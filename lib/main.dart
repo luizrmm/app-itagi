@@ -1,14 +1,24 @@
-import 'package:aqui_cliente/screens/Login/login_screen.dart';
+import 'package:aqui_cliente/notifiers/home_notifier.dart';
+import 'package:aqui_cliente/screens/Home/home_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: LoginScreen(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          builder: (context) => HomeNotifier(),
+        ),
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(primaryColor: Color(0xFF2C5573)),
+        home: HomeScreen(),
+      ),
     );
   }
 }
