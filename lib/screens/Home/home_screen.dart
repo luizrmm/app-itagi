@@ -10,12 +10,13 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     int cIndex = Provider.of<HomeNotifier>(context).currentIndex;
     return Scaffold(
+        backgroundColor: Colors.grey[300],
         body: IndexedStack(
           index: cIndex,
           children: <Widget>[
-            RelProblemsScreen(),
-            MenuScreen(),
             NoticiasScreen(),
+            MenuScreen(),
+            RelProblemsScreen(),
           ],
         ),
         bottomNavigationBar: BottomNavigationBar(
