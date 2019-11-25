@@ -8,7 +8,7 @@ class MenuItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(18.0), color: Colors.white),
+            borderRadius: BorderRadius.circular(6.0), color: Colors.white),
         padding: EdgeInsets.all(6.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -16,7 +16,7 @@ class MenuItem extends StatelessWidget {
           children: <Widget>[
             Image.asset(
               icon,
-              height: 70,
+              height: 50,
               fit: BoxFit.contain,
             ),
             Padding(
@@ -24,7 +24,7 @@ class MenuItem extends StatelessWidget {
               child: Text(
                 label,
                 textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 14.0, fontWeight: FontWeight.bold),
+                style: TextStyle(fontSize: 14.0),
               ),
             )
           ],

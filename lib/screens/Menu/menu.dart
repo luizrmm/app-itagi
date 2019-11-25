@@ -1,5 +1,5 @@
-import 'package:aqui_cliente/widgets/menu_item.dart';
 import 'package:flutter/material.dart';
+import 'widgets/menu_item.dart';
 
 class MenuScreen extends StatelessWidget {
   @override
@@ -7,10 +7,11 @@ class MenuScreen extends StatelessWidget {
     return SafeArea(
       child: Center(
           child: Padding(
-        padding: const EdgeInsets.all(22.0),
+        padding: const EdgeInsets.all(12.0),
         child: GridView(
+          physics: NeverScrollableScrollPhysics(),
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2, crossAxisSpacing: 24.0, mainAxisSpacing: 24.0),
+              crossAxisCount: 3, crossAxisSpacing: 8.0, mainAxisSpacing: 8.0),
           shrinkWrap: true,
           children: <Widget>[
             MenuItem(
