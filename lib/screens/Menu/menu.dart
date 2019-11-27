@@ -1,3 +1,4 @@
+import 'package:aqui_cliente/screens/Enquete/enquete_list.dart';
 import 'package:flutter/material.dart';
 import 'widgets/menu_item.dart';
 
@@ -15,6 +16,7 @@ class MenuScreen extends StatelessWidget {
           shrinkWrap: true,
           children: <Widget>[
             MenuItem(
+              route: EnqueteList(),
               icon: 'assets/enquete.png',
               label: 'Enquetes',
             ),
