@@ -16,8 +16,10 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        theme:
-            ThemeData(primaryColor: Color(0xFF2C5573), fontFamily: 'Poppins'),
+        theme: ThemeData(
+          primaryColor: Color(0xFF2C5573),
+          fontFamily: 'Poppins',
+        ),
         home: HomeScreen(),
       ),
     );

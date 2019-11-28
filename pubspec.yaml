@@ -53,6 +53,7 @@ flutter:
    - assets/contatos.png
    - assets/prefeitura.png
    - assets/prefeito.png
+   - assets/like.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

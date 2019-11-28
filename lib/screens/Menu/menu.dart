@@ -1,4 +1,5 @@
 import 'package:aqui_cliente/screens/Enquete/enquete_list.dart';
+import 'package:aqui_cliente/screens/Fale_conosco/fale_conosco.dart';
 import 'package:flutter/material.dart';
 import 'widgets/menu_item.dart';
 
@@ -22,6 +23,7 @@ class MenuScreen extends StatelessWidget {
             ),
             MenuItem(icon: 'assets/obras.png', label: 'Agenda de Obras'),
             MenuItem(
+              route: FaleConosco(),
               icon: 'assets/fale_conosco.png',
               label: 'Fale Conosco',
             ),

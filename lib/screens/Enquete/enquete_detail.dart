@@ -1,3 +1,4 @@
+import 'package:aqui_cliente/screens/Enquete/enquete_res.dart';
 import 'package:flutter/material.dart';
 
 class EnqueteDetail extends StatelessWidget {
@@ -40,32 +41,40 @@ class EnqueteDetail extends StatelessWidget {
             SizedBox(
               height: 24.0,
             ),
-            RichText(
-              textAlign: TextAlign.justify,
-              text: TextSpan(
-                text: 'Ementa: ',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black,
-                  fontSize: 18.0,
+            Expanded(
+              flex: 2,
+              child: RichText(
+                textAlign: TextAlign.justify,
+                text: TextSpan(
+                  text: 'Ementa: ',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
+                    fontSize: 18.0,
+                  ),
+                  children: <TextSpan>[
+                    TextSpan(
+                        text:
+                            'Modifica o sistema de previdência social, estabelece regras de transição e disposições transitórias, e dá outras providências.',
+                        style: TextStyle(fontWeight: FontWeight.normal)),
+                  ],
                 ),
-                children: <TextSpan>[
-                  TextSpan(
-                      text:
-                          'Modifica o sistema de previdência social, estabelece regras de transição e disposições transitórias, e dá outras providências.',
-                      style: TextStyle(fontWeight: FontWeight.normal)),
-                ],
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.only(top: 40.0, bottom: 12.0),
+            Expanded(
+              flex: 1,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Expanded(
                     child: RaisedButton(
-                      color: Colors.green,
-                      onPressed: () {},
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(6.0)),
+                      color: Color(0xFF61E47C),
+                      onPressed: () {
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => EnqueteResultado()));
+                      },
                       child: Text('A Favor',
                           style: TextStyle(color: Colors.white)),
                     ),
@@ -75,7 +84,9 @@ class EnqueteDetail extends StatelessWidget {
                   ),
                   Expanded(
                     child: RaisedButton(
-                      color: Colors.red,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(6.0)),
+                      color: Color(0xFFD76E6E),
                       onPressed: () {},
                       child: Text(
                         'Contra',
