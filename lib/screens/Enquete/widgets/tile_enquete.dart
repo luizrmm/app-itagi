@@ -2,6 +2,9 @@ import 'package:aqui_cliente/screens/Enquete/enquete_detail.dart';
 import 'package:flutter/material.dart';
 
 class TileEnquete extends StatelessWidget {
+  final Color color;
+  final IconData iconData;
+  TileEnquete({this.color, this.iconData});
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -43,13 +46,13 @@ class TileEnquete extends StatelessWidget {
               flex: 1,
               child: Container(
                 decoration: BoxDecoration(
-                    color: Theme.of(context).primaryColor,
+                    color: color,
                     borderRadius: BorderRadius.only(
                         topRight: Radius.circular(12.0),
                         bottomRight: Radius.circular(12.0))),
                 height: 80,
                 child: Center(
-                  child: Icon(Icons.arrow_forward_ios, color: Colors.white),
+                  child: Icon(iconData, color: Colors.white),
                 ),
               ),
             )

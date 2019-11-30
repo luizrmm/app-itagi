@@ -8,11 +8,30 @@ class EnquetesAtivas extends StatelessWidget {
         padding: EdgeInsets.fromLTRB(8.0, 12.0, 8.0, 0.0),
         child: ListView(
           children: <Widget>[
-            TileEnquete(),
-            TileEnquete(),
-            TileEnquete(),
-            TileEnquete(),
-            TileEnquete()
+            TileEnquete(
+              iconData: Icons.arrow_forward_ios,
+              color: Theme.of(context).primaryColor,
+            ),
+            TileEnquete(
+              iconData: Icons.arrow_forward_ios,
+              color: Theme.of(context).primaryColor,
+            ),
+            TileEnquete(
+              iconData: Icons.arrow_forward_ios,
+              color: Theme.of(context).primaryColor,
+            ),
+            TileEnquete(
+              iconData: Icons.arrow_forward_ios,
+              color: Theme.of(context).primaryColor,
+            ),
+            TileEnquete(
+              iconData: Icons.arrow_forward_ios,
+              color: Theme.of(context).primaryColor,
+            ),
+            TileEnquete(
+              iconData: Icons.arrow_forward_ios,
+              color: Theme.of(context).primaryColor,
+            ),
           ],
         ));
   }

@@ -1,3 +1,4 @@
+import 'package:aqui_cliente/screens/Fale_conosco/widgets/label.dart';
 import 'package:flutter/material.dart';
 
 class FaleConosco extends StatefulWidget {
@@ -25,23 +26,71 @@ class _FaleConoscoState extends State<FaleConosco> {
                     child: Form(
                       child: Column(
                         children: <Widget>[
-                          TextFormField(
-                            decoration: InputDecoration(labelText: 'Nome'),
+                          Label(
+                            value: 'Nome',
                           ),
-                          SizedBox(
-                            height: 18.0,
+                          Material(
+                            color: Colors.white,
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(6.0)),
+                            elevation: 7.0,
+                            shadowColor: Colors.black,
+                            child: TextFormField(
+                              style: TextStyle(fontSize: 16),
+                              decoration: InputDecoration(
+                                  contentPadding: EdgeInsets.symmetric(
+                                      horizontal: 12.0, vertical: 15.0),
+                                  fillColor: Colors.white,
+                                  filled: true,
+                                  border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(6.0),
+                                      borderSide: BorderSide.none)),
+                            ),
                           ),
-                          TextFormField(
-                            decoration: InputDecoration(labelText: 'Email'),
+                          Label(
+                            value: 'Email',
                           ),
-                          SizedBox(
-                            height: 18.0,
+                          Material(
+                            color: Colors.white,
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(6.0)),
+                            elevation: 7.0,
+                            shadowColor: Colors.black,
+                            child: TextFormField(
+                              style: TextStyle(fontSize: 16),
+                              decoration: InputDecoration(
+                                  contentPadding: EdgeInsets.symmetric(
+                                      horizontal: 12.0, vertical: 15.0),
+                                  fillColor: Colors.white,
+                                  filled: true,
+                                  border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(6.0),
+                                      borderSide: BorderSide.none)),
+                            ),
                           ),
-                          TextFormField(
-                            decoration: InputDecoration(labelText: 'Telefone'),
+                          Label(
+                            value: 'Telefone',
                           ),
-                          SizedBox(
-                            height: 18.0,
+                          Material(
+                            color: Colors.white,
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(6.0)),
+                            elevation: 7.0,
+                            shadowColor: Colors.black,
+                            child: TextFormField(
+                              style: TextStyle(fontSize: 16),
+                              decoration: InputDecoration(
+                                  contentPadding: EdgeInsets.symmetric(
+                                      horizontal: 12.0, vertical: 15.0),
+                                  fillColor: Colors.white,
+                                  filled: true,
+                                  border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(6.0),
+                                      borderSide: BorderSide.none)),
+                            ),
+                          ),
+                          Label(
+                            value: 'Mensagem',
                           ),
                           Material(
                             color: Colors.white,

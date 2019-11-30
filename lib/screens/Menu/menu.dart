@@ -1,5 +1,10 @@
+import 'package:aqui_cliente/screens/Agenda_obras/agenda_obras.dart';
+import 'package:aqui_cliente/screens/Contatos/contatos.dart';
 import 'package:aqui_cliente/screens/Enquete/enquete_list.dart';
 import 'package:aqui_cliente/screens/Fale_conosco/fale_conosco.dart';
+import 'package:aqui_cliente/screens/Prefeito/prefeito.dart';
+import 'package:aqui_cliente/screens/Prefeitura/prefeirura.dart';
+import 'package:aqui_cliente/screens/Telefones_uteis/telefones_uteis.dart';
 import 'package:flutter/material.dart';
 import 'widgets/menu_item.dart';
 
@@ -21,22 +26,33 @@ class MenuScreen extends StatelessWidget {
               icon: 'assets/enquete.png',
               label: 'Enquetes',
             ),
-            MenuItem(icon: 'assets/obras.png', label: 'Agenda de Obras'),
+            MenuItem(
+                route: AgendaObras(),
+                icon: 'assets/obras.png',
+                label: 'Agenda de Obras'),
             MenuItem(
               route: FaleConosco(),
               icon: 'assets/fale_conosco.png',
               label: 'Fale Conosco',
             ),
             MenuItem(
+              route: TelefonesUteis(),
               icon: 'assets/telefones.png',
               label: 'Telefones Úteis',
             ),
             MenuItem(
+              route: Contatos(),
               icon: 'assets/contatos.png',
               label: 'Contatos',
             ),
-            MenuItem(icon: 'assets/prefeitura.png', label: 'Prefeitura'),
-            MenuItem(icon: 'assets/prefeito.png', label: 'Prefeito'),
+            MenuItem(
+                route: Prefeitura(),
+                icon: 'assets/prefeitura.png',
+                label: 'Prefeitura'),
+            MenuItem(
+                route: Prefeito(),
+                icon: 'assets/prefeito.png',
+                label: 'Prefeito'),
             MenuItem(
                 icon: 'assets/pesquisa.png', label: 'Pesquisa de Satisfação'),
           ],
