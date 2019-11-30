@@ -2,6 +2,7 @@ import 'package:aqui_cliente/screens/Agenda_obras/agenda_obras.dart';
 import 'package:aqui_cliente/screens/Contatos/contatos.dart';
 import 'package:aqui_cliente/screens/Enquete/enquete_list.dart';
 import 'package:aqui_cliente/screens/Fale_conosco/fale_conosco.dart';
+import 'package:aqui_cliente/screens/Pesquisa_satisfacao/pesquisa.dart';
 import 'package:aqui_cliente/screens/Prefeito/prefeito.dart';
 import 'package:aqui_cliente/screens/Prefeitura/prefeirura.dart';
 import 'package:aqui_cliente/screens/Telefones_uteis/telefones_uteis.dart';
@@ -54,7 +55,9 @@ class MenuScreen extends StatelessWidget {
                 icon: 'assets/prefeito.png',
                 label: 'Prefeito'),
             MenuItem(
-                icon: 'assets/pesquisa.png', label: 'Pesquisa de Satisfação'),
+                route: PesquisaSatisfacao(),
+                icon: 'assets/pesquisa.png',
+                label: 'Pesquisa de Satisfação'),
           ],
         ),
       )),
