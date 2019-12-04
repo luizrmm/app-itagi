@@ -56,6 +56,7 @@ flutter:
    - assets/like.png
    - assets/logo_barreiras.png
    - assets/upload.png
+   - assets/newspaper.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

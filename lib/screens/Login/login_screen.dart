@@ -1,3 +1,4 @@
+import 'package:aqui_cliente/screens/Fale_conosco/widgets/label.dart';
 import 'package:flutter/material.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -8,40 +9,100 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: LayoutBuilder(
-        builder: (BuildContext context, BoxConstraints viewportConstraints) {
-          return SingleChildScrollView(
-            child: ConstrainedBox(
-              constraints:
-                  BoxConstraints(minHeight: viewportConstraints.maxHeight),
+    return LayoutBuilder(
+      builder: (BuildContext context, BoxConstraints viewportConstraints) {
+        return SingleChildScrollView(
+          child: ConstrainedBox(
+            constraints:
+                BoxConstraints(minHeight: viewportConstraints.maxHeight),
+            child: SafeArea(
               child: Container(
                 padding: EdgeInsets.all(20.0),
-                color: Colors.white,
                 child: Form(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
-                    mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      Text(
-                        'Prefeitura de Barreiras',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                            fontSize: 32.0,
-                            color: Colors.red,
-                            fontWeight: FontWeight.bold),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 20.0, bottom: 30.0),
+                        child: Image.asset(
+                          'assets/logo_barreiras.png',
+                          height: 120,
+                        ),
                       ),
-                      TextFormField(),
-                      TextFormField(),
-                      MaterialButton(
-                        height: 42,
-                        color: Colors.blue,
+                      Label(
+                        value: 'Usuário',
+                      ),
+                      Material(
+                        color: Colors.white,
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(6.0)),
-                        onPressed: () {},
-                        child: Text(
-                          'Login',
-                          style: TextStyle(color: Colors.white, fontSize: 14.0),
+                        elevation: 7.0,
+                        shadowColor: Colors.black,
+                        child: TextFormField(
+                          style: TextStyle(fontSize: 16),
+                          decoration: InputDecoration(
+                              contentPadding: EdgeInsets.symmetric(
+                                  horizontal: 12.0, vertical: 15.0),
+                              fillColor: Colors.white,
+                              filled: true,
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(6.0),
+                                  borderSide: BorderSide.none)),
+                        ),
+                      ),
+                      Label(
+                        value: 'Senha',
+                      ),
+                      Material(
+                        color: Colors.white,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(6.0)),
+                        elevation: 7.0,
+                        shadowColor: Colors.black,
+                        child: TextFormField(
+                          obscureText: true,
+                          style: TextStyle(fontSize: 16),
+                          decoration: InputDecoration(
+                              contentPadding: EdgeInsets.symmetric(
+                                  horizontal: 12.0, vertical: 15.0),
+                              fillColor: Colors.white,
+                              filled: true,
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(6.0),
+                                  borderSide: BorderSide.none)),
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(top: 18.0, bottom: 20.0),
+                        child: MaterialButton(
+                          minWidth: MediaQuery.of(context).size.width * 0.45,
+                          height: 42,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(6.0)),
+                          color: Theme.of(context).primaryColor,
+                          onPressed: () {},
+                          child: Text(
+                            'Entrar',
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(top: 60.0),
+                        child: FlatButton(
+                          child: RichText(
+                            text: TextSpan(
+                              text: 'Não tem conta? ',
+                              style: DefaultTextStyle.of(context).style,
+                              children: <TextSpan>[
+                                TextSpan(
+                                    text: 'Cadastre-se',
+                                    style:
+                                        TextStyle(fontWeight: FontWeight.bold)),
+                              ],
+                            ),
+                          ),
+                          onPressed: () {},
                         ),
                       )
                     ],
@@ -49,9 +110,9 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ),
             ),
-          );
-        },
-      ),
+          ),
+        );
+      },
     );
   }
 }

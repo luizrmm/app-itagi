@@ -2,6 +2,7 @@ import 'package:aqui_cliente/screens/Agenda_obras/agenda_obras.dart';
 import 'package:aqui_cliente/screens/Contatos/contatos.dart';
 import 'package:aqui_cliente/screens/Enquete/enquete_list.dart';
 import 'package:aqui_cliente/screens/Fale_conosco/fale_conosco.dart';
+import 'package:aqui_cliente/screens/Noticias/noticias.dart';
 import 'package:aqui_cliente/screens/Pesquisa_satisfacao/pesquisa.dart';
 import 'package:aqui_cliente/screens/Prefeito/prefeito.dart';
 import 'package:aqui_cliente/screens/Prefeitura/prefeirura.dart';
@@ -22,6 +23,11 @@ class MenuScreen extends StatelessWidget {
               crossAxisCount: 3, crossAxisSpacing: 8.0, mainAxisSpacing: 8.0),
           shrinkWrap: true,
           children: <Widget>[
+            MenuItem(
+              route: NoticiasScreen(),
+              icon: 'assets/newspaper.png',
+              label: 'Notícias',
+            ),
             MenuItem(
               route: EnqueteList(),
               icon: 'assets/enquete.png',

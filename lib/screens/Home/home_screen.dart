@@ -1,6 +1,6 @@
 import 'package:aqui_cliente/notifiers/home_notifier.dart';
+import 'package:aqui_cliente/screens/Login/login_screen.dart';
 import 'package:aqui_cliente/screens/Menu/menu.dart';
-import 'package:aqui_cliente/screens/Noticias/noticias.dart';
 import 'package:aqui_cliente/screens/Relatar_problemas/relatar_problemas.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -14,7 +14,7 @@ class HomeScreen extends StatelessWidget {
         body: IndexedStack(
           index: cIndex,
           children: <Widget>[
-            NoticiasScreen(),
+            LoginScreen(),
             MenuScreen(),
             RelProblemsScreen(),
           ],
@@ -29,9 +29,9 @@ class HomeScreen extends StatelessWidget {
           items: [
             BottomNavigationBarItem(
                 icon: Icon(
-                  Icons.rss_feed,
+                  Icons.person,
                 ),
-                title: Text('Notícias'),
+                title: Text('Perfil'),
                 backgroundColor: Theme.of(context).primaryColor),
             BottomNavigationBarItem(
                 icon: Icon(Icons.apps),
