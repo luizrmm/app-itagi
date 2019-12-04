@@ -75,7 +75,7 @@ class RelProblemsScreen extends StatelessWidget {
                         style: TextStyle(fontSize: 16),
                         decoration: InputDecoration(
                             contentPadding: EdgeInsets.symmetric(
-                                horizontal: 12.0, vertical: 15.0),
+                                horizontal: 12.0, vertical: 10.0),
                             fillColor: Colors.white,
                             filled: true,
                             border: OutlineInputBorder(
@@ -96,7 +96,7 @@ class RelProblemsScreen extends StatelessWidget {
                         style: TextStyle(fontSize: 16),
                         decoration: InputDecoration(
                             contentPadding: EdgeInsets.symmetric(
-                                horizontal: 12.0, vertical: 15.0),
+                                horizontal: 12.0, vertical: 10.0),
                             fillColor: Colors.white,
                             filled: true,
                             border: OutlineInputBorder(
@@ -117,7 +117,7 @@ class RelProblemsScreen extends StatelessWidget {
                         style: TextStyle(fontSize: 16),
                         decoration: InputDecoration(
                             contentPadding: EdgeInsets.symmetric(
-                                horizontal: 12.0, vertical: 15.0),
+                                horizontal: 12.0, vertical: 10.0),
                             fillColor: Colors.white,
                             filled: true,
                             border: OutlineInputBorder(
