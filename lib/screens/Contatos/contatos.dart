@@ -1,182 +1,42 @@
 import 'package:flutter/material.dart';
 
+import 'widgets/telefone_row.dart';
+import 'widgets/telefone_tile.dart';
+
 class Contatos extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    List<String> nomes = [
+      'Secretária da Educação',
+      'Administração',
+      'Secretária da Saúde'
+    ];
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Contatos'),
         centerTitle: true,
       ),
-      body: Container(
-        child: Column(
-          children: <Widget>[
-            Container(
-              padding: EdgeInsets.fromLTRB(20.0, 12.0, 20.0, 18.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 10.0),
-                    child: Text(
-                      'Saúde',
-                      style: TextStyle(
-                          fontSize: 24.0, fontWeight: FontWeight.bold),
-                    ),
-                  ),
-                  Row(
-                    children: <Widget>[
-                      Text('Hospital - '),
-                      Text(
-                        '(33) 3333-0000',
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      )
-                    ],
-                  ),
-                  Row(
-                    children: <Widget>[
-                      Text('Scretária de Saúde - '),
-                      Text(
-                        '(33) 3333-0000',
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      )
-                    ],
-                  ),
-                  Row(
-                    children: <Widget>[
-                      Text('Posto de Saúde - '),
-                      Text(
-                        '(33) 3333-0000',
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      )
-                    ],
-                  ),
-                  Row(
-                    children: <Widget>[
-                      Text('Hospital Centro - '),
-                      Text(
-                        '(33) 3333-0000',
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      )
-                    ],
-                  ),
-                ],
+      body: ListView.separated(
+        itemCount: 3,
+        itemBuilder: (BuildContext context, int index) {
+          return TelefoneTile(
+            title: nomes[index],
+            telefones: <Widget>[
+              TelefoneRow(
+                telNumber: '(33) 3333-0000',
               ),
-            ),
-            Divider(
-              color: Colors.black,
-              height: 1.0,
-            ),
-            Container(
-              padding: EdgeInsets.fromLTRB(20.0, 12.0, 20.0, 18.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 10.0),
-                    child: Text(
-                      'Transporte',
-                      style: TextStyle(
-                          fontSize: 24.0, fontWeight: FontWeight.bold),
-                    ),
-                  ),
-                  Row(
-                    children: <Widget>[
-                      Text('Táxi - '),
-                      Text(
-                        '(33) 3333-0000',
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      )
-                    ],
-                  ),
-                  Row(
-                    children: <Widget>[
-                      Text('Ônibus - '),
-                      Text(
-                        '(33) 3333-0000',
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      )
-                    ],
-                  ),
-                  Row(
-                    children: <Widget>[
-                      Text('Transporte de mudanças - '),
-                      Text(
-                        '(33) 3333-0000',
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      )
-                    ],
-                  ),
-                  Row(
-                    children: <Widget>[
-                      Text('Hospital Centro - '),
-                      Text(
-                        '(33) 3333-0000',
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      )
-                    ],
-                  ),
-                ],
-              ),
-            ),
-            Divider(
-              color: Colors.black,
-              height: 1.0,
-            ),
-            Container(
-              padding: EdgeInsets.fromLTRB(20.0, 12.0, 20.0, 18.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 10.0),
-                    child: Text(
-                      'Posto Policial',
-                      style: TextStyle(
-                          fontSize: 24.0, fontWeight: FontWeight.bold),
-                    ),
-                  ),
-                  Row(
-                    children: <Widget>[
-                      Text('Bairro Colina - '),
-                      Text(
-                        '(33) 3333-0000',
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      )
-                    ],
-                  ),
-                  Row(
-                    children: <Widget>[
-                      Text('Bairro Vila Nova - '),
-                      Text(
-                        '(33) 3333-0000',
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      )
-                    ],
-                  ),
-                  Row(
-                    children: <Widget>[
-                      Text('Bairro Járdim Itália - '),
-                      Text(
-                        '(33) 3333-0000',
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      )
-                    ],
-                  ),
-                  Row(
-                    children: <Widget>[
-                      Text('Centro - '),
-                      Text(
-                        '(33) 3333-0000',
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      )
-                    ],
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
+              TelefoneRow(
+                telNumber: '(55) 5555-0000',
+              )
+            ],
+          );
+        },
+        separatorBuilder: (BuildContext context, int index) {
+          return Divider(
+            color: Colors.black,
+          );
+        },
       ),
     );
   }

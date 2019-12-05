@@ -14,59 +14,71 @@ class MenuScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Center(
-          child: Padding(
-        padding: const EdgeInsets.all(12.0),
-        child: GridView(
-          physics: NeverScrollableScrollPhysics(),
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 3, crossAxisSpacing: 8.0, mainAxisSpacing: 8.0),
-          shrinkWrap: true,
-          children: <Widget>[
-            MenuItem(
-              route: NoticiasScreen(),
-              icon: 'assets/newspaper.png',
-              label: 'Notícias',
+      child: ListView(
+        children: <Widget>[
+          Padding(
+            padding: const EdgeInsets.only(top: 40.0, bottom: 60.0),
+            child: Image.asset(
+              'assets/logo_barreiras.png',
+              height: 140,
             ),
-            MenuItem(
-              route: EnqueteList(),
-              icon: 'assets/enquete.png',
-              label: 'Enquetes',
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10.0),
+            child: GridView(
+              physics: NeverScrollableScrollPhysics(),
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 3,
+                  crossAxisSpacing: 8.0,
+                  mainAxisSpacing: 8.0),
+              shrinkWrap: true,
+              children: <Widget>[
+                MenuItem(
+                  route: NoticiasScreen(),
+                  icon: 'assets/newspaper.png',
+                  label: 'Notícias',
+                ),
+                MenuItem(
+                    route: AgendaObras(),
+                    icon: 'assets/obras.png',
+                    label: 'Agenda de Obras'),
+                MenuItem(
+                    route: PesquisaSatisfacao(),
+                    icon: 'assets/pesquisa.png',
+                    label: 'Pesquisa de Satisfação'),
+                MenuItem(
+                  route: TelefonesUteis(),
+                  icon: 'assets/telefones.png',
+                  label: 'Telefones Úteis',
+                ),
+                MenuItem(
+                  route: Contatos(),
+                  icon: 'assets/contatos.png',
+                  label: 'Contatos',
+                ),
+                MenuItem(
+                  route: FaleConosco(),
+                  icon: 'assets/fale_conosco.png',
+                  label: 'Fale Conosco',
+                ),
+                MenuItem(
+                    route: Prefeitura(),
+                    icon: 'assets/prefeitura.png',
+                    label: 'Prefeitura'),
+                MenuItem(
+                    route: Prefeito(),
+                    icon: 'assets/prefeito.png',
+                    label: 'Prefeito'),
+                MenuItem(
+                  route: EnqueteList(),
+                  icon: 'assets/enquete.png',
+                  label: 'Enquetes',
+                ),
+              ],
             ),
-            MenuItem(
-                route: AgendaObras(),
-                icon: 'assets/obras.png',
-                label: 'Agenda de Obras'),
-            MenuItem(
-              route: FaleConosco(),
-              icon: 'assets/fale_conosco.png',
-              label: 'Fale Conosco',
-            ),
-            MenuItem(
-              route: TelefonesUteis(),
-              icon: 'assets/telefones.png',
-              label: 'Telefones Úteis',
-            ),
-            MenuItem(
-              route: Contatos(),
-              icon: 'assets/contatos.png',
-              label: 'Contatos',
-            ),
-            MenuItem(
-                route: Prefeitura(),
-                icon: 'assets/prefeitura.png',
-                label: 'Prefeitura'),
-            MenuItem(
-                route: Prefeito(),
-                icon: 'assets/prefeito.png',
-                label: 'Prefeito'),
-            MenuItem(
-                route: PesquisaSatisfacao(),
-                icon: 'assets/pesquisa.png',
-                label: 'Pesquisa de Satisfação'),
-          ],
-        ),
-      )),
+          ),
+        ],
+      ),
     );
   }
 }

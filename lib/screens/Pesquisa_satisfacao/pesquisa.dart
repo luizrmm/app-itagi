@@ -17,7 +17,7 @@ class PesquisaSatisfacao extends StatelessWidget {
               children: <Widget>[
                 Text(
                   'Saúde',
-                  style: TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
+                  style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
                 ),
                 Row(
                   children: <Widget>[
@@ -27,7 +27,6 @@ class PesquisaSatisfacao extends StatelessWidget {
                     ),
                     Text(
                       'Insastifeito',
-                      style: TextStyle(fontSize: 18.0),
                     )
                   ],
                 ),
@@ -39,7 +38,6 @@ class PesquisaSatisfacao extends StatelessWidget {
                     ),
                     Text(
                       'Pouco satisfeito',
-                      style: TextStyle(fontSize: 18.0),
                     )
                   ],
                 ),
@@ -51,7 +49,6 @@ class PesquisaSatisfacao extends StatelessWidget {
                     ),
                     Text(
                       'Satisfeito',
-                      style: TextStyle(fontSize: 18.0),
                     )
                   ],
                 )
@@ -63,7 +60,7 @@ class PesquisaSatisfacao extends StatelessWidget {
               children: <Widget>[
                 Text(
                   'Educação',
-                  style: TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
+                  style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
                 ),
                 Row(
                   children: <Widget>[
@@ -73,7 +70,6 @@ class PesquisaSatisfacao extends StatelessWidget {
                     ),
                     Text(
                       'Insastifeito',
-                      style: TextStyle(fontSize: 18.0),
                     )
                   ],
                 ),
@@ -85,7 +81,6 @@ class PesquisaSatisfacao extends StatelessWidget {
                     ),
                     Text(
                       'Pouco satisfeito',
-                      style: TextStyle(fontSize: 18.0),
                     )
                   ],
                 ),
@@ -97,7 +92,6 @@ class PesquisaSatisfacao extends StatelessWidget {
                     ),
                     Text(
                       'Satisfeito',
-                      style: TextStyle(fontSize: 18.0),
                     )
                   ],
                 )
@@ -109,7 +103,7 @@ class PesquisaSatisfacao extends StatelessWidget {
               children: <Widget>[
                 Text(
                   'Segurança',
-                  style: TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
+                  style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
                 ),
                 Row(
                   children: <Widget>[
@@ -119,7 +113,6 @@ class PesquisaSatisfacao extends StatelessWidget {
                     ),
                     Text(
                       'Insastifeito',
-                      style: TextStyle(fontSize: 18.0),
                     )
                   ],
                 ),
@@ -131,7 +124,6 @@ class PesquisaSatisfacao extends StatelessWidget {
                     ),
                     Text(
                       'Pouco satisfeito',
-                      style: TextStyle(fontSize: 18.0),
                     )
                   ],
                 ),
@@ -143,7 +135,6 @@ class PesquisaSatisfacao extends StatelessWidget {
                     ),
                     Text(
                       'Satisfeito',
-                      style: TextStyle(fontSize: 18.0),
                     )
                   ],
                 )
@@ -158,10 +149,8 @@ class PesquisaSatisfacao extends StatelessWidget {
                     borderRadius: BorderRadius.circular(6.0)),
                 color: Theme.of(context).primaryColor,
                 onPressed: () {},
-                child: Text(
-                  'Confirmar',
-                  style: TextStyle(color: Colors.white),
-                ),
+                child: Text('Confirmar',
+                    style: TextStyle(color: Colors.white, fontSize: 18.0)),
               ),
             )
           ],
