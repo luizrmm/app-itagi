@@ -1,3 +1,4 @@
+import 'package:aqui_cliente/screens/Cadastro/cadastro.dart';
 import 'package:aqui_cliente/screens/Fale_conosco/widgets/label.dart';
 import 'package:flutter/material.dart';
 
@@ -102,7 +103,12 @@ class _LoginScreenState extends State<LoginScreen> {
                               ],
                             ),
                           ),
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => Cadastro()));
+                          },
                         ),
                       )
                     ],

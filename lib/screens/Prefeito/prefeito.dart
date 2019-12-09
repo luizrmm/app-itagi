@@ -1,6 +1,20 @@
+import 'package:aqui_cliente/notifiers/prefeito_notifier.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-class Prefeito extends StatelessWidget {
+class Prefeito extends StatefulWidget {
+  @override
+  _PrefeitoState createState() => _PrefeitoState();
+}
+
+class _PrefeitoState extends State<Prefeito> {
+  @override
+  void initState() {
+    Future.microtask(() => Provider.of<PrefeitoNotifier>(context, listen: false)
+        .getPrefeitoData());
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -12,28 +26,42 @@ class Prefeito extends StatelessWidget {
         builder: (BuildContext context, BoxConstraints viewportConstraints) {
           return SingleChildScrollView(
             child: ConstrainedBox(
-              constraints:
-                  BoxConstraints(minHeight: viewportConstraints.maxHeight),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.only(top: 20.0, bottom: 30.0),
-                    child: Image.asset(
-                      'assets/prefeito.png',
-                      height: 120,
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                    child: Text(
-                      '       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam tincidunt lacus ut mi molestie, vel bibendum erat cursus. Suspendisse potenti. Duis dapibus tincidunt tellus, a tempus ante dapibus ut. Etiam volutpat et metus quis sodales. Proin eget tincidunt nisi. Nam porttitor laoreet mauris iaculis porta. Curabitur tempus placerat lectus in lobortis.\n\n         Sed posuere a erat vel viverra. Donec in finibus ipsum, sed dictum orci. Donec vitae arcu ac quam ullamcorper faucibus. Duis commodo finibus massa, et ultrices nisi gravida ac. Proin lectus tortor, laoreet sit amet varius ac, iaculis non nisi.',
-                      textAlign: TextAlign.justify,
-                    ),
-                  )
-                ],
-              ),
-            ),
+                constraints:
+                    BoxConstraints(minHeight: viewportConstraints.maxHeight),
+                child: Consumer<PrefeitoNotifier>(
+                  builder: (context, result, child) {
+                    return Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: <Widget>[
+                        Padding(
+                          padding:
+                              const EdgeInsets.only(top: 20.0, bottom: 30.0),
+                          child: Image.asset(
+                            'assets/prefeito.png',
+                            height: 120,
+                          ),
+                        ),
+                        result.loading
+                            ? Center(
+                                child: CircularProgressIndicator(
+                                  valueColor: AlwaysStoppedAnimation<Color>(
+                                      Colors.black),
+                                ),
+                              )
+                            : Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 20.0),
+                                child: Text(
+                                  result.prefeito != null
+                                      ? result.prefeito.descricao
+                                      : result.errorMessage,
+                                  textAlign: TextAlign.justify,
+                                ),
+                              )
+                      ],
+                    );
+                  },
+                )),
           );
         },
       ),

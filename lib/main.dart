@@ -1,4 +1,7 @@
 import 'package:aqui_cliente/notifiers/home_notifier.dart';
+import 'package:aqui_cliente/notifiers/pontosInteresse_notifier.dart';
+import 'package:aqui_cliente/notifiers/prefeito_notifier.dart';
+import 'package:aqui_cliente/notifiers/prefeitura_notifier.dart';
 import 'package:aqui_cliente/screens/Home/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -13,6 +16,15 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           builder: (context) => HomeNotifier(),
         ),
+        ChangeNotifierProvider(
+          builder: (context) => PrefeituraNotifier(),
+        ),
+        ChangeNotifierProvider(
+          builder: (context) => PrefeitoNotifier(),
+        ),
+        ChangeNotifierProvider(
+          builder: (context) => PontosInteresseNotifier(),
+        )
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
