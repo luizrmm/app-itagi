@@ -1,4 +1,5 @@
 import 'package:aqui_cliente/notifiers/prefeitura_notifier.dart';
+import 'package:aqui_cliente/screens/widgets/loading.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -31,35 +32,32 @@ class _PrefeituraState extends State<Prefeitura> {
                     BoxConstraints(minHeight: viewportConstraints.maxHeight),
                 child: Consumer<PrefeituraNotifier>(
                   builder: (context, result, child) {
-                    return Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: <Widget>[
-                        Padding(
-                          padding:
-                              const EdgeInsets.only(top: 20.0, bottom: 30.0),
-                          child: Image.asset(
-                            'assets/logo_barreiras.png',
-                            height: 120,
+                    return SafeArea(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: <Widget>[
+                          Padding(
+                            padding:
+                                const EdgeInsets.only(top: 20.0, bottom: 30.0),
+                            child: Image.asset(
+                              'assets/logo_barreiras.png',
+                              height: 120,
+                            ),
                           ),
-                        ),
-                        result.loading
-                            ? Center(
-                                child: CircularProgressIndicator(
-                                  valueColor: AlwaysStoppedAnimation<Color>(
-                                      Colors.black),
-                                ),
-                              )
-                            : Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 20.0),
-                                child: Text(
-                                  result.prefeitura != null
-                                      ? result.prefeitura.descricao
-                                      : result.errorMessage,
-                                  textAlign: TextAlign.justify,
-                                ),
-                              )
-                      ],
+                          result.loading
+                              ? Center(child: Loading())
+                              : Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 20.0),
+                                  child: Text(
+                                    result.prefeitura != null
+                                        ? result.prefeitura.descricao
+                                        : result.errorMessage,
+                                    textAlign: TextAlign.justify,
+                                  ),
+                                )
+                        ],
+                      ),
                     );
                   },
                 )),

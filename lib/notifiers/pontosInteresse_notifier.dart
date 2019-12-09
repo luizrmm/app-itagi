@@ -25,13 +25,13 @@ class PontosInteresseNotifier with ChangeNotifier {
     Map<String, dynamic> data;
     List<dynamic> list;
     http.Response response =
-        await http.get('$baseUrl/telefones/buscar_telefones/1');
+        await http.get('$baseUrl/telefones/buscar_telefones/10');
     data = jsonDecode(response.body);
-    list = data["mensagem"] as List;
     if (response.statusCode == 200) {
+      list = data["mensagem"] as List;
       _pontos =
           list.map((value) => PontosInteresseModel.fromJson(value)).toList();
-      print(_pontos[0].secretaria);
+      setLoading(false);
     } else {
       _errorMessage = data["mensagem"];
       setLoading(false);
