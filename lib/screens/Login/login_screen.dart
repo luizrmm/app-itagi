@@ -1,5 +1,6 @@
 import 'package:aqui_cliente/screens/Cadastro/cadastro.dart';
 import 'package:aqui_cliente/screens/Fale_conosco/widgets/label.dart';
+import 'package:aqui_cliente/screens/widgets/button.dart';
 import 'package:flutter/material.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -74,20 +75,15 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                       ),
                       Padding(
-                        padding: EdgeInsets.only(top: 18.0, bottom: 20.0),
-                        child: MaterialButton(
-                          minWidth: MediaQuery.of(context).size.width * 0.45,
-                          height: 42,
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(6.0)),
-                          color: Theme.of(context).primaryColor,
-                          onPressed: () {},
-                          child: Text(
-                            'Entrar',
-                            style: TextStyle(color: Colors.white),
-                          ),
-                        ),
-                      ),
+                          padding: EdgeInsets.only(top: 18.0, bottom: 20.0),
+                          child: DefaultButton(
+                              text: 'Entrar',
+                              function: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => Cadastro()));
+                              })),
                       Padding(
                         padding: EdgeInsets.only(top: 60.0),
                         child: FlatButton(

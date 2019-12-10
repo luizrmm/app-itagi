@@ -22,7 +22,6 @@ class TelefonesUteis extends StatelessWidget {
                         child: Loading(),
                       )
                     : ListView.separated(
-                        shrinkWrap: true,
                         itemCount: qtdPontos,
                         itemBuilder: (BuildContext context, int index) {
                           return Padding(

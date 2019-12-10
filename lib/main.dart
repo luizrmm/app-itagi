@@ -1,3 +1,4 @@
+import 'package:aqui_cliente/notifiers/contatos_notifier.dart';
 import 'package:aqui_cliente/notifiers/home_notifier.dart';
 import 'package:aqui_cliente/notifiers/pontosInteresse_notifier.dart';
 import 'package:aqui_cliente/notifiers/prefeito_notifier.dart';
@@ -24,6 +25,9 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           builder: (context) => PontosInteresseNotifier(),
+        ),
+        ChangeNotifierProvider(
+          builder: (context) => ContatosNotifier(),
         )
       ],
       child: MaterialApp(

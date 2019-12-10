@@ -1,9 +1,10 @@
+import 'dart:convert';
+
 import 'package:aqui_cliente/models/pontosInteresse_model.dart';
 import 'package:flutter/material.dart';
-import 'dart:convert';
 import 'package:http/http.dart' as http;
 
-class PontosInteresseNotifier with ChangeNotifier {
+class ContatosNotifier with ChangeNotifier {
   final String baseUrl = 'https://projetos.smtech.dev/sistema-prefeitura/api/';
 
   bool _loading = false;
@@ -16,16 +17,16 @@ class PontosInteresseNotifier with ChangeNotifier {
   List<PontosInteresseModel> _pontos;
   List<PontosInteresseModel> get pontos => _pontos;
 
-  PontosInteresseNotifier() {
-    getPontosInteresse();
+  ContatosNotifier() {
+    getContatos();
   }
 
-  Future getPontosInteresse() async {
+  Future getContatos() async {
     setLoading(true);
     Map<String, dynamic> data;
     List<dynamic> list;
     http.Response response =
-        await http.get('$baseUrl/telefones/buscar_telefones/1');
+        await http.get('$baseUrl/telefones/buscar_telefones/2');
     data = jsonDecode(response.body);
     if (response.statusCode == 200) {
       list = data["mensagem"] as List;

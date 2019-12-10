@@ -8,6 +8,7 @@ class TelefoneTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView.builder(
       shrinkWrap: true,
+      physics: NeverScrollableScrollPhysics(),
       itemCount: telefones.length,
       itemBuilder: (BuildContext context, int index) {
         return Padding(
