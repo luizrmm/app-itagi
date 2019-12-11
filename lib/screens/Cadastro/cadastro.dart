@@ -1,4 +1,6 @@
+import 'package:aqui_cliente/screens/widgets/input.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'widgets/label.dart';
 
@@ -8,6 +10,16 @@ class Cadastro extends StatefulWidget {
 }
 
 class _CadastroState extends State<Cadastro> {
+  final _formKey = GlobalKey<FormState>();
+  final _nome = TextEditingController();
+  final _senha = TextEditingController();
+  final _email = TextEditingController();
+  final telefone = TextEditingController();
+  final _endereco = TextEditingController();
+  final _numero = TextEditingController();
+  final _bairro = TextEditingController();
+  final _cidadeId = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,72 +37,53 @@ class _CadastroState extends State<Cadastro> {
                   child: Container(
                     padding: EdgeInsets.all(20.0),
                     child: Form(
+                      key: _formKey,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: <Widget>[
                           Label(
                             value: 'Usuário',
                           ),
-                          Material(
-                            color: Colors.white,
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(6.0)),
-                            elevation: 7.0,
-                            shadowColor: Colors.black,
-                            child: TextFormField(
-                              style: TextStyle(fontSize: 16),
-                              decoration: InputDecoration(
-                                  contentPadding: EdgeInsets.symmetric(
-                                      horizontal: 12.0, vertical: 10.0),
-                                  fillColor: Colors.white,
-                                  filled: true,
-                                  border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(6.0),
-                                      borderSide: BorderSide.none)),
-                            ),
+                          Input(
+                            controller: _nome,
+                            type: TextInputType.text,
+                            isObscure: false,
+                            validatorFunc: (value) {
+                              if (value.isEmpty) {
+                                return 'Por favor insira seu nome';
+                              }
+                              return null;
+                            },
                           ),
                           Label(
                             value: 'Senha',
                           ),
-                          Material(
-                            color: Colors.white,
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(6.0)),
-                            elevation: 7.0,
-                            shadowColor: Colors.black,
-                            child: TextFormField(
-                              obscureText: true,
-                              style: TextStyle(fontSize: 16),
-                              decoration: InputDecoration(
-                                  contentPadding: EdgeInsets.symmetric(
-                                      horizontal: 12.0, vertical: 10.0),
-                                  fillColor: Colors.white,
-                                  filled: true,
-                                  border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(6.0),
-                                      borderSide: BorderSide.none)),
-                            ),
+                          Input(
+                            controller: _senha,
+                            isObscure: true,
+                            validatorFunc: (value) {
+                              if (value.isEmpty) {
+                                return 'A senha é obrigatória';
+                              }
+                              return null;
+                            },
                           ),
                           Label(
                             value: 'Email',
                           ),
-                          Material(
-                            color: Colors.white,
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(6.0)),
-                            elevation: 7.0,
-                            shadowColor: Colors.black,
-                            child: TextFormField(
-                              style: TextStyle(fontSize: 16),
-                              decoration: InputDecoration(
-                                  contentPadding: EdgeInsets.symmetric(
-                                      horizontal: 12.0, vertical: 10.0),
-                                  fillColor: Colors.white,
-                                  filled: true,
-                                  border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(6.0),
-                                      borderSide: BorderSide.none)),
-                            ),
+                          Input(
+                            controller: _email,
+                            isObscure: false,
+                            type: TextInputType.emailAddress,
+                            validatorFunc: (value) {
+                              bool emailValid = RegExp(
+                                      r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                                  .hasMatch(value);
+                              if (!emailValid) {
+                                return 'Insira um email valido';
+                              }
+                              return null;
+                            },
                           ),
                           Label(
                             value: 'telefone',
@@ -102,6 +95,12 @@ class _CadastroState extends State<Cadastro> {
                             elevation: 7.0,
                             shadowColor: Colors.black,
                             child: TextFormField(
+                              inputFormatters: <TextInputFormatter>[
+                                WhitelistingTextInputFormatter(
+                                    RegExp("[a-zA-Z]")),
+                                BlacklistingTextInputFormatter(
+                                    RegExp("[abFeG]")),
+                              ],
                               style: TextStyle(fontSize: 16),
                               decoration: InputDecoration(
                                   contentPadding: EdgeInsets.symmetric(
@@ -234,7 +233,11 @@ class _CadastroState extends State<Cadastro> {
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(6.0)),
                               color: Theme.of(context).primaryColor,
-                              onPressed: () {},
+                              onPressed: () {
+                                if (_formKey.currentState.validate()) {
+                                  print('valido');
+                                }
+                              },
                               child: Text(
                                 'Cadastrar',
                                 style: TextStyle(color: Colors.white),
