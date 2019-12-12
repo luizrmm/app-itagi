@@ -1,6 +1,11 @@
+import 'package:aqui_cliente/notifiers/cadastro_notifier.dart';
+import 'package:aqui_cliente/screens/widgets/button.dart';
 import 'package:aqui_cliente/screens/widgets/input.dart';
+import 'package:aqui_cliente/screens/widgets/loading.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_masked_text/flutter_masked_text.dart';
+import 'package:provider/provider.dart';
 
 import 'widgets/label.dart';
 
@@ -14,11 +19,18 @@ class _CadastroState extends State<Cadastro> {
   final _nome = TextEditingController();
   final _senha = TextEditingController();
   final _email = TextEditingController();
-  final telefone = TextEditingController();
+  final _telefone = MaskedTextController(mask: '(00)00000-0000');
   final _endereco = TextEditingController();
-  final _numero = TextEditingController();
   final _bairro = TextEditingController();
-  final _cidadeId = TextEditingController();
+  final _complemento = TextEditingController();
+  final _numero = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    Future.microtask(
+        () => Provider.of<CadastroNotifier>(context).getCidades('MG'));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -88,71 +100,16 @@ class _CadastroState extends State<Cadastro> {
                           Label(
                             value: 'telefone',
                           ),
-                          Material(
-                            color: Colors.white,
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(6.0)),
-                            elevation: 7.0,
-                            shadowColor: Colors.black,
-                            child: TextFormField(
-                              inputFormatters: <TextInputFormatter>[
-                                WhitelistingTextInputFormatter(
-                                    RegExp("[a-zA-Z]")),
-                                BlacklistingTextInputFormatter(
-                                    RegExp("[abFeG]")),
-                              ],
-                              style: TextStyle(fontSize: 16),
-                              decoration: InputDecoration(
-                                  contentPadding: EdgeInsets.symmetric(
-                                      horizontal: 12.0, vertical: 10.0),
-                                  fillColor: Colors.white,
-                                  filled: true,
-                                  border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(6.0),
-                                      borderSide: BorderSide.none)),
-                            ),
-                          ),
-                          Label(
-                            value: 'Endereço',
-                          ),
-                          Material(
-                            color: Colors.white,
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(6.0)),
-                            elevation: 7.0,
-                            shadowColor: Colors.black,
-                            child: TextFormField(
-                              style: TextStyle(fontSize: 16),
-                              decoration: InputDecoration(
-                                  contentPadding: EdgeInsets.symmetric(
-                                      horizontal: 12.0, vertical: 10.0),
-                                  fillColor: Colors.white,
-                                  filled: true,
-                                  border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(6.0),
-                                      borderSide: BorderSide.none)),
-                            ),
-                          ),
-                          Label(
-                            value: 'Bairro',
-                          ),
-                          Material(
-                            color: Colors.white,
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(6.0)),
-                            elevation: 7.0,
-                            shadowColor: Colors.black,
-                            child: TextFormField(
-                              style: TextStyle(fontSize: 16),
-                              decoration: InputDecoration(
-                                  contentPadding: EdgeInsets.symmetric(
-                                      horizontal: 12.0, vertical: 10.0),
-                                  fillColor: Colors.white,
-                                  filled: true,
-                                  border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(6.0),
-                                      borderSide: BorderSide.none)),
-                            ),
+                          Input(
+                            controller: _telefone,
+                            isObscure: false,
+                            type: TextInputType.phone,
+                            validatorFunc: (value) {
+                              if (value.isEmpty) {
+                                return 'Por favor insira um número de telefone';
+                              }
+                              return null;
+                            },
                           ),
                           Row(
                             children: <Widget>[
@@ -161,29 +118,17 @@ class _CadastroState extends State<Cadastro> {
                                 child: Column(
                                   children: <Widget>[
                                     Label(
-                                      value: 'Cidade',
+                                      value: 'Endereço',
                                     ),
-                                    Material(
-                                      color: Colors.white,
-                                      shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(6.0)),
-                                      elevation: 7.0,
-                                      shadowColor: Colors.black,
-                                      child: TextFormField(
-                                        style: TextStyle(fontSize: 16),
-                                        decoration: InputDecoration(
-                                            contentPadding:
-                                                EdgeInsets.symmetric(
-                                                    horizontal: 12.0,
-                                                    vertical: 10.0),
-                                            fillColor: Colors.white,
-                                            filled: true,
-                                            border: OutlineInputBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(6.0),
-                                                borderSide: BorderSide.none)),
-                                      ),
+                                    Input(
+                                      isObscure: false,
+                                      controller: _endereco,
+                                      validatorFunc: (value) {
+                                        if (value.isEmpty) {
+                                          return 'Por favor insira um endereço válido';
+                                        }
+                                        return null;
+                                      },
                                     ),
                                   ],
                                 ),
@@ -192,58 +137,137 @@ class _CadastroState extends State<Cadastro> {
                                 width: 10.0,
                               ),
                               Flexible(
+                                flex: 1,
                                 child: Column(
                                   children: <Widget>[
                                     Label(
                                       value: 'Número',
                                     ),
-                                    Material(
-                                      color: Colors.white,
-                                      shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(6.0)),
-                                      elevation: 7.0,
-                                      shadowColor: Colors.black,
-                                      child: TextFormField(
-                                        style: TextStyle(fontSize: 16),
-                                        decoration: InputDecoration(
-                                            contentPadding:
-                                                EdgeInsets.symmetric(
-                                                    horizontal: 12.0,
-                                                    vertical: 10.0),
-                                            fillColor: Colors.white,
-                                            filled: true,
-                                            border: OutlineInputBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(6.0),
-                                                borderSide: BorderSide.none)),
-                                      ),
+                                    Input(
+                                      type: TextInputType.number,
+                                      isObscure: false,
+                                      controller: _numero,
+                                      validatorFunc: (value) {
+                                        if (value.isEmpty) {
+                                          return 'Campo obrigatório';
+                                        }
+                                        return null;
+                                      },
                                     ),
                                   ],
                                 ),
-                              )
+                              ),
+                            ],
+                          ),
+                          Label(
+                            value: 'Complemento',
+                          ),
+                          Input(
+                            controller: _complemento,
+                            isObscure: false,
+                          ),
+                          Label(
+                            value: 'Bairro',
+                          ),
+                          Input(
+                            controller: _bairro,
+                            isObscure: false,
+                            validatorFunc: (value) {
+                              if (value.isEmpty) {
+                                return 'Por favor informe seu bairro';
+                              }
+                              return null;
+                            },
+                          ),
+                          Row(
+                            children: <Widget>[
+                              Flexible(
+                                child: Column(
+                                  children: <Widget>[
+                                    Label(
+                                      value: 'Estado',
+                                    ),
+                                    DropdownButton(
+                                      icon: Icon(Icons.keyboard_arrow_down),
+                                      isExpanded: true,
+                                      items:
+                                          Provider.of<CadastroNotifier>(context)
+                                              .estados
+                                              .map((value) {
+                                        return DropdownMenuItem<String>(
+                                          value: value,
+                                          child: Text(value),
+                                        );
+                                      }).toList(),
+                                      onChanged: (newValue) {
+                                        Provider.of<CadastroNotifier>(context)
+                                            .changeValue(newValue);
+                                      },
+                                      value:
+                                          Provider.of<CadastroNotifier>(context)
+                                              .estado,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              SizedBox(
+                                width: 10.0,
+                              ),
+                              Flexible(
+                                flex: 3,
+                                child: Column(
+                                  children: <Widget>[
+                                    Label(
+                                      value: 'Cidade',
+                                    ),
+                                    Provider.of<CadastroNotifier>(context)
+                                                .loading ||
+                                            Provider.of<CadastroNotifier>(
+                                                        context)
+                                                    .cidades ==
+                                                null
+                                        ? Loading()
+                                        : DropdownButton(
+                                            icon:
+                                                Icon(Icons.keyboard_arrow_down),
+                                            value:
+                                                Provider.of<CadastroNotifier>(
+                                                        context)
+                                                    .city,
+                                            isExpanded: true,
+                                            items:
+                                                Provider.of<CadastroNotifier>(
+                                                        context)
+                                                    .cidades
+                                                    .map((value) {
+                                              return DropdownMenuItem<String>(
+                                                value: value.id,
+                                                child: Text(value.nome),
+                                              );
+                                            }).toList(),
+                                            onChanged: (String newValue) {
+                                              Provider.of<CadastroNotifier>(
+                                                      context)
+                                                  .changeCidade(newValue);
+                                            },
+                                          )
+                                  ],
+                                ),
+                              ),
                             ],
                           ),
                           Padding(
-                            padding: EdgeInsets.only(top: 18.0, bottom: 20.0),
-                            child: MaterialButton(
-                              minWidth:
-                                  MediaQuery.of(context).size.width * 0.45,
-                              height: 42,
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(6.0)),
-                              color: Theme.of(context).primaryColor,
-                              onPressed: () {
-                                if (_formKey.currentState.validate()) {
-                                  print('valido');
-                                }
-                              },
-                              child: Text(
-                                'Cadastrar',
-                                style: TextStyle(color: Colors.white),
-                              ),
-                            ),
-                          ),
+                              padding: EdgeInsets.only(top: 18.0, bottom: 20.0),
+                              child: DefaultButton(
+                                text: 'Cadastrar',
+                                function: () {
+                                  if (_formKey.currentState.validate()) {
+                                    print('oi');
+                                  } else {
+                                    print('tchau');
+                                  }
+                                },
+                              )),
                         ],
                       ),
                     ),
