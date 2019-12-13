@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:aqui_cliente/models/cidade_model.dart';
+import 'package:aqui_cliente/models/user_model.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
@@ -19,9 +20,18 @@ class CadastroNotifier with ChangeNotifier {
   bool _loading = false;
   bool get loading => _loading;
 
+  bool _loadingcity = false;
+  bool get loadingcity => _loadingcity;
+
   String _errorMessage = "";
 
   String get errorMessage => _errorMessage;
+
+  String _successMessage = "";
+  String get successMessage => _successMessage;
+
+  bool _requestSucces = false;
+  bool get requestSucces => _requestSucces;
 
   List<CidadeModel> _cidades;
   List<CidadeModel> get cidades => _cidades;
@@ -61,15 +71,45 @@ class CadastroNotifier with ChangeNotifier {
   Future getCidades(String sigla) async {
     Map<String, dynamic> data;
     List<dynamic> list;
-    setLoading(true);
+    setLoadingcity(true);
     http.Response response =
         await http.get('$baseUrl/cidades/buscar_cidades/$sigla');
     data = jsonDecode(response.body);
     if (response.statusCode == 200) {
       list = data["mensagem"] as List;
       _cidades = list.map((value) => CidadeModel.fromJson(value)).toList();
+      setLoadingcity(false);
+    } else {
+      _errorMessage = data["mensagem"];
+      setLoadingcity(false);
+    }
+  }
+
+  Future cadastrar(UserModel user, String password) async {
+    setLoading(true);
+    Map<String, dynamic> data;
+    Map<String, dynamic> json = {
+      "nome": user.nome,
+      "senha": password,
+      "email": user.email,
+      "telefone": user.telefone,
+      "endereco": user.endereco,
+      "numero": user.numero,
+      "bairro": user.bairro,
+      "complemento": user.complemento,
+      "cidade_id": user.cidadeId
+    };
+    http.Response response = await http.put(
+      '$baseUrl/usuario/cadastrar',
+      body: json,
+    );
+    data = jsonDecode(response.body);
+    if (response.statusCode == 200) {
+      _requestSucces = true;
+      _successMessage = data["mensagem"];
       setLoading(false);
     } else {
+      _requestSucces = false;
       _errorMessage = data["mensagem"];
       setLoading(false);
     }
@@ -89,6 +129,11 @@ class CadastroNotifier with ChangeNotifier {
 
   void setLoading(bool value) {
     _loading = value;
+    notifyListeners();
+  }
+
+  void setLoadingcity(bool value) {
+    _loadingcity = value;
     notifyListeners();
   }
 }
