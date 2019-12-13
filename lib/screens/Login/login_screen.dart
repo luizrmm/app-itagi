@@ -80,9 +80,6 @@ class _LoginScreenState extends State<LoginScreen> {
                                 if (_formKey.currentState.validate()) {
                                   await Provider.of<LoginNotifier>(context)
                                       .logar(_email.text, _password.text);
-                                  print(Provider.of<LoginNotifier>(context)
-                                      .user
-                                      .nome);
                                 }
                               })),
                       Padding(

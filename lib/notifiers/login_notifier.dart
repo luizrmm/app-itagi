@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:aqui_cliente/models/user_model.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginNotifier with ChangeNotifier {
   final String baseUrl = 'https://projetos.smtech.dev/sistema-prefeitura/api/';
@@ -37,6 +38,7 @@ class LoginNotifier with ChangeNotifier {
     if (response.statusCode == 200) {
       _requestSucces = true;
       _user = UserModel.fromJson(data["mensagem"]);
+      setToken(data["mensagem"]["token"]);
       setLoading(false);
     } else {
       _requestSucces = false;
@@ -48,5 +50,11 @@ class LoginNotifier with ChangeNotifier {
   void setLoading(bool value) {
     _loading = value;
     notifyListeners();
+  }
+
+  Future setToken(String token) async {
+    print("Login " + token.substring(0, 10));
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString('token', token);
   }
 }

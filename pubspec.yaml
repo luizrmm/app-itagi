@@ -26,18 +26,17 @@ dependencies:
   provider: ^3.1.0+1
   http: ^0.12.0+2
   flutter_masked_text: ^0.8.0
+  shared_preferences: ^0.5.6
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
 # The following section is specific to Flutter.
 flutter:
-
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
@@ -45,20 +44,20 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-   - assets/news.png
-   - assets/obras.png
-   - assets/support.png
-   - assets/pesquisa.png
-   - assets/enquete.png
-   - assets/telefones.png
-   - assets/fale_conosco.png
-   - assets/contatos.png
-   - assets/prefeitura.png
-   - assets/prefeito.png
-   - assets/like.png
-   - assets/logo_barreiras.png
-   - assets/upload.png
-   - assets/newspaper.png
+    - assets/news.png
+    - assets/obras.png
+    - assets/support.png
+    - assets/pesquisa.png
+    - assets/enquete.png
+    - assets/telefones.png
+    - assets/fale_conosco.png
+    - assets/contatos.png
+    - assets/prefeitura.png
+    - assets/prefeito.png
+    - assets/like.png
+    - assets/logo_barreiras.png
+    - assets/upload.png
+    - assets/newspaper.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
@@ -78,7 +77,7 @@ flutter:
         - asset: fonts/Poppins-Thin.ttf
         - asset: fonts/Poppins-Bold.ttf
 
-    - family:  CustomIcons
+    - family: CustomIcons
       fonts:
         - asset: fonts/custom_icons.ttf
     # - family: Trajan Pro

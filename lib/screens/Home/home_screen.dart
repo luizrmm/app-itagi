@@ -1,11 +1,23 @@
 import 'package:aqui_cliente/notifiers/home_notifier.dart';
 import 'package:aqui_cliente/screens/Login/login_screen.dart';
 import 'package:aqui_cliente/screens/Menu/menu.dart';
+import 'package:aqui_cliente/screens/Perfil/perfil_screen.dart';
 import 'package:aqui_cliente/screens/Relatar_problemas/relatar_problemas.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
+  @override
+  _HomeScreenState createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  @override
+  void initState() {
+    super.initState();
+    Future.microtask(() => Provider.of<HomeNotifier>(context).getToken());
+  }
+
   @override
   Widget build(BuildContext context) {
     int cIndex = Provider.of<HomeNotifier>(context).currentIndex;
@@ -14,7 +26,9 @@ class HomeScreen extends StatelessWidget {
         body: IndexedStack(
           index: cIndex,
           children: <Widget>[
-            LoginScreen(),
+            Provider.of<HomeNotifier>(context).token == null
+                ? LoginScreen()
+                : Perfil(),
             MenuScreen(),
             RelProblemsScreen(),
           ],
