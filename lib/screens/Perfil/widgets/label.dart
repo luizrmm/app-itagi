@@ -9,7 +9,12 @@ class Label extends StatelessWidget {
       padding: const EdgeInsets.only(top: 18.0, bottom: 12.0),
       child: Row(
         children: <Widget>[
-          Text(value),
+          Text(
+            value,
+            style: TextStyle(
+                color: Theme.of(context).primaryColor,
+                fontWeight: FontWeight.bold),
+          ),
         ],
       ),
     );
