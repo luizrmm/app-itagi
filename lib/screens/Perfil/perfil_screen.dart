@@ -16,7 +16,7 @@ class Perfil extends StatefulWidget {
 
 class _PerfilState extends State<Perfil> {
   final _formKey = GlobalKey<FormState>();
-  TextEditingController _nome = TextEditingController(text: 'rwerew');
+  final _nome = TextEditingController();
   final _estado = TextEditingController();
   final _cidade = TextEditingController();
   final _email = TextEditingController();

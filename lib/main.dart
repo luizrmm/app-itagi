@@ -1,5 +1,6 @@
 import 'package:aqui_cliente/notifiers/cadastro_notifier.dart';
 import 'package:aqui_cliente/notifiers/contatos_notifier.dart';
+import 'package:aqui_cliente/notifiers/faleConosco_notifier.dart';
 import 'package:aqui_cliente/notifiers/home_notifier.dart';
 import 'package:aqui_cliente/notifiers/login_notifier.dart';
 import 'package:aqui_cliente/notifiers/perfil_notifier.dart';
@@ -41,6 +42,9 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           builder: (context) => PerfilNotifier(),
         ),
+        ChangeNotifierProvider(
+          builder: (context) => FaleNotifier(),
+        )
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
