@@ -1,7 +1,10 @@
+import 'package:aqui_cliente/notifiers/login_notifier.dart';
 import 'package:aqui_cliente/screens/Cadastro/cadastro.dart';
 import 'package:aqui_cliente/screens/Fale_conosco/widgets/label.dart';
 import 'package:aqui_cliente/screens/widgets/button.dart';
+import 'package:aqui_cliente/screens/widgets/input.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -9,6 +12,11 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  final _email = TextEditingController();
+  final _password = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
+  FocusNode senhaFocusNode = FocusNode();
+  FocusNode emailFocusNode = FocusNode();
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(
@@ -21,6 +29,7 @@ class _LoginScreenState extends State<LoginScreen> {
               child: Container(
                 padding: EdgeInsets.all(20.0),
                 child: Form(
+                  key: _formKey,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: <Widget>[
@@ -34,55 +43,47 @@ class _LoginScreenState extends State<LoginScreen> {
                       Label(
                         value: 'Usuário',
                       ),
-                      Material(
-                        color: Colors.white,
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(6.0)),
-                        elevation: 7.0,
-                        shadowColor: Colors.black,
-                        child: TextFormField(
-                          style: TextStyle(fontSize: 16),
-                          decoration: InputDecoration(
-                              contentPadding: EdgeInsets.symmetric(
-                                  horizontal: 12.0, vertical: 10.0),
-                              fillColor: Colors.white,
-                              filled: true,
-                              border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(6.0),
-                                  borderSide: BorderSide.none)),
-                        ),
+                      Input(
+                        focusNode: emailFocusNode,
+                        controller: _email,
+                        isObscure: false,
+                        action: TextInputAction.next,
+                        type: TextInputType.emailAddress,
+                        nextFocus: senhaFocusNode,
+                        validatorFunc: (value) {
+                          if (value.isEmpty) {
+                            return 'Campo obrigatório!';
+                          }
+                          return null;
+                        },
                       ),
                       Label(
                         value: 'Senha',
                       ),
-                      Material(
-                        color: Colors.white,
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(6.0)),
-                        elevation: 7.0,
-                        shadowColor: Colors.black,
-                        child: TextFormField(
-                          obscureText: true,
-                          style: TextStyle(fontSize: 16),
-                          decoration: InputDecoration(
-                              contentPadding: EdgeInsets.symmetric(
-                                  horizontal: 12.0, vertical: 10.0),
-                              fillColor: Colors.white,
-                              filled: true,
-                              border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(6.0),
-                                  borderSide: BorderSide.none)),
-                        ),
+                      Input(
+                        controller: _password,
+                        action: TextInputAction.done,
+                        isObscure: true,
+                        focusNode: senhaFocusNode,
+                        validatorFunc: (value) {
+                          if (value.isEmpty) {
+                            return 'Campo obrigatório!';
+                          }
+                          return null;
+                        },
                       ),
                       Padding(
                           padding: EdgeInsets.only(top: 18.0, bottom: 20.0),
                           child: DefaultButton(
                               text: 'Entrar',
-                              function: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => Cadastro()));
+                              function: () async {
+                                if (_formKey.currentState.validate()) {
+                                  await Provider.of<LoginNotifier>(context)
+                                      .logar(_email.text, _password.text);
+                                  print(Provider.of<LoginNotifier>(context)
+                                      .user
+                                      .nome);
+                                }
                               })),
                       Padding(
                         padding: EdgeInsets.only(top: 60.0),

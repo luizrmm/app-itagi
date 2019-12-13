@@ -1,6 +1,7 @@
 import 'package:aqui_cliente/notifiers/cadastro_notifier.dart';
 import 'package:aqui_cliente/notifiers/contatos_notifier.dart';
 import 'package:aqui_cliente/notifiers/home_notifier.dart';
+import 'package:aqui_cliente/notifiers/login_notifier.dart';
 import 'package:aqui_cliente/notifiers/pontosInteresse_notifier.dart';
 import 'package:aqui_cliente/notifiers/prefeito_notifier.dart';
 import 'package:aqui_cliente/notifiers/prefeitura_notifier.dart';
@@ -32,6 +33,9 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           builder: (context) => CadastroNotifier(),
+        ),
+        ChangeNotifierProvider(
+          builder: (context) => LoginNotifier(),
         )
       ],
       child: MaterialApp(
