@@ -1,5 +1,6 @@
 import 'package:aqui_cliente/models/user_model.dart';
 import 'package:aqui_cliente/notifiers/perfil_notifier.dart';
+import 'package:aqui_cliente/screens/Home/home_screen.dart';
 import 'package:aqui_cliente/screens/Perfil/widgets/label.dart';
 import 'package:aqui_cliente/screens/widgets/loading.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +16,7 @@ class Perfil extends StatefulWidget {
 
 class _PerfilState extends State<Perfil> {
   final _formKey = GlobalKey<FormState>();
-  final _nome = TextEditingController()..text = 'teerer';
+  TextEditingController _nome = TextEditingController(text: 'rwerew');
   final _estado = TextEditingController();
   final _cidade = TextEditingController();
   final _email = TextEditingController();
@@ -24,8 +25,6 @@ class _PerfilState extends State<Perfil> {
   final _bairro = TextEditingController();
   final _complemento = TextEditingController();
   final _numero = TextEditingController();
-  UserModel user = UserModel();
-
   @override
   void initState() {
     super.initState();
@@ -34,6 +33,18 @@ class _PerfilState extends State<Perfil> {
 
   @override
   Widget build(BuildContext context) {
+    UserModel user = Provider.of<PerfilNotifier>(context).userPerfil;
+    if (Provider.of<PerfilNotifier>(context).userPerfil != null) {
+      _nome.text = user.nome;
+      _email.text = user.email;
+      _telefone.text = user.telefone;
+      _endereco.text = user.endereco;
+      _numero.text = user.numero;
+      _complemento.text = user.complemento;
+      _bairro.text = user.bairro;
+      _estado.text = user.estado;
+      _cidade.text = user.cidade;
+    }
     return Scaffold(
       appBar: AppBar(
         title: Text('Perfil'),
@@ -52,15 +63,6 @@ class _PerfilState extends State<Perfil> {
                       child: Loading(),
                     );
                   } else {
-                    _email.text = result.userPerfil.email;
-                    _telefone.text = result.userPerfil.telefone;
-                    _endereco.text = result.userPerfil.endereco;
-                    _numero.text = result.userPerfil.numero;
-                    _complemento.text = result.userPerfil.complemento;
-                    _bairro.text = result.userPerfil.bairro;
-                    _estado.text = result.userPerfil.estado;
-                    _cidade.text = result.userPerfil.cidade;
-
                     return Container(
                       padding: EdgeInsets.fromLTRB(20.0, 12.0, 20.0, 0),
                       child: Form(
@@ -168,16 +170,27 @@ class _PerfilState extends State<Perfil> {
                                 ),
                               ],
                             ),
-                            Padding(
-                              padding: EdgeInsets.only(top: 40.0),
-                              child: Button(
-                                color: Colors.green,
-                                text: 'Editar perfil',
-                                function: () {
-                                  result.enableEdit(true);
-                                },
-                              ),
-                            ),
+                            result.isEditable
+                                ? Padding(
+                                    padding: EdgeInsets.only(top: 40.0),
+                                    child: Button(
+                                      color: Colors.green,
+                                      text: 'Salvar',
+                                      function: () {
+                                        result.enableEdit(false);
+                                      },
+                                    ),
+                                  )
+                                : Padding(
+                                    padding: EdgeInsets.only(top: 40.0),
+                                    child: Button(
+                                      color: Colors.green,
+                                      text: 'Editar perfil',
+                                      function: () {
+                                        result.enableEdit(true);
+                                      },
+                                    ),
+                                  ),
                             result.isEditable
                                 ? Padding(
                                     padding: EdgeInsets.only(
@@ -196,7 +209,14 @@ class _PerfilState extends State<Perfil> {
                                     child: Button(
                                       color: Colors.red,
                                       text: 'Sair',
-                                      function: () {},
+                                      function: () async {
+                                        await result.deleteToken();
+                                        Navigator.pushReplacement(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    HomeScreen()));
+                                      },
                                     ),
                                   )
                           ],

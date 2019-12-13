@@ -50,6 +50,11 @@ class PerfilNotifier with ChangeNotifier {
     token = prefs.getString('token');
   }
 
+  deleteToken() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    preferences.clear();
+  }
+
   void enableEdit(bool value) {
     _isEditable = value;
     notifyListeners();
