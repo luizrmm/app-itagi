@@ -25,7 +25,6 @@ class FaleNotifier with ChangeNotifier {
     http.Response response =
         await http.put('$baseUrl/fale_conosco/enviar_mensagem', body: json);
     data = jsonDecode(response.body);
-    print(response.statusCode);
     if (response.statusCode == 200) {
       _requestSucces = true;
       _successMessage = data["mensagem"];

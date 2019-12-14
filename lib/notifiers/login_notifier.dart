@@ -54,7 +54,6 @@ class LoginNotifier with ChangeNotifier {
   }
 
   Future setToken(String token) async {
-    print("Login " + token.substring(0, 10));
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setString('token', token);
   }

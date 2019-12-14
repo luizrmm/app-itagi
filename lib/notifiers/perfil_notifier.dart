@@ -41,7 +41,6 @@ class PerfilNotifier with ChangeNotifier {
       _userPerfil = UserModel.fromJson(data["mensagem"]);
       setLoading(false);
     } else {
-      print(data);
       setLoading(false);
     }
   }

@@ -53,7 +53,6 @@ class NovasEnqueteNotifier with ChangeNotifier {
         headers: {'Token': token},
         body: {"enquete_id": enqueteId, "voto": voto});
     data = jsonDecode(response.body);
-    print(data);
     if (response.statusCode == 200) {
       _requestSucces = true;
       _successMessage = data["mensagem"];

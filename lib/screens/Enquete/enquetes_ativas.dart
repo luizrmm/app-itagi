@@ -11,13 +11,6 @@ class EnquetesAtivas extends StatefulWidget {
 
 class _EnquetesAtivasState extends State<EnquetesAtivas> {
   @override
-  void initState() {
-    super.initState();
-    Future.microtask(
-        () => Provider.of<NovasEnqueteNotifier>(context).getNovasEnquetes());
-  }
-
-  @override
   Widget build(BuildContext context) {
     if (Provider.of<NovasEnqueteNotifier>(context).loading) {
       return Container(
