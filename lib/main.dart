@@ -8,6 +8,7 @@ import 'package:aqui_cliente/notifiers/home_notifier.dart';
 import 'package:aqui_cliente/notifiers/login_notifier.dart';
 import 'package:aqui_cliente/notifiers/noticia_notifier.dart';
 import 'package:aqui_cliente/notifiers/perfil_notifier.dart';
+import 'package:aqui_cliente/notifiers/pesquisa_notifier.dart';
 import 'package:aqui_cliente/notifiers/pontosInteresse_notifier.dart';
 import 'package:aqui_cliente/notifiers/prefeito_notifier.dart';
 import 'package:aqui_cliente/notifiers/prefeitura_notifier.dart';
@@ -64,6 +65,9 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (context) => NoticiaNotifier(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => PesquisaNotifier(),
         )
       ],
       child: MaterialApp(
