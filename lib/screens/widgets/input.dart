@@ -8,6 +8,7 @@ class Input extends StatelessWidget {
   final FocusNode focusNode;
   final FocusNode nextFocus;
   final TextInputAction action;
+
   Input(
       {this.isObscure,
       this.validatorFunc,
@@ -24,9 +25,11 @@ class Input extends StatelessWidget {
       elevation: 7.0,
       shadowColor: Colors.black,
       child: TextFormField(
-        onFieldSubmitted: (String value) {
-          FocusScope.of(context).requestFocus(nextFocus);
-        },
+        onFieldSubmitted: nextFocus != null
+            ? (String value) {
+                FocusScope.of(context).requestFocus(nextFocus);
+              }
+            : null,
         textInputAction: action,
         focusNode: focusNode,
         keyboardType: type,

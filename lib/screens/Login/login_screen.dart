@@ -63,10 +63,10 @@ class _LoginScreenState extends State<LoginScreen> {
                         value: 'Senha',
                       ),
                       Input(
+                        focusNode: senhaFocusNode,
                         controller: _password,
                         action: TextInputAction.done,
                         isObscure: true,
-                        focusNode: senhaFocusNode,
                         validatorFunc: (value) {
                           if (value.isEmpty) {
                             return 'Campo obrigatório!';
