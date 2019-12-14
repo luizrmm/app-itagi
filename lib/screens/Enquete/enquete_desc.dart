@@ -48,7 +48,7 @@ class EnqueteDesc extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(top: 30.0, bottom: 18.0),
               child: Text(
-                'Resultado Parcial',
+                'Resultado Final',
                 textAlign: TextAlign.center,
                 style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
               ),
@@ -61,7 +61,7 @@ class EnqueteDesc extends StatelessWidget {
                   textAlign: TextAlign.center,
                   style: TextStyle(
                       fontSize: 18.0,
-                      color: Color(0xFFD76E6E),
+                      color: Color(0xFF61E47C),
                       fontWeight: FontWeight.bold),
                 ),
                 Text(
@@ -69,7 +69,7 @@ class EnqueteDesc extends StatelessWidget {
                   textAlign: TextAlign.center,
                   style: TextStyle(
                       fontSize: 18.0,
-                      color: Color(0xFF61E47C),
+                      color: Color(0xFFD76E6E),
                       fontWeight: FontWeight.bold),
                 ),
               ],

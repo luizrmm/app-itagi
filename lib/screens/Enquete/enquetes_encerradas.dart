@@ -12,6 +12,13 @@ class EnquetesEncerradas extends StatefulWidget {
 
 class _EnquetesEncerradasState extends State<EnquetesEncerradas> {
   @override
+  void initState() {
+    super.initState();
+    Future.microtask(() => Provider.of<EnqueteEncerradasNotifier>(context)
+        .getEnquetesEncerradas());
+  }
+
+  @override
   Widget build(BuildContext context) {
     if (Provider.of<EnqueteEncerradasNotifier>(context).loading) {
       return Container(

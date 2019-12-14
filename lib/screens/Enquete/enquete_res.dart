@@ -1,10 +1,8 @@
+import 'package:aqui_cliente/notifiers/enquetes/novas.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class EnqueteResultado extends StatelessWidget {
-  final String contra;
-  final String favor;
-
-  const EnqueteResultado({Key key, this.contra, this.favor}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,19 +45,19 @@ class EnqueteResultado extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: <Widget>[
                 Text(
-                  '$favor\nA Favor',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                      fontSize: 18.0,
-                      color: Color(0xFFD76E6E),
-                      fontWeight: FontWeight.bold),
-                ),
-                Text(
-                  '$contra\nContra',
+                  '${Provider.of<NovasEnqueteNotifier>(context).favor}\nA Favor',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                       fontSize: 18.0,
                       color: Color(0xFF61E47C),
+                      fontWeight: FontWeight.bold),
+                ),
+                Text(
+                  '${Provider.of<NovasEnqueteNotifier>(context).contra}\nContra',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                      fontSize: 18.0,
+                      color: Color(0xFFD76E6E),
                       fontWeight: FontWeight.bold),
                 ),
               ],

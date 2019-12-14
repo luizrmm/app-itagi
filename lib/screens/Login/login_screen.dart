@@ -36,6 +36,11 @@ class _LoginScreenState extends State<LoginScreen> {
                 BoxConstraints(minHeight: viewportConstraints.maxHeight),
             child: SafeArea(
               child: Container(
+                decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                        colors: [Colors.white, Colors.blueGrey],
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter)),
                 padding: EdgeInsets.all(20.0),
                 child: Form(
                   key: _formKey,

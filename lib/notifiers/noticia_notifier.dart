@@ -1,13 +1,14 @@
 import 'dart:convert';
 
-import 'package:aqui_cliente/models/enquete_model.dart';
+import 'package:aqui_cliente/models/noticia_model.dart';
 import 'package:aqui_cliente/utils/api_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
-class NovasEnqueteNotifier with ChangeNotifier {
+class NoticiaNotifier with ChangeNotifier {
   String baseUrl = ApiUtils().baseUrl;
   String token;
+
   bool _loading = false;
   bool get loading => _loading;
 
@@ -20,29 +21,20 @@ class NovasEnqueteNotifier with ChangeNotifier {
   bool _requestSucces = false;
   bool get requestSucces => _requestSucces;
 
-  List<EnqueteModel> _novasEnquetes;
-  List<EnqueteModel> get novasEnquetes => _novasEnquetes;
+  List<NoticiaModel> _noticias;
+  List<NoticiaModel> get noticias => _noticias;
 
-  String _favor;
-  String get favor => _favor;
-
-  String _contra;
-  String get contra => _contra;
-
-  Future getNovasEnquetes() async {
+  Future getNoticias(String tipo) async {
     setLoading(true);
     Map<String, dynamic> data;
     List<dynamic> list;
-    token = await ApiUtils().getToken();
-    http.Response response = await http.get(
-        '$baseUrl/enquetes/buscar_enquetes_nova',
-        headers: {'Token': token});
+    http.Response response =
+        await http.get('$baseUrl/noticias/buscar_noticias/$tipo');
     data = jsonDecode(response.body);
     if (response.statusCode == 200) {
       _requestSucces = true;
       list = data["mensagem"] as List;
-      _novasEnquetes =
-          list.map((value) => EnqueteModel.fromJson(value)).toList();
+      _noticias = list.map((value) => NoticiaModel.fromJson(value)).toList();
       setLoading(false);
     } else {
       _requestSucces = false;
@@ -51,24 +43,19 @@ class NovasEnqueteNotifier with ChangeNotifier {
     }
   }
 
-  Future votarEnquete(String enqueteId, String voto) async {
-    setLoading(true);
-    token = await ApiUtils().getToken();
+  Future curtir(Map<String, dynamic> json) async {
     Map<String, dynamic> data;
-    http.Response response = await http.put('$baseUrl/enquetes/votar_enquete',
-        headers: {'Token': token},
-        body: {"enquete_id": enqueteId, "voto": voto});
+    token = await ApiUtils().getToken();
+    http.Response response = await http.put('$baseUrl/noticias/curtidas',
+        headers: {'Token': token}, body: json);
     data = jsonDecode(response.body);
     if (response.statusCode == 200) {
       _requestSucces = true;
-      _favor = data["mensagem"]["votos_afavor"];
-      _contra = data["mensagem"]["votos_contra"];
-      getNovasEnquetes();
-      setLoading(false);
+      notifyListeners();
     } else {
       _requestSucces = false;
       _errorMessage = data["mensagem"];
-      setLoading(false);
+      notifyListeners();
     }
   }
 

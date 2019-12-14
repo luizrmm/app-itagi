@@ -6,6 +6,7 @@ import 'package:aqui_cliente/notifiers/enquetes/novas.dart';
 import 'package:aqui_cliente/notifiers/faleConosco_notifier.dart';
 import 'package:aqui_cliente/notifiers/home_notifier.dart';
 import 'package:aqui_cliente/notifiers/login_notifier.dart';
+import 'package:aqui_cliente/notifiers/noticia_notifier.dart';
 import 'package:aqui_cliente/notifiers/perfil_notifier.dart';
 import 'package:aqui_cliente/notifiers/pontosInteresse_notifier.dart';
 import 'package:aqui_cliente/notifiers/prefeito_notifier.dart';
@@ -60,6 +61,9 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (context) => UsuarioEnqueteNotifier(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => NoticiaNotifier(),
         )
       ],
       child: MaterialApp(

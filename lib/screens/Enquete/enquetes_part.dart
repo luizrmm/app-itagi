@@ -12,6 +12,13 @@ class EnquetesPart extends StatefulWidget {
 
 class _EnquetesPartState extends State<EnquetesPart> {
   @override
+  void initState() {
+    super.initState();
+    Future.microtask(() =>
+        Provider.of<UsuarioEnqueteNotifier>(context).getEnquetesUsuario());
+  }
+
+  @override
   Widget build(BuildContext context) {
     if (Provider.of<UsuarioEnqueteNotifier>(context).loading) {
       return Container(

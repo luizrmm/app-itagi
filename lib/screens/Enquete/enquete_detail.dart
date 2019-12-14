@@ -77,10 +77,7 @@ class _EnqueteDetailState extends State<EnqueteDetail> {
                           Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => EnqueteResultado(
-                                        contra: widget.contra,
-                                        favor: widget.favor,
-                                      )));
+                                  builder: (context) => EnqueteResultado()));
                         } else {
                           _scaffoldKey.currentState.showSnackBar(SnackBar(
                             content: Text(
@@ -110,10 +107,7 @@ class _EnqueteDetailState extends State<EnqueteDetail> {
                           Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => EnqueteResultado(
-                                        contra: widget.contra,
-                                        favor: widget.favor,
-                                      )));
+                                  builder: (context) => EnqueteResultado()));
                         } else {
                           _scaffoldKey.currentState.showSnackBar(SnackBar(
                             content: Text(
