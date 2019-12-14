@@ -5,6 +5,7 @@ import 'package:aqui_cliente/screens/Fale_conosco/widgets/label.dart';
 import 'package:aqui_cliente/screens/Home/home_screen.dart';
 import 'package:aqui_cliente/screens/widgets/button.dart';
 import 'package:aqui_cliente/screens/widgets/input.dart';
+import 'package:aqui_cliente/screens/widgets/loading.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -83,31 +84,32 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                       Padding(
                           padding: EdgeInsets.only(top: 18.0, bottom: 20.0),
-                          child: DefaultButton(
-                              text: 'Entrar',
-                              function: () async {
-                                if (_formKey.currentState.validate()) {
-                                  await Provider.of<LoginNotifier>(context)
-                                      .logar(_email.text, _password.text);
-                                  if (Provider.of<LoginNotifier>(context)
-                                      .requestSucces) {
-                                    Provider.of<HomeNotifier>(context)
-                                        .changePage(1);
-                                    Navigator.pushReplacement(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                HomeScreen()));
-                                  } else {
-                                    Scaffold.of(context).showSnackBar(SnackBar(
-                                      content: Text(
-                                          Provider.of<LoginNotifier>(context)
-                                              .errorMessage),
-                                      backgroundColor: Colors.red,
-                                    ));
-                                  }
-                                }
-                              })),
+                          child: Provider.of<LoginNotifier>(context).loading
+                              ? Center(
+                                  child: Loading(),
+                                )
+                              : DefaultButton(
+                                  text: 'Entrar',
+                                  function: () async {
+                                    if (_formKey.currentState.validate()) {
+                                      await Provider.of<LoginNotifier>(context)
+                                          .logar(_email.text, _password.text);
+                                      if (Provider.of<LoginNotifier>(context)
+                                          .requestSucces) {
+                                        Provider.of<HomeNotifier>(context)
+                                            .changePage(1);
+                                      } else {
+                                        Scaffold.of(context)
+                                            .showSnackBar(SnackBar(
+                                          content: Text(
+                                              Provider.of<LoginNotifier>(
+                                                      context)
+                                                  .errorMessage),
+                                          backgroundColor: Colors.red,
+                                        ));
+                                      }
+                                    }
+                                  })),
                       Padding(
                         padding: EdgeInsets.only(top: 60.0),
                         child: FlatButton(
