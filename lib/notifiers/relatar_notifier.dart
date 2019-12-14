@@ -26,11 +26,13 @@ class RelatarNotifier with ChangeNotifier {
 
   Future getImage(int value) async {
     if (value == 0) {
-      File eoq = await ImagePicker.pickImage(source: ImageSource.camera);
+      File eoq = await ImagePicker.pickImage(
+          source: ImageSource.camera, imageQuality: 40);
       _image = eoq;
       notifyListeners();
     } else {
-      File eoq = await ImagePicker.pickImage(source: ImageSource.gallery);
+      File eoq = await ImagePicker.pickImage(
+          source: ImageSource.gallery, imageQuality: 50);
       _image = eoq;
       notifyListeners();
     }
@@ -43,7 +45,7 @@ class RelatarNotifier with ChangeNotifier {
 
   Future putRelatar(Map<String, dynamic> json) async {
     setLoading(true);
-    await getToken();
+    token = await getToken();
     Map<String, dynamic> data;
     http.Response response = await http.put(
         '$baseUrl/relatar_problema/enviar_problema',
@@ -69,5 +71,6 @@ class RelatarNotifier with ChangeNotifier {
   Future getToken() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     token = prefs.getString('token');
+    return token;
   }
 }

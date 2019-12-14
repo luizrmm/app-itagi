@@ -20,6 +20,13 @@ class _LoginScreenState extends State<LoginScreen> {
   FocusNode senhaFocusNode = FocusNode();
   FocusNode emailFocusNode = FocusNode();
   @override
+  void dispose() {
+    senhaFocusNode.dispose();
+    emailFocusNode.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (BuildContext context, BoxConstraints viewportConstraints) {

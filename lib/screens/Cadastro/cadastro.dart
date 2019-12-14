@@ -49,8 +49,17 @@ class _CadastroState extends State<Cadastro> {
   @override
   void dispose() {
     // Clean up the focus node when the Form is disposed.
+
     myFocusNode.dispose();
     senhaFocusNode.dispose();
+    emailFocusNode.dispose();
+    telefoneFocusNode.dispose();
+    enderecoFocusNode.dispose();
+    numeroFocusNode.dispose();
+    complementoFocusNode.dispose();
+    bairroFocusNode.dispose();
+    estadoFocusNode.dispose();
+    cidadeFocusNode.dispose();
 
     super.dispose();
   }

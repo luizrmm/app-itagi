@@ -31,7 +31,7 @@ class PerfilNotifier with ChangeNotifier {
 
   Future getPerfil() async {
     setLoading(true);
-    await getToken();
+    token = await getToken();
     Map<String, dynamic> data;
     http.Response response =
         await http.get('$baseUrl/usuario/perfil', headers: {'Token': token});
@@ -45,9 +45,28 @@ class PerfilNotifier with ChangeNotifier {
     }
   }
 
+  Future editarPerfil(Map<String, dynamic> json) async {
+    setLoading(true);
+    token = await getToken();
+    Map<String, dynamic> data;
+    http.Response response = await http.put('$baseUrl/usuario/editar_perfil',
+        headers: {'Token': token}, body: json);
+    data = jsonDecode(response.body);
+    if (response.statusCode == 200) {
+      _requestSucces = true;
+      _successMessage = data["mensagem"];
+      setLoading(false);
+    } else {
+      _requestSucces = false;
+      _errorMessage = data["mensgem"];
+      setLoading(false);
+    }
+  }
+
   getToken() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     token = prefs.getString('token');
+    return token;
   }
 
   deleteToken() async {

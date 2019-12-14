@@ -1,4 +1,5 @@
 import 'package:aqui_cliente/models/user_model.dart';
+import 'package:aqui_cliente/notifiers/cadastro_notifier.dart';
 import 'package:aqui_cliente/notifiers/perfil_notifier.dart';
 import 'package:aqui_cliente/screens/Home/home_screen.dart';
 import 'package:aqui_cliente/screens/Perfil/widgets/label.dart';
@@ -25,10 +26,34 @@ class _PerfilState extends State<Perfil> {
   final _bairro = TextEditingController();
   final _complemento = TextEditingController();
   final _numero = TextEditingController();
+  FocusNode senhaFocusNode = FocusNode();
+  FocusNode emailFocusNode = FocusNode();
+  FocusNode telefoneFocusNode = FocusNode();
+  FocusNode enderecoFocusNode = FocusNode();
+  FocusNode numeroFocusNode = FocusNode();
+  FocusNode complementoFocusNode = FocusNode();
+  FocusNode bairroFocusNode = FocusNode();
+  FocusNode estadoFocusNode = FocusNode();
+  FocusNode cidadeFocusNode = FocusNode();
+  Map<String, dynamic> formulario;
   @override
   void initState() {
     super.initState();
     Future.microtask(() => Provider.of<PerfilNotifier>(context).getPerfil());
+  }
+
+  @override
+  void dispose() {
+    senhaFocusNode.dispose();
+    emailFocusNode.dispose();
+    telefoneFocusNode.dispose();
+    enderecoFocusNode.dispose();
+    numeroFocusNode.dispose();
+    complementoFocusNode.dispose();
+    bairroFocusNode.dispose();
+    estadoFocusNode.dispose();
+    cidadeFocusNode.dispose();
+    super.dispose();
   }
 
   @override
@@ -75,21 +100,61 @@ class _PerfilState extends State<Perfil> {
                             ),
                             TextFormField(
                               controller: _nome,
-                              enabled: result.isEditable,
+                              textInputAction: TextInputAction.next,
+                              onFieldSubmitted: (String value) {
+                                FocusScope.of(context)
+                                    .requestFocus(emailFocusNode);
+                              },
+                              enabled: false,
+                              validator: (value) {
+                                if (value.isEmpty) {
+                                  return 'Campo obrigatório!';
+                                }
+                                return null;
+                              },
                             ),
                             Label(
                               value: 'Email',
                             ),
                             TextFormField(
                               controller: _email,
+                              focusNode: emailFocusNode,
+                              keyboardType: TextInputType.emailAddress,
+                              textInputAction: TextInputAction.next,
+                              onFieldSubmitted: (String value) {
+                                FocusScope.of(context)
+                                    .requestFocus(telefoneFocusNode);
+                              },
                               enabled: result.isEditable,
+                              validator: (value) {
+                                bool emailValid = RegExp(
+                                        r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                                    .hasMatch(value);
+                                if (!emailValid) {
+                                  return 'Insira um email valido';
+                                }
+                                return null;
+                              },
                             ),
                             Label(
                               value: 'Telefone',
                             ),
                             TextFormField(
                               controller: _telefone,
+                              focusNode: telefoneFocusNode,
+                              keyboardType: TextInputType.phone,
+                              textInputAction: TextInputAction.next,
+                              onFieldSubmitted: (String value) {
+                                FocusScope.of(context)
+                                    .requestFocus(enderecoFocusNode);
+                              },
                               enabled: result.isEditable,
+                              validator: (value) {
+                                if (value.isEmpty) {
+                                  return 'Campo obrigatório!';
+                                }
+                                return null;
+                              },
                             ),
                             Row(
                               children: <Widget>[
@@ -102,7 +167,19 @@ class _PerfilState extends State<Perfil> {
                                       ),
                                       TextFormField(
                                         controller: _endereco,
+                                        focusNode: enderecoFocusNode,
+                                        textInputAction: TextInputAction.next,
+                                        onFieldSubmitted: (String value) {
+                                          FocusScope.of(context)
+                                              .requestFocus(numeroFocusNode);
+                                        },
                                         enabled: result.isEditable,
+                                        validator: (value) {
+                                          if (value.isEmpty) {
+                                            return 'Campo obrigatório!';
+                                          }
+                                          return null;
+                                        },
                                       ),
                                     ],
                                   ),
@@ -117,7 +194,20 @@ class _PerfilState extends State<Perfil> {
                                       ),
                                       TextFormField(
                                         controller: _numero,
+                                        focusNode: numeroFocusNode,
+                                        keyboardType: TextInputType.number,
+                                        textInputAction: TextInputAction.next,
+                                        onFieldSubmitted: (String value) {
+                                          FocusScope.of(context).requestFocus(
+                                              complementoFocusNode);
+                                        },
                                         enabled: result.isEditable,
+                                        validator: (value) {
+                                          if (value.isEmpty) {
+                                            return 'Campo obrigatório!';
+                                          }
+                                          return null;
+                                        },
                                       ),
                                     ],
                                   ),
@@ -129,6 +219,12 @@ class _PerfilState extends State<Perfil> {
                             ),
                             TextFormField(
                               controller: _complemento,
+                              focusNode: complementoFocusNode,
+                              textInputAction: TextInputAction.next,
+                              onFieldSubmitted: (String value) {
+                                FocusScope.of(context)
+                                    .requestFocus(bairroFocusNode);
+                              },
                               enabled: result.isEditable,
                             ),
                             Label(
@@ -136,48 +232,201 @@ class _PerfilState extends State<Perfil> {
                             ),
                             TextFormField(
                               controller: _bairro,
+                              focusNode: bairroFocusNode,
+                              textInputAction: TextInputAction.next,
+                              onFieldSubmitted: (String value) {
+                                FocusScope.of(context)
+                                    .requestFocus(estadoFocusNode);
+                              },
                               enabled: result.isEditable,
+                              validator: (value) {
+                                if (value.isEmpty) {
+                                  return 'Campo obrigatório!';
+                                }
+                                return null;
+                              },
                             ),
-                            Row(
-                              children: <Widget>[
-                                Flexible(
-                                  child: Column(
+                            result.isEditable
+                                ? Row(
                                     children: <Widget>[
-                                      Label(
-                                        value: 'Estado',
+                                      Flexible(
+                                        child: Column(
+                                          children: <Widget>[
+                                            Label(
+                                              value: 'Estado',
+                                            ),
+                                            DropdownButton(
+                                              focusNode: estadoFocusNode,
+                                              icon: Icon(
+                                                  Icons.keyboard_arrow_down),
+                                              isExpanded: true,
+                                              items:
+                                                  Provider.of<CadastroNotifier>(
+                                                          context)
+                                                      .estados
+                                                      .map((value) {
+                                                return DropdownMenuItem<String>(
+                                                  value: value,
+                                                  child: Text(value),
+                                                );
+                                              }).toList(),
+                                              onChanged: (newValue) {
+                                                Provider.of<CadastroNotifier>(
+                                                        context)
+                                                    .changeValue(newValue);
+                                                FocusScope.of(context)
+                                                    .requestFocus(
+                                                        cidadeFocusNode);
+                                              },
+                                              value:
+                                                  Provider.of<CadastroNotifier>(
+                                                          context)
+                                                      .estado,
+                                            ),
+                                          ],
+                                        ),
                                       ),
-                                      TextFormField(
-                                        controller: _estado,
-                                        enabled: result.isEditable,
+                                      SizedBox(
+                                        width: 10.0,
+                                      ),
+                                      Flexible(
+                                        flex: 3,
+                                        child: Column(
+                                          children: <Widget>[
+                                            Label(
+                                              value: 'Cidade',
+                                            ),
+                                            Provider.of<CadastroNotifier>(
+                                                            context)
+                                                        .loadingcity ||
+                                                    Provider.of<CadastroNotifier>(
+                                                                context)
+                                                            .cidades ==
+                                                        null
+                                                ? Text('Aguardando Estado')
+                                                : DropdownButton(
+                                                    hint: Text(
+                                                        'Selecione uma ciadade'),
+                                                    focusNode: cidadeFocusNode,
+                                                    icon: Icon(Icons
+                                                        .keyboard_arrow_down),
+                                                    value: Provider.of<
+                                                                CadastroNotifier>(
+                                                            context)
+                                                        .city,
+                                                    isExpanded: true,
+                                                    items: Provider.of<
+                                                                CadastroNotifier>(
+                                                            context)
+                                                        .cidades
+                                                        .map((value) {
+                                                      return DropdownMenuItem<
+                                                          String>(
+                                                        value: value.id,
+                                                        child: Text(value.nome),
+                                                      );
+                                                    }).toList(),
+                                                    onChanged:
+                                                        (String newValue) {
+                                                      Provider.of<CadastroNotifier>(
+                                                              context)
+                                                          .changeCidade(
+                                                              newValue);
+                                                    },
+                                                  )
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  )
+                                : Row(
+                                    children: <Widget>[
+                                      Flexible(
+                                        child: Column(
+                                          children: <Widget>[
+                                            Label(
+                                              value: 'Estado',
+                                            ),
+                                            TextFormField(
+                                              controller: _estado,
+                                              enabled: result.isEditable,
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      SizedBox(width: 20.0),
+                                      Flexible(
+                                        flex: 3,
+                                        child: Column(
+                                          children: <Widget>[
+                                            Label(
+                                              value: 'Cidade',
+                                            ),
+                                            TextFormField(
+                                              controller: _cidade,
+                                              enabled: result.isEditable,
+                                            ),
+                                          ],
+                                        ),
                                       ),
                                     ],
                                   ),
-                                ),
-                                SizedBox(width: 20.0),
-                                Flexible(
-                                  flex: 3,
-                                  child: Column(
-                                    children: <Widget>[
-                                      Label(
-                                        value: 'Cidade',
-                                      ),
-                                      TextFormField(
-                                        controller: _cidade,
-                                        enabled: result.isEditable,
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
                             result.isEditable
                                 ? Padding(
                                     padding: EdgeInsets.only(top: 40.0),
                                     child: Button(
                                       color: Colors.green,
-                                      text: 'Salvar',
-                                      function: () {
+                                      text: result.loading
+                                          ? 'Aguarde salvando ...'
+                                          : 'Salvar',
+                                      function: () async {
                                         result.enableEdit(false);
+                                        if (_formKey.currentState.validate()) {
+                                          formulario = {
+                                            "email": _email.text,
+                                            "telefone": _telefone.text,
+                                            "endereco": _endereco.text,
+                                            "numero": _numero.text,
+                                            "bairro": _bairro.text,
+                                            "complemento": _complemento.text,
+                                            "cidade_id": Provider.of<
+                                                                CadastroNotifier>(
+                                                            context)
+                                                        .city ==
+                                                    null
+                                                ? user.cidadeId
+                                                : Provider.of<CadastroNotifier>(
+                                                        context)
+                                                    .city
+                                          };
+                                          await Provider.of<PerfilNotifier>(
+                                                  context)
+                                              .editarPerfil(formulario);
+                                          if (Provider.of<PerfilNotifier>(
+                                                  context)
+                                              .requestSucces) {
+                                            await Provider.of<PerfilNotifier>(
+                                                    context)
+                                                .getPerfil();
+                                            Scaffold.of(context)
+                                                .showSnackBar(SnackBar(
+                                              content: Text(
+                                                  Provider.of<PerfilNotifier>(
+                                                          context)
+                                                      .successMessage),
+                                              backgroundColor: Colors.green,
+                                            ));
+                                          } else {
+                                            Scaffold.of(context)
+                                                .showSnackBar(SnackBar(
+                                              content: Text(
+                                                  Provider.of<PerfilNotifier>(
+                                                          context)
+                                                      .errorMessage),
+                                              backgroundColor: Colors.red,
+                                            ));
+                                          }
+                                        }
                                       },
                                     ),
                                   )

@@ -20,34 +20,34 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
-          builder: (context) => HomeNotifier(),
+          create: (context) => HomeNotifier(),
         ),
         ChangeNotifierProvider(
-          builder: (context) => PrefeituraNotifier(),
+          create: (context) => PrefeituraNotifier(),
         ),
         ChangeNotifierProvider(
-          builder: (context) => PrefeitoNotifier(),
+          create: (context) => PrefeitoNotifier(),
         ),
         ChangeNotifierProvider(
-          builder: (context) => PontosInteresseNotifier(),
+          create: (context) => PontosInteresseNotifier(),
         ),
         ChangeNotifierProvider(
-          builder: (context) => ContatosNotifier(),
+          create: (context) => ContatosNotifier(),
         ),
         ChangeNotifierProvider(
-          builder: (context) => CadastroNotifier(),
+          create: (context) => CadastroNotifier(),
         ),
         ChangeNotifierProvider(
-          builder: (context) => LoginNotifier(),
+          create: (context) => LoginNotifier(),
         ),
         ChangeNotifierProvider(
-          builder: (context) => PerfilNotifier(),
+          create: (context) => PerfilNotifier(),
         ),
         ChangeNotifierProvider(
-          builder: (context) => FaleNotifier(),
+          create: (context) => FaleNotifier(),
         ),
         ChangeNotifierProvider(
-          builder: (context) => RelatarNotifier(),
+          create: (context) => RelatarNotifier(),
         )
       ],
       child: MaterialApp(
