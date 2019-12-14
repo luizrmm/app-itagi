@@ -1,16 +1,52 @@
+import 'package:aqui_cliente/screens/Enquete/enquete_desc.dart';
 import 'package:aqui_cliente/screens/Enquete/enquete_detail.dart';
 import 'package:flutter/material.dart';
 
 class TileEnquete extends StatelessWidget {
   final Color color;
   final IconData iconData;
-  TileEnquete({this.color, this.iconData});
+  final String id;
+  final String title;
+  final String description;
+  final String qtdVotos;
+  final String aFavor;
+  final String contra;
+  final String dataEnc;
+  final bool encerrada;
+  TileEnquete(
+      {this.color,
+      this.iconData,
+      this.id,
+      this.title,
+      this.description,
+      this.qtdVotos,
+      this.aFavor,
+      this.contra,
+      this.dataEnc,
+      this.encerrada});
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.of(context)
-            .push(MaterialPageRoute(builder: (context) => EnqueteDetail()));
+        if (encerrada) {
+          Navigator.of(context).push(MaterialPageRoute(
+              builder: (context) => EnqueteDesc(
+                    title: title,
+                    description: description,
+                    contra: contra,
+                    favor: aFavor,
+                  )));
+        } else {
+          Navigator.of(context).push(MaterialPageRoute(
+              builder: (context) => EnqueteDetail(
+                    id: id,
+                    title: title,
+                    description: description,
+                    contra: contra,
+                    favor: aFavor,
+                  )));
+        }
       },
       child: Card(
         shape:
@@ -25,17 +61,17 @@ class TileEnquete extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    Text('Pec 6/2019'),
+                    Text(title),
                     Text(
-                      'Modifica o sitema da previdência e auxilia políticos a obterem mais auxilios desnecessários para manter seu sustento',
+                      description,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
-                        Text('205 votos'),
-                        Text('Encerramento: 10/03')
+                        Text('$qtdVotos votos'),
+                        Text('Encerramento: $dataEnc')
                       ],
                     )
                   ],

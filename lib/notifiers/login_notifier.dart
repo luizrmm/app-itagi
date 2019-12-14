@@ -1,12 +1,13 @@
 import 'dart:convert';
 
 import 'package:aqui_cliente/models/user_model.dart';
+import 'package:aqui_cliente/utils/api_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginNotifier with ChangeNotifier {
-  final String baseUrl = 'https://projetos.smtech.dev/sistema-prefeitura/api/';
+  String baseUrl = ApiUtils().baseUrl;
   String _email = "";
   String get email => _email;
 

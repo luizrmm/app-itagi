@@ -1,5 +1,8 @@
 import 'package:aqui_cliente/notifiers/cadastro_notifier.dart';
 import 'package:aqui_cliente/notifiers/contatos_notifier.dart';
+import 'package:aqui_cliente/notifiers/enquetes/encerradas.dart';
+import 'package:aqui_cliente/notifiers/enquetes/enquetes_usuario.dart';
+import 'package:aqui_cliente/notifiers/enquetes/novas.dart';
 import 'package:aqui_cliente/notifiers/faleConosco_notifier.dart';
 import 'package:aqui_cliente/notifiers/home_notifier.dart';
 import 'package:aqui_cliente/notifiers/login_notifier.dart';
@@ -48,6 +51,15 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (context) => RelatarNotifier(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => NovasEnqueteNotifier(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => EnqueteEncerradasNotifier(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => UsuarioEnqueteNotifier(),
         )
       ],
       child: MaterialApp(

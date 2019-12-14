@@ -2,11 +2,12 @@ import 'dart:convert';
 
 import 'package:aqui_cliente/models/cidade_model.dart';
 import 'package:aqui_cliente/models/user_model.dart';
+import 'package:aqui_cliente/utils/api_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 class CadastroNotifier with ChangeNotifier {
-  final String baseUrl = 'https://projetos.smtech.dev/sistema-prefeitura/api/';
+  String baseUrl = ApiUtils().baseUrl;
 
   List<String> _estados;
   List<String> get estados => _estados;

@@ -2,7 +2,12 @@ import 'package:flutter/material.dart';
 
 import 'widgets/tile_enquete.dart';
 
-class EnquetesPart extends StatelessWidget {
+class EnquetesPart extends StatefulWidget {
+  @override
+  _EnquetesPartState createState() => _EnquetesPartState();
+}
+
+class _EnquetesPartState extends State<EnquetesPart> {
   @override
   Widget build(BuildContext context) {
     return Container(

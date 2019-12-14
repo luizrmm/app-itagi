@@ -1,19 +1,20 @@
 import 'dart:io';
 import 'dart:convert';
+import 'package:aqui_cliente/utils/api_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
 class RelatarNotifier with ChangeNotifier {
-  final String baseUrl = 'https://projetos.smtech.dev/sistema-prefeitura/api/';
+  String baseUrl = ApiUtils().baseUrl;
   File _image;
   File get image => _image;
 
   bool _loading = false;
   bool get loading => _loading;
-  String _errorMessage = "";
 
+  String _errorMessage = "";
   String get errorMessage => _errorMessage;
 
   String _successMessage = "";

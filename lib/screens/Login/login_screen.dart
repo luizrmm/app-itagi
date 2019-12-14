@@ -2,7 +2,6 @@ import 'package:aqui_cliente/notifiers/home_notifier.dart';
 import 'package:aqui_cliente/notifiers/login_notifier.dart';
 import 'package:aqui_cliente/screens/Cadastro/cadastro.dart';
 import 'package:aqui_cliente/screens/Fale_conosco/widgets/label.dart';
-import 'package:aqui_cliente/screens/Home/home_screen.dart';
 import 'package:aqui_cliente/screens/widgets/button.dart';
 import 'package:aqui_cliente/screens/widgets/input.dart';
 import 'package:aqui_cliente/screens/widgets/loading.dart';

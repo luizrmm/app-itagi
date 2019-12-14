@@ -1,10 +1,11 @@
 import 'package:aqui_cliente/models/pontosInteresse_model.dart';
+import 'package:aqui_cliente/utils/api_utils.dart';
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 class PontosInteresseNotifier with ChangeNotifier {
-  final String baseUrl = 'https://projetos.smtech.dev/sistema-prefeitura/api/';
+  String baseUrl = ApiUtils().baseUrl;
 
   bool _loading = false;
   bool get loading => _loading;
