@@ -51,8 +51,8 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (context) => FaleNotifier(),
         ),
-        ChangeNotifierProvider(
-          create: (context) => RelatarNotifier(),
+        ChangeNotifierProvider<RelatarNotifier>.value(
+          value: RelatarNotifier(),
         ),
         ChangeNotifierProvider(
           create: (context) => NovasEnqueteNotifier(),

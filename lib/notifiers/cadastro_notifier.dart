@@ -75,6 +75,7 @@ class CadastroNotifier with ChangeNotifier {
     setLoadingcity(true);
     http.Response response =
         await http.get('$baseUrl/cidades/buscar_cidades/$sigla');
+
     data = jsonDecode(response.body);
     if (response.statusCode == 200) {
       list = data["mensagem"] as List;

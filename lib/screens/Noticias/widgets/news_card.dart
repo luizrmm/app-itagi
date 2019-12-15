@@ -40,6 +40,7 @@ class NewsCard extends StatelessWidget {
             MaterialPageRoute(
                 builder: (context) => NoticiaDetail(
                       noticia: noticia,
+                      title: 'Datalhes',
                     )));
       },
       child: Card(

@@ -95,6 +95,8 @@ class _LoginScreenState extends State<LoginScreen> {
                               : DefaultButton(
                                   text: 'Entrar',
                                   function: () async {
+                                    senhaFocusNode.unfocus();
+                                    emailFocusNode.unfocus();
                                     if (_formKey.currentState.validate()) {
                                       await Provider.of<LoginNotifier>(context)
                                           .logar(_email.text, _password.text);
