@@ -118,6 +118,8 @@ class _FaleConoscoState extends State<FaleConosco> {
                           Padding(
                               padding: EdgeInsets.only(top: 18.0, bottom: 20.0),
                               child: DefaultButton(
+                                  isbusy: Provider.of<FaleNotifier>(context)
+                                      .loading,
                                   text: 'Confirmar',
                                   function: () async {
                                     if (_formKey.currentState.validate()) {

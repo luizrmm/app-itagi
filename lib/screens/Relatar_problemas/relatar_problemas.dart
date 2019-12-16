@@ -71,6 +71,7 @@ class _RelProblemsScreenState extends State<RelProblemsScreen> {
                     Padding(
                         padding: EdgeInsets.only(top: 18.0, bottom: 20.0),
                         child: DefaultButton(
+                          isbusy: false,
                           function: () {
                             Provider.of<RelatarNotifier>(context).getImage(0);
                           },
@@ -79,6 +80,7 @@ class _RelProblemsScreenState extends State<RelProblemsScreen> {
                     Padding(
                         padding: EdgeInsets.only(bottom: 20.0),
                         child: DefaultButton(
+                          isbusy: false,
                           function: () {
                             Provider.of<RelatarNotifier>(context).getImage(1);
                           },
@@ -148,6 +150,7 @@ class _RelProblemsScreenState extends State<RelProblemsScreen> {
                     Padding(
                         padding: EdgeInsets.only(top: 18.0, bottom: 20.0),
                         child: DefaultButton(
+                          isbusy: Provider.of<RelatarNotifier>(context).loading,
                           function: () async {
                             if (_formKey.currentState.validate()) {
                               if (_image != null) {

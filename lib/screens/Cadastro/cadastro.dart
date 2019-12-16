@@ -298,49 +298,45 @@ class _CadastroState extends State<Cadastro> {
                                 ),
                               ],
                             ),
-                            result.loading
-                                ? Center(child: Loading())
-                                : Padding(
-                                    padding: EdgeInsets.only(
-                                        top: 18.0, bottom: 20.0),
-                                    child: DefaultButton(
-                                      text: 'Cadastrar',
-                                      function: () async {
-                                        if (_formKey.currentState.validate()) {
-                                          user.nome = _nome.text;
-                                          user.email = _email.text;
-                                          user.telefone = _telefone.text;
-                                          user.endereco = _endereco.text;
-                                          user.numero = _numero.text;
-                                          user.bairro = _bairro.text;
-                                          user.complemento = _complemento.text;
-                                          user.cidadeId = result.city;
+                            Padding(
+                                padding:
+                                    EdgeInsets.only(top: 18.0, bottom: 20.0),
+                                child: DefaultButton(
+                                  isbusy: result.loading,
+                                  text: 'Cadastrar',
+                                  function: () async {
+                                    if (_formKey.currentState.validate()) {
+                                      user.nome = _nome.text;
+                                      user.email = _email.text;
+                                      user.telefone = _telefone.text;
+                                      user.endereco = _endereco.text;
+                                      user.numero = _numero.text;
+                                      user.bairro = _bairro.text;
+                                      user.complemento = _complemento.text;
+                                      user.cidadeId = result.city;
 
-                                          await result.cadastrar(
-                                              user, _senha.text);
-                                          if (result.requestSucces) {
-                                            Scaffold.of(context)
-                                                .showSnackBar(SnackBar(
-                                              content:
-                                                  Text(result.successMessage),
-                                              backgroundColor: Colors.green,
-                                            ));
-                                            Navigator.pushReplacement(
-                                                context,
-                                                MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        HomeScreen()));
-                                          } else {
-                                            Scaffold.of(context)
-                                                .showSnackBar(SnackBar(
-                                              content:
-                                                  Text(result.errorMessage),
-                                              backgroundColor: Colors.red,
-                                            ));
-                                          }
-                                        }
-                                      },
-                                    )),
+                                      await result.cadastrar(user, _senha.text);
+                                      if (result.requestSucces) {
+                                        Scaffold.of(context)
+                                            .showSnackBar(SnackBar(
+                                          content: Text(result.successMessage),
+                                          backgroundColor: Colors.green,
+                                        ));
+                                        Navigator.pushReplacement(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    HomeScreen()));
+                                      } else {
+                                        Scaffold.of(context)
+                                            .showSnackBar(SnackBar(
+                                          content: Text(result.errorMessage),
+                                          backgroundColor: Colors.red,
+                                        ));
+                                      }
+                                    }
+                                  },
+                                )),
                           ],
                         ),
                       ),

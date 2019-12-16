@@ -74,6 +74,7 @@ class _PesquisaSatisfacaoState extends State<PesquisaSatisfacao> {
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 25.0),
                         child: DefaultButton(
+                          isbusy: false,
                           function: () {},
                           text: 'Confirmar',
                         ),
