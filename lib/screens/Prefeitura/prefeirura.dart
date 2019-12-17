@@ -3,20 +3,7 @@ import 'package:aqui_cliente/screens/widgets/loading.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class Prefeitura extends StatefulWidget {
-  @override
-  _PrefeituraState createState() => _PrefeituraState();
-}
-
-class _PrefeituraState extends State<Prefeitura> {
-  @override
-  void initState() {
-    super.initState();
-    Future.microtask(() =>
-        Provider.of<PrefeituraNotifier>(context, listen: false)
-            .getPrefeituraData());
-  }
-
+class Prefeitura extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

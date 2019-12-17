@@ -13,10 +13,12 @@ class NoticiaDetail extends StatelessWidget {
         title: Text(title),
       ),
       body: Container(
-        padding: EdgeInsets.only(top: 20.0, right: 20.0, left: 20.0),
         child: SingleChildScrollView(
-          child: Html(
-            data: noticia,
+          child: Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: Html(
+              data: noticia,
+            ),
           ),
         ),
       ),

@@ -5,8 +5,11 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class PrefeitoNotifier with ChangeNotifier {
-  String baseUrl = ApiUtils().baseUrl;
+  PrefeitoNotifier() {
+    getPrefeitoData();
+  }
 
+  String baseUrl = ApiUtils().baseUrl;
   bool _loading = false;
   bool get loading => _loading;
 

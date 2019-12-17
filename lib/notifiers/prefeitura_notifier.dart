@@ -6,6 +6,10 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 class PrefeituraNotifier with ChangeNotifier {
+  PrefeituraNotifier() {
+    getPrefeituraData();
+  }
+
   String baseUrl = ApiUtils().baseUrl;
 
   bool _loading = false;

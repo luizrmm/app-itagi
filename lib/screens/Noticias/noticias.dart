@@ -14,8 +14,8 @@ class _NoticiasScreenState extends State<NoticiasScreen> {
   @override
   void initState() {
     super.initState();
-    Future.microtask(
-        () => Provider.of<NoticiaNotifier>(context).getNoticias("1"));
+    Future.microtask(() =>
+        Provider.of<NoticiaNotifier>(context, listen: false).getNoticias("1"));
   }
 
   @override

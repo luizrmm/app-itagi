@@ -32,6 +32,7 @@ class NewsCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print('tchayu');
     Map<String, dynamic> form;
     return GestureDetector(
       onTap: () {
@@ -40,7 +41,7 @@ class NewsCard extends StatelessWidget {
             MaterialPageRoute(
                 builder: (context) => NoticiaDetail(
                       noticia: noticia,
-                      title: 'Datalhes',
+                      title: 'Detalhes',
                     )));
       },
       child: Card(
@@ -59,7 +60,11 @@ class NewsCard extends StatelessWidget {
                           height: 160,
                           fit: BoxFit.fitWidth,
                         )
-                      : Image.memory(base64Decode(imagem))),
+                      : Image.memory(
+                          base64Decode(imagem),
+                          height: 200,
+                          fit: BoxFit.cover,
+                        )),
               Padding(
                 padding: const EdgeInsets.only(top: 8.0, bottom: 12.0),
                 child: Text(
@@ -85,7 +90,8 @@ class NewsCard extends StatelessWidget {
                             "descurtir": "0",
                             "noticia_id": id
                           };
-                          Provider.of<NoticiaNotifier>(context).curtir(form);
+                          Provider.of<NoticiaNotifier>(context, listen: false)
+                              .curtir(form);
                         },
                         icon: Icon(
                           CustomIcons.thumbs_up,

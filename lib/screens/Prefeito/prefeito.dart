@@ -3,19 +3,7 @@ import 'package:aqui_cliente/screens/widgets/loading.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class Prefeito extends StatefulWidget {
-  @override
-  _PrefeitoState createState() => _PrefeitoState();
-}
-
-class _PrefeitoState extends State<Prefeito> {
-  @override
-  void initState() {
-    Future.microtask(() => Provider.of<PrefeitoNotifier>(context, listen: false)
-        .getPrefeitoData());
-    super.initState();
-  }
-
+class Prefeito extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

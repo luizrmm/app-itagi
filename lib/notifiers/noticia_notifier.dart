@@ -44,19 +44,7 @@ class NoticiaNotifier with ChangeNotifier {
   }
 
   Future curtir(Map<String, dynamic> json) async {
-    Map<String, dynamic> data;
-    token = await ApiUtils().getToken();
-    http.Response response = await http.put('$baseUrl/noticias/curtidas',
-        headers: {'Token': token}, body: json);
-    data = jsonDecode(response.body);
-    if (response.statusCode == 200) {
-      _requestSucces = true;
-      notifyListeners();
-    } else {
-      _requestSucces = false;
-      _errorMessage = data["mensagem"];
-      notifyListeners();
-    }
+    print(json);
   }
 
   void setLoading(bool value) {

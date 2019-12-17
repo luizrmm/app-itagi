@@ -31,6 +31,7 @@ dependencies:
   badges: ^1.1.0
   flutter_html: ^0.11.0
   grouped_buttons: ^1.0.4
+  transparent_image: ^1.0.0
 
 dev_dependencies:
   flutter_test:

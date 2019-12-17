@@ -8,10 +8,13 @@ class HomeNotifier with ChangeNotifier {
   String _token;
   String get token => _token;
 
-  changePage(int index) {
+  changePage(int index) async {
     _currentIndex = index;
     if (currentIndex == 0) {
-      getToken();
+      await getToken();
+      notifyListeners();
+    }
+    if (currentIndex != 0) {
       notifyListeners();
     }
     notifyListeners();

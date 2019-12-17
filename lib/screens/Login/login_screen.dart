@@ -1,4 +1,3 @@
-import 'package:aqui_cliente/notifiers/home_notifier.dart';
 import 'package:aqui_cliente/notifiers/login_notifier.dart';
 import 'package:aqui_cliente/screens/Cadastro/cadastro.dart';
 import 'package:aqui_cliente/screens/Fale_conosco/widgets/label.dart';
@@ -92,13 +91,16 @@ class _LoginScreenState extends State<LoginScreen> {
                                   Provider.of<LoginNotifier>(context).loading,
                               text: 'Entrar',
                               function: () async {
+                                senhaFocusNode.unfocus();
                                 if (_formKey.currentState.validate()) {
                                   await Provider.of<LoginNotifier>(context)
                                       .logar(_email.text, _password.text);
                                   if (Provider.of<LoginNotifier>(context)
                                       .requestSucces) {
-                                    Provider.of<HomeNotifier>(context)
-                                        .changePage(1);
+                                    Scaffold.of(context).showSnackBar(SnackBar(
+                                      content: Text('Voce está logado'),
+                                      backgroundColor: Colors.green,
+                                    ));
                                   } else {
                                     Scaffold.of(context).showSnackBar(SnackBar(
                                       content: Text(
