@@ -67,6 +67,8 @@ class CadastroNotifier with ChangeNotifier {
       "SE",
       "TO"
     ];
+    changeValue('BA');
+    changeCidade('472');
   }
 
   Future getCidades(String sigla) async {
@@ -125,6 +127,7 @@ class CadastroNotifier with ChangeNotifier {
   }
 
   void changeCidade(String newValue) {
+    print(newValue);
     _city = newValue;
     notifyListeners();
   }

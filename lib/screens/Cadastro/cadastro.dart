@@ -25,8 +25,7 @@ class _CadastroState extends State<Cadastro> {
   FocusNode numeroFocusNode = FocusNode();
   FocusNode complementoFocusNode = FocusNode();
   FocusNode bairroFocusNode = FocusNode();
-  FocusNode estadoFocusNode = FocusNode();
-  FocusNode cidadeFocusNode = FocusNode();
+
   final _formKey = GlobalKey<FormState>();
   final _nome = TextEditingController();
   final _senha = TextEditingController();
@@ -37,14 +36,6 @@ class _CadastroState extends State<Cadastro> {
   final _complemento = TextEditingController();
   final _numero = TextEditingController();
   UserModel user = UserModel();
-
-  @override
-  void initState() {
-    super.initState();
-
-    Future.microtask(
-        () => Provider.of<CadastroNotifier>(context).getCidades('MG'));
-  }
 
   @override
   void dispose() {
@@ -58,8 +49,6 @@ class _CadastroState extends State<Cadastro> {
     numeroFocusNode.dispose();
     complementoFocusNode.dispose();
     bairroFocusNode.dispose();
-    estadoFocusNode.dispose();
-    cidadeFocusNode.dispose();
 
     super.dispose();
   }
@@ -224,7 +213,6 @@ class _CadastroState extends State<Cadastro> {
                             ),
                             Input(
                               focusNode: bairroFocusNode,
-                              nextFocus: estadoFocusNode,
                               action: TextInputAction.done,
                               controller: _bairro,
                               isObscure: false,
@@ -244,7 +232,6 @@ class _CadastroState extends State<Cadastro> {
                                         value: 'Estado',
                                       ),
                                       DropdownButton(
-                                        focusNode: estadoFocusNode,
                                         icon: Icon(Icons.keyboard_arrow_down),
                                         isExpanded: true,
                                         items: result.estados.map((value) {
@@ -254,9 +241,8 @@ class _CadastroState extends State<Cadastro> {
                                           );
                                         }).toList(),
                                         onChanged: (newValue) {
+                                          bairroFocusNode.unfocus();
                                           result.changeValue(newValue);
-                                          FocusScope.of(context)
-                                              .requestFocus(cidadeFocusNode);
                                         },
                                         value: result.estado,
                                       ),
@@ -277,7 +263,6 @@ class _CadastroState extends State<Cadastro> {
                                               result.cidades == null
                                           ? Loading()
                                           : DropdownButton(
-                                              focusNode: cidadeFocusNode,
                                               icon: Icon(
                                                   Icons.keyboard_arrow_down),
                                               value: result.city,
