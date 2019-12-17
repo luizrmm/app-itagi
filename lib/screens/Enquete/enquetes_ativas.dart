@@ -4,19 +4,7 @@ import 'package:aqui_cliente/screens/widgets/loading.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class EnquetesAtivas extends StatefulWidget {
-  @override
-  _EnquetesAtivasState createState() => _EnquetesAtivasState();
-}
-
-class _EnquetesAtivasState extends State<EnquetesAtivas> {
-  @override
-  void initState() {
-    super.initState();
-    Future.microtask(
-        () => Provider.of<NovasEnqueteNotifier>(context).getNovasEnquetes());
-  }
-
+class EnquetesAtivas extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (Provider.of<NovasEnqueteNotifier>(context).loading) {

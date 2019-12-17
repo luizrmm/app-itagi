@@ -7,15 +7,20 @@ class NoticiaModel {
   String noticia;
   String likes;
   String delikes;
-  NoticiaModel(
-      {this.id,
-      this.data,
-      this.titulo,
-      this.resumo,
-      this.noticia,
-      this.likes,
-      this.delikes,
-      this.imagem});
+  String descurtiu;
+  String curtiu;
+  NoticiaModel({
+    this.id,
+    this.data,
+    this.titulo,
+    this.resumo,
+    this.noticia,
+    this.likes,
+    this.delikes,
+    this.imagem,
+    this.descurtiu,
+    this.curtiu,
+  });
 
   factory NoticiaModel.fromJson(Map<String, dynamic> json) {
     return NoticiaModel(
@@ -26,6 +31,8 @@ class NoticiaModel {
         imagem: json["imagem"],
         noticia: json["noticia"],
         likes: json["num_curtidas"],
-        delikes: json["num_descurtidas"]);
+        delikes: json["num_descurtidas"],
+        curtiu: json["user_curtiu"],
+        descurtiu: json["user_descurtiu"]);
   }
 }

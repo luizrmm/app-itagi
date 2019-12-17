@@ -17,6 +17,8 @@ class NewsCard extends StatelessWidget {
   final String noticia;
   final String likes;
   final String deslikes;
+  final String curtiu;
+  final String descurtiu;
 
   const NewsCard(
       {Key key,
@@ -27,12 +29,13 @@ class NewsCard extends StatelessWidget {
       this.imagem,
       this.noticia,
       this.likes,
-      this.deslikes})
+      this.deslikes,
+      this.curtiu,
+      this.descurtiu})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    print('tchayu');
     Map<String, dynamic> form;
     return GestureDetector(
       onTap: () {
@@ -84,17 +87,28 @@ class NewsCard extends StatelessWidget {
                         style: TextStyle(color: Colors.white, fontSize: 12),
                       ),
                       child: IconButton(
-                        onPressed: () {
-                          form = {
-                            "curtir": "1",
-                            "descurtir": "0",
-                            "noticia_id": id
-                          };
-                          Provider.of<NoticiaNotifier>(context, listen: false)
+                        onPressed: () async {
+                          if (curtiu == "0") {
+                            form = {
+                              "curtir": "1",
+                              "descurtir": "0",
+                              "noticia_id": id
+                            };
+                          } else {
+                            form = {
+                              "curtir": "0",
+                              "descurtir": "0",
+                              "noticia_id": id
+                            };
+                          }
+                          await Provider.of<NoticiaNotifier>(context,
+                                  listen: false)
                               .curtir(form);
                         },
                         icon: Icon(
-                          CustomIcons.thumbs_up,
+                          curtiu == "0"
+                              ? CustomIcons.thumbs_up
+                              : CustomIcons.thumbs_up_alt,
                           color: Colors.blue,
                         ),
                       ),
@@ -106,9 +120,28 @@ class NewsCard extends StatelessWidget {
                         style: TextStyle(color: Colors.white, fontSize: 12),
                       ),
                       child: IconButton(
-                        onPressed: () {},
+                        onPressed: () async {
+                          if (descurtiu == "0") {
+                            form = {
+                              "curtir": "0",
+                              "descurtir": "1",
+                              "noticia_id": id
+                            };
+                          } else {
+                            form = {
+                              "curtir": "0",
+                              "descurtir": "0",
+                              "noticia_id": id
+                            };
+                          }
+                          await Provider.of<NoticiaNotifier>(context,
+                                  listen: false)
+                              .curtir(form);
+                        },
                         icon: Icon(
-                          CustomIcons.thumbs_down,
+                          descurtiu == "0"
+                              ? CustomIcons.thumbs_down
+                              : CustomIcons.thumbs_down_alt,
                           color: Colors.red,
                         ),
                       ),

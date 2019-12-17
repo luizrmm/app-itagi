@@ -5,19 +5,7 @@ import 'package:provider/provider.dart';
 
 import 'widgets/tile_enquete.dart';
 
-class EnquetesPart extends StatefulWidget {
-  @override
-  _EnquetesPartState createState() => _EnquetesPartState();
-}
-
-class _EnquetesPartState extends State<EnquetesPart> {
-  @override
-  void initState() {
-    super.initState();
-    Future.microtask(() =>
-        Provider.of<UsuarioEnqueteNotifier>(context).getEnquetesUsuario());
-  }
-
+class EnquetesPart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (Provider.of<UsuarioEnqueteNotifier>(context).loading) {

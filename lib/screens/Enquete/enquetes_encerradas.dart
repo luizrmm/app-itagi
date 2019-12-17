@@ -5,19 +5,7 @@ import 'package:provider/provider.dart';
 
 import 'widgets/tile_enquete.dart';
 
-class EnquetesEncerradas extends StatefulWidget {
-  @override
-  _EnquetesEncerradasState createState() => _EnquetesEncerradasState();
-}
-
-class _EnquetesEncerradasState extends State<EnquetesEncerradas> {
-  @override
-  void initState() {
-    super.initState();
-    Future.microtask(() => Provider.of<EnqueteEncerradasNotifier>(context)
-        .getEnquetesEncerradas());
-  }
-
+class EnquetesEncerradas extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (Provider.of<EnqueteEncerradasNotifier>(context).loading) {

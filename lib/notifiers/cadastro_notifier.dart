@@ -127,7 +127,6 @@ class CadastroNotifier with ChangeNotifier {
   }
 
   void changeCidade(String newValue) {
-    print(newValue);
     _city = newValue;
     notifyListeners();
   }

@@ -50,6 +50,8 @@ class _NoticiasScreenState extends State<NoticiasScreen> {
                         noticia: result.noticias[index].noticia,
                         likes: result.noticias[index].likes,
                         deslikes: result.noticias[index].delikes,
+                        curtiu: result.noticias[index].curtiu,
+                        descurtiu: result.noticias[index].descurtiu,
                       );
                     },
                   ));

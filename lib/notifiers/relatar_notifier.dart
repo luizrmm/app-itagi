@@ -4,7 +4,6 @@ import 'package:aqui_cliente/utils/api_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:http/http.dart' as http;
-import 'package:shared_preferences/shared_preferences.dart';
 
 class RelatarNotifier with ChangeNotifier {
   String baseUrl = ApiUtils().baseUrl;
@@ -46,7 +45,7 @@ class RelatarNotifier with ChangeNotifier {
 
   Future putRelatar(Map<String, dynamic> json) async {
     setLoading(true);
-    token = await getToken();
+    token = await ApiUtils().getToken();
     Map<String, dynamic> data;
     http.Response response = await http.put(
         '$baseUrl/relatar_problema/enviar_problema',
@@ -67,11 +66,5 @@ class RelatarNotifier with ChangeNotifier {
   void setLoading(bool value) {
     _loading = value;
     notifyListeners();
-  }
-
-  Future getToken() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    token = prefs.getString('token');
-    return token;
   }
 }

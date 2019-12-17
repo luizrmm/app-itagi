@@ -1,3 +1,5 @@
+import 'package:aqui_cliente/notifiers/enquetes/encerradas.dart';
+import 'package:aqui_cliente/notifiers/enquetes/enquetes_usuario.dart';
 import 'package:aqui_cliente/notifiers/enquetes/novas.dart';
 import 'package:aqui_cliente/screens/Enquete/enquete_res.dart';
 import 'package:flutter/material.dart';
@@ -74,6 +76,12 @@ class _EnqueteDetailState extends State<EnqueteDetail> {
                             .votarEnquete(widget.id, "1");
                         if (Provider.of<NovasEnqueteNotifier>(context)
                             .requestSucces) {
+                          Provider.of<EnqueteEncerradasNotifier>(context)
+                              .getEnquetesEncerradas();
+                          Provider.of<UsuarioEnqueteNotifier>(context)
+                              .getEnquetesUsuario();
+                          Provider.of<NovasEnqueteNotifier>(context)
+                              .getNovasEnquetes();
                           Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(
