@@ -3,6 +3,7 @@ import 'package:aqui_cliente/utils/api_utils.dart';
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:url_launcher/url_launcher.dart';
 
 class PontosInteresseNotifier with ChangeNotifier {
   String baseUrl = ApiUtils().baseUrl;
@@ -42,5 +43,14 @@ class PontosInteresseNotifier with ChangeNotifier {
   void setLoading(bool value) {
     _loading = value;
     notifyListeners();
+  }
+
+  launchURL(String value) async {
+    var url = 'tel: $value';
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Não foi possível realizar operação';
+    }
   }
 }
