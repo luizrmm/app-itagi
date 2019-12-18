@@ -1,3 +1,4 @@
+import 'package:aqui_cliente/notifiers/home_notifier.dart';
 import 'package:aqui_cliente/notifiers/login_notifier.dart';
 import 'package:aqui_cliente/screens/Cadastro/cadastro.dart';
 import 'package:aqui_cliente/screens/Fale_conosco/widgets/label.dart';
@@ -84,33 +85,33 @@ class _LoginScreenState extends State<LoginScreen> {
                           return null;
                         },
                       ),
-                      Padding(
-                          padding: EdgeInsets.only(top: 18.0, bottom: 20.0),
-                          child: DefaultButton(
-                              isbusy:
-                                  Provider.of<LoginNotifier>(context).loading,
-                              text: 'Entrar',
-                              function: () async {
-                                senhaFocusNode.unfocus();
-                                if (_formKey.currentState.validate()) {
-                                  await Provider.of<LoginNotifier>(context)
-                                      .logar(_email.text, _password.text);
-                                  if (Provider.of<LoginNotifier>(context)
-                                      .requestSucces) {
-                                    Scaffold.of(context).showSnackBar(SnackBar(
-                                      content: Text('Voce está logado'),
-                                      backgroundColor: Colors.green,
-                                    ));
-                                  } else {
-                                    Scaffold.of(context).showSnackBar(SnackBar(
-                                      content: Text(
-                                          Provider.of<LoginNotifier>(context)
-                                              .errorMessage),
-                                      backgroundColor: Colors.red,
-                                    ));
-                                  }
-                                }
-                              })),
+                      Consumer<LoginNotifier>(
+                        builder: (context, result, widget) {
+                          return Padding(
+                              padding: EdgeInsets.only(top: 18.0, bottom: 20.0),
+                              child: DefaultButton(
+                                  isbusy: result.loading,
+                                  text: 'Entrar',
+                                  function: () async {
+                                    senhaFocusNode.unfocus();
+                                    emailFocusNode.unfocus();
+                                    if (_formKey.currentState.validate()) {
+                                      await result.logar(
+                                          _email.text, _password.text);
+                                      if (result.requestSucces) {
+                                        Provider.of<HomeNotifier>(context)
+                                            .changePage(1);
+                                      } else {
+                                        Scaffold.of(context)
+                                            .showSnackBar(SnackBar(
+                                          content: Text(result.errorMessage),
+                                          backgroundColor: Colors.red,
+                                        ));
+                                      }
+                                    }
+                                  }));
+                        },
+                      ),
                       Padding(
                         padding: EdgeInsets.only(top: 60.0),
                         child: FlatButton(

@@ -1,6 +1,3 @@
-import 'dart:convert';
-import 'dart:typed_data';
-
 class NoticiaModel {
   String id;
   String data;
