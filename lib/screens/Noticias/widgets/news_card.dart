@@ -15,10 +15,9 @@ class NewsCard extends StatelessWidget {
   final String resumo;
   final String imagem;
   final String noticia;
-  final String likes;
-  final String deslikes;
   final String curtiu;
   final String descurtiu;
+  final int index;
 
   const NewsCard(
       {Key key,
@@ -28,14 +27,14 @@ class NewsCard extends StatelessWidget {
       this.resumo,
       this.imagem,
       this.noticia,
-      this.likes,
-      this.deslikes,
       this.curtiu,
-      this.descurtiu})
+      this.descurtiu,
+      this.index})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    print('teste');
     Map<String, dynamic> form;
     return GestureDetector(
       onTap: () {
@@ -83,7 +82,9 @@ class NewsCard extends StatelessWidget {
                     Badge(
                       position: BadgePosition.topRight(right: 0, top: 0),
                       badgeContent: Text(
-                        likes,
+                        Provider.of<NoticiaNotifier>(context)
+                            .noticias[index]
+                            .likes,
                         style: TextStyle(color: Colors.white, fontSize: 12),
                       ),
                       child: IconButton(
@@ -103,7 +104,7 @@ class NewsCard extends StatelessWidget {
                           }
                           await Provider.of<NoticiaNotifier>(context,
                                   listen: false)
-                              .curtir(form);
+                              .curtir(form, index);
                         },
                         icon: Icon(
                           curtiu == "0"
@@ -116,7 +117,9 @@ class NewsCard extends StatelessWidget {
                     Badge(
                       position: BadgePosition.topRight(right: 0, top: 0),
                       badgeContent: Text(
-                        deslikes,
+                        Provider.of<NoticiaNotifier>(context)
+                            .noticias[index]
+                            .delikes,
                         style: TextStyle(color: Colors.white, fontSize: 12),
                       ),
                       child: IconButton(
@@ -136,7 +139,7 @@ class NewsCard extends StatelessWidget {
                           }
                           await Provider.of<NoticiaNotifier>(context,
                                   listen: false)
-                              .curtir(form);
+                              .curtir(form, index);
                         },
                         icon: Icon(
                           descurtiu == "0"

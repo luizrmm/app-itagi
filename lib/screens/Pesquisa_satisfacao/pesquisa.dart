@@ -11,6 +11,7 @@ class PesquisaSatisfacao extends StatefulWidget {
 }
 
 class _PesquisaSatisfacaoState extends State<PesquisaSatisfacao> {
+  List<dynamic> list = new List();
   @override
   void initState() {
     super.initState();
@@ -53,16 +54,42 @@ class _PesquisaSatisfacaoState extends State<PesquisaSatisfacao> {
                               crossAxisAlignment: CrossAxisAlignment.stretch,
                               children: <Widget>[
                                 Text(
-                                  result.options[index].titulo,
+                                  result.options[index].id,
                                   style: TextStyle(
                                       fontSize: 18.0,
                                       fontWeight: FontWeight.bold),
                                 ),
-                                RadioButtonGroup(labels: [
-                                  'Insatisfeito',
-                                  'Pouco Satisfeito',
-                                  'Satisfeito'
-                                ], onSelected: (String selected) {})
+                                RadioButtonGroup(
+                                    labels: [
+                                      'Insatisfeito',
+                                      'Pouco Satisfeito',
+                                      'Satisfeito'
+                                    ],
+                                    onSelected: (String selected) {
+                                      if (selected == "Insatisfeito") {
+                                        var value = {
+                                          "pesquisa_id":
+                                              result.options[index].id,
+                                          "voto": 1
+                                        };
+                                        list.add(value);
+                                      } else if (selected ==
+                                          "Pouco Satisfeito") {
+                                        var value = {
+                                          "pesquisa_id":
+                                              result.options[index].id,
+                                          "voto": 2
+                                        };
+                                        list.add(value);
+                                      } else {
+                                        var value = {
+                                          "pesquisa_id":
+                                              result.options[index].id,
+                                          "voto": 3
+                                        };
+                                        list.add(value);
+                                      }
+                                    })
                               ],
                             ),
                           );
@@ -75,7 +102,12 @@ class _PesquisaSatisfacaoState extends State<PesquisaSatisfacao> {
                         padding: const EdgeInsets.symmetric(vertical: 25.0),
                         child: DefaultButton(
                           isbusy: false,
-                          function: () {},
+                          function: () async {
+                            var form = {"respostas": list};
+                            print(form);
+                            await Provider.of<PesquisaNotifier>(context)
+                                .votar(form);
+                          },
                           text: 'Confirmar',
                         ),
                       )

@@ -5,6 +5,9 @@ import 'package:aqui_cliente/screens/Perfil/perfil_screen.dart';
 import 'package:aqui_cliente/screens/Relatar_problemas/relatar_problemas.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
+
+final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -16,6 +19,25 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
     Future.microtask(() => Provider.of<HomeNotifier>(context).getToken());
+    setupNotification();
+  }
+
+  void setupNotification() async {
+    _firebaseMessaging.getToken().then((token) {
+      print(token);
+    });
+
+    _firebaseMessaging.configure(
+      onMessage: (Map<String, dynamic> message) async {
+        print("onMessage: $message");
+      },
+      onLaunch: (Map<String, dynamic> message) async {
+        print("onLaunch: $message");
+      },
+      onResume: (Map<String, dynamic> message) async {
+        print("onResume: $message");
+      },
+    );
   }
 
   @override

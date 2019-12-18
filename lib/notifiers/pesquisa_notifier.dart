@@ -46,6 +46,27 @@ class PesquisaNotifier with ChangeNotifier {
     }
   }
 
+  Future votar(Map<String, dynamic> json) async {
+    setLoading(true);
+    Map<String, dynamic> data;
+    token = await ApiUtils().getToken();
+    var teste = jsonEncode(json);
+    print(teste);
+    http.Response response = await http.put(
+        '$baseUrl/pesquisa_satisfacao/enviar_satisfacao',
+        headers: {'Token': token},
+        body: teste);
+    data = jsonDecode(response.body);
+
+    if (response.statusCode == 200) {
+      print(data);
+      setLoading(false);
+    } else {
+      print(data);
+      setLoading(false);
+    }
+  }
+
   void select(int value) {
     _isSelected = value;
     notifyListeners();

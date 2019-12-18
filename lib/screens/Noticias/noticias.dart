@@ -5,19 +5,7 @@ import 'package:provider/provider.dart';
 
 import 'widgets/news_card.dart';
 
-class NoticiasScreen extends StatefulWidget {
-  @override
-  _NoticiasScreenState createState() => _NoticiasScreenState();
-}
-
-class _NoticiasScreenState extends State<NoticiasScreen> {
-  @override
-  void initState() {
-    super.initState();
-    Future.microtask(() =>
-        Provider.of<NoticiaNotifier>(context, listen: false).getNoticias("1"));
-  }
-
+class NoticiasScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,10 +36,9 @@ class _NoticiasScreenState extends State<NoticiasScreen> {
                         imagem: result.noticias[index].imagem,
                         resumo: result.noticias[index].resumo,
                         noticia: result.noticias[index].noticia,
-                        likes: result.noticias[index].likes,
-                        deslikes: result.noticias[index].delikes,
                         curtiu: result.noticias[index].curtiu,
                         descurtiu: result.noticias[index].descurtiu,
+                        index: index,
                       );
                     },
                   ));

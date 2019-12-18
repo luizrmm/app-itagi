@@ -9,6 +9,11 @@ class NoticiaNotifier with ChangeNotifier {
   String baseUrl = ApiUtils().baseUrl;
   String token;
 
+  NoticiaNotifier() {
+    getNoticias("1");
+    getNoticias("2");
+  }
+
   bool _loading = false;
   bool get loading => _loading;
 
@@ -29,6 +34,9 @@ class NoticiaNotifier with ChangeNotifier {
 
   String _qtdDeslikes;
   String get qtdDeslikes => _qtdDeslikes;
+
+  bool _reqLike = false;
+  bool get reqLike => _reqLike;
 
   Future getNoticias(String tipo) async {
     setLoading(true);
@@ -51,18 +59,22 @@ class NoticiaNotifier with ChangeNotifier {
     }
   }
 
-  Future curtir(Map<String, dynamic> json) async {
-    print(json);
+  Future curtir(Map<String, dynamic> json, int index) async {
     Map<String, dynamic> data;
+
     token = await ApiUtils().getToken();
     http.Response response = await http.put('$baseUrl/noticias/curtidas',
         body: json, headers: {'Token': token});
     data = jsonDecode(response.body);
     if (response.statusCode == 200) {
-      _qtdDeslikes = data["num_curtidas"];
-      _qtdDeslikes = data["num_descurtidas"];
+      _noticias[index].likes = data["num_curtidas"];
+      _noticias[index].delikes = data["num_descurtidas"];
+      print(data["num_curtidas"]);
+      print(data["num_descurtidas"]);
       notifyListeners();
     } else {
+      _reqLike = false;
+      _errorMessage = data["mensagem"];
       print('error');
     }
   }

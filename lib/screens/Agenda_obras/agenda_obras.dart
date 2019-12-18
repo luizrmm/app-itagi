@@ -46,8 +46,6 @@ class _AgendaObrasState extends State<AgendaObras> {
                         imagem: result.noticias[index].imagem,
                         resumo: result.noticias[index].resumo,
                         noticia: result.noticias[index].noticia,
-                        likes: result.noticias[index].likes,
-                        deslikes: result.noticias[index].delikes,
                       );
                     },
                   ));
