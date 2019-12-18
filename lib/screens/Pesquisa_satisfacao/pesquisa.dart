@@ -43,6 +43,7 @@ class _PesquisaSatisfacaoState extends State<PesquisaSatisfacao> {
                   padding: EdgeInsets.only(
                       top: 20.0, left: 20.0, right: 20.0, bottom: 0.0),
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: <Widget>[
                       ListView.separated(
                         physics: NeverScrollableScrollPhysics(),
@@ -54,7 +55,7 @@ class _PesquisaSatisfacaoState extends State<PesquisaSatisfacao> {
                               crossAxisAlignment: CrossAxisAlignment.stretch,
                               children: <Widget>[
                                 Text(
-                                  result.options[index].id,
+                                  result.options[index].titulo,
                                   style: TextStyle(
                                       fontSize: 18.0,
                                       fontWeight: FontWeight.bold),
@@ -101,12 +102,24 @@ class _PesquisaSatisfacaoState extends State<PesquisaSatisfacao> {
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 25.0),
                         child: DefaultButton(
-                          isbusy: false,
+                          isbusy:
+                              Provider.of<PesquisaNotifier>(context).loading,
                           function: () async {
                             var form = {"respostas": list};
-                            print(form);
                             await Provider.of<PesquisaNotifier>(context)
                                 .votar(form);
+                            if (Provider.of<PesquisaNotifier>(context)
+                                .requestSucces) {
+                              Scaffold.of(context).showSnackBar(SnackBar(
+                                content: Text(result.successMessage),
+                                backgroundColor: Colors.green,
+                              ));
+                            } else {
+                              Scaffold.of(context).showSnackBar(SnackBar(
+                                content: Text(result.errorMessage),
+                                backgroundColor: Colors.red,
+                              ));
+                            }
                           },
                           text: 'Confirmar',
                         ),

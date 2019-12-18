@@ -69,8 +69,6 @@ class NoticiaNotifier with ChangeNotifier {
     if (response.statusCode == 200) {
       _noticias[index].likes = data["num_curtidas"];
       _noticias[index].delikes = data["num_descurtidas"];
-      print(data["num_curtidas"]);
-      print(data["num_descurtidas"]);
       notifyListeners();
     } else {
       _reqLike = false;

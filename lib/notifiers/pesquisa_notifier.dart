@@ -2,12 +2,14 @@ import 'dart:convert';
 
 import 'package:aqui_cliente/models/option_model.dart';
 import 'package:aqui_cliente/utils/api_utils.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 class PesquisaNotifier with ChangeNotifier {
   String baseUrl = ApiUtils().baseUrl;
   String token;
+  Dio dio = new Dio();
 
   bool _loading = false;
   bool get loading => _loading;
@@ -49,20 +51,21 @@ class PesquisaNotifier with ChangeNotifier {
   Future votar(Map<String, dynamic> json) async {
     setLoading(true);
     Map<String, dynamic> data;
-    token = await ApiUtils().getToken();
-    var teste = jsonEncode(json);
-    print(teste);
-    http.Response response = await http.put(
-        '$baseUrl/pesquisa_satisfacao/enviar_satisfacao',
-        headers: {'Token': token},
-        body: teste);
-    data = jsonDecode(response.body);
 
+    token = await ApiUtils().getToken();
+
+    Response response = await dio.put(
+        '$baseUrl/pesquisa_satisfacao/enviar_satisfacao',
+        data: json,
+        options: Options(headers: {'Token': token}));
+    data = response.data;
     if (response.statusCode == 200) {
-      print(data);
+      _requestSucces = true;
+      _successMessage = data["mensagem"];
       setLoading(false);
     } else {
-      print(data);
+      _requestSucces = false;
+      _errorMessage = data["mensagem"];
       setLoading(false);
     }
   }

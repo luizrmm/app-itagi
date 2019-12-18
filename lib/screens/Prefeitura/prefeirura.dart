@@ -1,6 +1,8 @@
 import 'package:aqui_cliente/notifiers/prefeitura_notifier.dart';
 import 'package:aqui_cliente/screens/widgets/loading.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_html/flutter_html.dart';
+import 'package:html/dom.dart' as dom;
 import 'package:provider/provider.dart';
 
 class Prefeitura extends StatelessWidget {
@@ -36,12 +38,17 @@ class Prefeitura extends StatelessWidget {
                               : Padding(
                                   padding: const EdgeInsets.symmetric(
                                       horizontal: 20.0),
-                                  child: Text(
-                                    result.prefeitura != null
-                                        ? result.prefeitura.descricao
-                                        : result.errorMessage,
-                                    textAlign: TextAlign.justify,
-                                  ),
+                                  child: Html(
+                                      data: result.prefeitura != null
+                                          ? result.prefeitura.descricao
+                                          : result.errorMessage,
+                                      customTextAlign: (dom.Node node) {
+                                        if (node is dom.Element &&
+                                            node.localName == "p") {
+                                          return TextAlign.justify;
+                                        }
+                                        return TextAlign.left;
+                                      }),
                                 )
                         ],
                       ),
