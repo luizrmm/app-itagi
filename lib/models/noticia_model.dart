@@ -1,3 +1,6 @@
+import 'dart:convert';
+import 'dart:typed_data';
+
 class NoticiaModel {
   String id;
   String data;
@@ -28,7 +31,7 @@ class NoticiaModel {
         data: json["data_noticia"],
         titulo: json["titulo"],
         resumo: json["resumo"],
-        imagem: json["imagem"],
+        imagem: json["imagem"].toString(),
         noticia: json["noticia"],
         likes: json["num_curtidas"],
         delikes: json["num_descurtidas"],

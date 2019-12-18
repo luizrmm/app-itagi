@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:typed_data';
 
 import 'package:aqui_cliente/notifiers/noticia_notifier.dart';
 import 'package:aqui_cliente/screens/Noticias/noticias_detail.dart';
@@ -59,8 +60,8 @@ class NewsCard extends StatelessWidget {
                   borderRadius: BorderRadius.circular(10.0),
                   child: imagem == null
                       ? Text('Imagem indisponível')
-                      : Image.memory(
-                          base64Decode(imagem),
+                      : Image.network(
+                          imagem,
                           height: 200,
                           fit: BoxFit.cover,
                         )),
