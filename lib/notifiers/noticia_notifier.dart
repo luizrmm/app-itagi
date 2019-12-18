@@ -29,6 +29,9 @@ class NoticiaNotifier with ChangeNotifier {
   List<NoticiaModel> _noticias;
   List<NoticiaModel> get noticias => _noticias;
 
+  List<NoticiaModel> _noticias2;
+  List<NoticiaModel> get noticias2 => _noticias2;
+
   String _qtdLikes;
   String get qtdLikes => _qtdLikes;
 
@@ -50,7 +53,11 @@ class NoticiaNotifier with ChangeNotifier {
     if (response.statusCode == 200) {
       _requestSucces = true;
       list = data["mensagem"] as List;
-      _noticias = list.map((value) => NoticiaModel.fromJson(value)).toList();
+      if (tipo == "1") {
+        _noticias = list.map((value) => NoticiaModel.fromJson(value)).toList();
+      } else {
+        _noticias2 = list.map((value) => NoticiaModel.fromJson(value)).toList();
+      }
       setLoading(false);
     } else {
       _requestSucces = false;
@@ -59,7 +66,7 @@ class NoticiaNotifier with ChangeNotifier {
     }
   }
 
-  Future curtir(Map<String, dynamic> json, int index) async {
+  Future curtir(Map<String, dynamic> json) async {
     Map<String, dynamic> data;
 
     token = await ApiUtils().getToken();
@@ -67,13 +74,29 @@ class NoticiaNotifier with ChangeNotifier {
         body: json, headers: {'Token': token});
     data = jsonDecode(response.body);
     if (response.statusCode == 200) {
-      _noticias[index].likes = data["num_curtidas"];
-      _noticias[index].delikes = data["num_descurtidas"];
+      getNoticias("1");
       notifyListeners();
     } else {
-      _reqLike = false;
+      _requestSucces = false;
       _errorMessage = data["mensagem"];
-      print('error');
+      setLoading(false);
+    }
+  }
+
+  Future curtir2(Map<String, dynamic> json) async {
+    Map<String, dynamic> data;
+
+    token = await ApiUtils().getToken();
+    http.Response response = await http.put('$baseUrl/noticias/curtidas',
+        body: json, headers: {'Token': token});
+    data = jsonDecode(response.body);
+    if (response.statusCode == 200) {
+      getNoticias("2");
+      notifyListeners();
+    } else {
+      _requestSucces = false;
+      _errorMessage = data["mensagem"];
+      setLoading(false);
     }
   }
 

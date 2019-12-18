@@ -8,7 +8,7 @@ import 'package:provider/provider.dart';
 import './custom_icons.dart';
 import 'package:flutter/material.dart';
 
-class NewsCard extends StatelessWidget {
+class ObrasCard extends StatelessWidget {
   final String id;
   final String data;
   final String titulo;
@@ -20,7 +20,7 @@ class NewsCard extends StatelessWidget {
   final String likes;
   final String deslikes;
 
-  const NewsCard(
+  const ObrasCard(
       {Key key,
       this.id,
       this.data,
@@ -58,7 +58,11 @@ class NewsCard extends StatelessWidget {
               ClipRRect(
                   borderRadius: BorderRadius.circular(10.0),
                   child: imagem == null
-                      ? Text('Imagem indisponível')
+                      ? Image.network(
+                          'https://source.unsplash.com/random',
+                          height: 160,
+                          fit: BoxFit.fitWidth,
+                        )
                       : Image.memory(
                           base64Decode(imagem),
                           height: 200,
@@ -99,7 +103,7 @@ class NewsCard extends StatelessWidget {
                           }
                           await Provider.of<NoticiaNotifier>(context,
                                   listen: false)
-                              .curtir(form);
+                              .curtir2(form);
                           if (!Provider.of<NoticiaNotifier>(context)
                               .requestSucces) {
                             Scaffold.of(context).showSnackBar(SnackBar(
@@ -141,7 +145,7 @@ class NewsCard extends StatelessWidget {
                           }
                           await Provider.of<NoticiaNotifier>(context,
                                   listen: false)
-                              .curtir(form);
+                              .curtir2(form);
                           if (!Provider.of<NoticiaNotifier>(context)
                               .requestSucces) {
                             Scaffold.of(context).showSnackBar(SnackBar(

@@ -38,7 +38,8 @@ class NoticiasScreen extends StatelessWidget {
                         noticia: result.noticias[index].noticia,
                         curtiu: result.noticias[index].curtiu,
                         descurtiu: result.noticias[index].descurtiu,
-                        index: index,
+                        likes: result.noticias[index].likes,
+                        deslikes: result.noticias[index].delikes,
                       );
                     },
                   ));

@@ -23,12 +23,21 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void setupNotification() async {
-    _firebaseMessaging.getToken().then((token) {});
+    _firebaseMessaging.getToken().then((token) {
+      var json = {"key": token};
+      Provider.of<HomeNotifier>(context).saveFCM(json);
+    });
 
     _firebaseMessaging.configure(
-      onMessage: (Map<String, dynamic> message) async {},
-      onLaunch: (Map<String, dynamic> message) async {},
-      onResume: (Map<String, dynamic> message) async {},
+      onMessage: (Map<String, dynamic> message) async {
+        print("onMessage: $message");
+      },
+      onLaunch: (Map<String, dynamic> message) async {
+        print("onLaunch: $message");
+      },
+      onResume: (Map<String, dynamic> message) async {
+        print("onResume: $message");
+      },
     );
   }
 
