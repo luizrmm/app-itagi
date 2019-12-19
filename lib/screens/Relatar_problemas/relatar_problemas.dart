@@ -127,6 +127,7 @@ class _RelProblemsScreenState extends State<RelProblemsScreen> {
                       elevation: 7.0,
                       shadowColor: Colors.black,
                       child: TextFormField(
+                        textInputAction: TextInputAction.done,
                         controller: _descricao,
                         focusNode: descricaoFocusNode,
                         style: TextStyle(fontSize: 16),

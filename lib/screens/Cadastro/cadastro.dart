@@ -25,6 +25,7 @@ class _CadastroState extends State<Cadastro> {
   FocusNode numeroFocusNode = FocusNode();
   FocusNode complementoFocusNode = FocusNode();
   FocusNode bairroFocusNode = FocusNode();
+  FocusNode estadoFocusNode = FocusNode();
 
   final _formKey = GlobalKey<FormState>();
   final _nome = TextEditingController();
@@ -40,7 +41,6 @@ class _CadastroState extends State<Cadastro> {
   @override
   void dispose() {
     // Clean up the focus node when the Form is disposed.
-
     myFocusNode.dispose();
     senhaFocusNode.dispose();
     emailFocusNode.dispose();
@@ -49,6 +49,7 @@ class _CadastroState extends State<Cadastro> {
     numeroFocusNode.dispose();
     complementoFocusNode.dispose();
     bairroFocusNode.dispose();
+    estadoFocusNode.dispose();
 
     super.dispose();
   }
@@ -213,6 +214,7 @@ class _CadastroState extends State<Cadastro> {
                             ),
                             Input(
                               focusNode: bairroFocusNode,
+                              nextFocus: estadoFocusNode,
                               action: TextInputAction.done,
                               controller: _bairro,
                               isObscure: false,
@@ -232,6 +234,7 @@ class _CadastroState extends State<Cadastro> {
                                         value: 'Estado',
                                       ),
                                       DropdownButton(
+                                        focusNode: estadoFocusNode,
                                         icon: Icon(Icons.keyboard_arrow_down),
                                         isExpanded: true,
                                         items: result.estados.map((value) {

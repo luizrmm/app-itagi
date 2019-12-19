@@ -60,9 +60,9 @@ class _LoginScreenState extends State<LoginScreen> {
                         focusNode: emailFocusNode,
                         controller: _email,
                         isObscure: false,
-                        action: TextInputAction.next,
+                        action: TextInputAction.done,
                         type: TextInputType.emailAddress,
-                        nextFocus: senhaFocusNode,
+                        nextFocus: null,
                         validatorFunc: (value) {
                           if (value.isEmpty) {
                             return 'Campo obrigatório!';
@@ -100,7 +100,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                           _email.text, _password.text);
                                       if (result.requestSucces) {
                                         Provider.of<HomeNotifier>(context)
-                                            .changePage(1);
+                                            .getToken();
                                       } else {
                                         Scaffold.of(context)
                                             .showSnackBar(SnackBar(

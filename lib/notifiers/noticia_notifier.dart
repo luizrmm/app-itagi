@@ -74,6 +74,7 @@ class NoticiaNotifier with ChangeNotifier {
         body: json, headers: {'Token': token});
     data = jsonDecode(response.body);
     if (response.statusCode == 200) {
+      _requestSucces = true;
       getNoticias("1");
       notifyListeners();
     } else {
@@ -91,6 +92,7 @@ class NoticiaNotifier with ChangeNotifier {
         body: json, headers: {'Token': token});
     data = jsonDecode(response.body);
     if (response.statusCode == 200) {
+      _requestSucces = true;
       getNoticias("2");
       notifyListeners();
     } else {
