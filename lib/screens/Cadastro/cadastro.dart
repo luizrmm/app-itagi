@@ -129,7 +129,7 @@ class _CadastroState extends State<Cadastro> {
                               },
                             ),
                             Label(
-                              value: 'telefone',
+                              value: 'Telefone',
                             ),
                             Input(
                               focusNode: telefoneFocusNode,

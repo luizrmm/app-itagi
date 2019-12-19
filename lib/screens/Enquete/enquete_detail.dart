@@ -80,8 +80,6 @@ class _EnqueteDetailState extends State<EnqueteDetail> {
                               .getEnquetesEncerradas();
                           Provider.of<UsuarioEnqueteNotifier>(context)
                               .getEnquetesUsuario();
-                          Provider.of<NovasEnqueteNotifier>(context)
-                              .getNovasEnquetes();
                           Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(

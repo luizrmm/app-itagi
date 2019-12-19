@@ -1,35 +1,42 @@
 {
   "project_info": {
-    "project_number": "163822581986",
-    "firebase_url": "https://teste-87b10.firebaseio.com",
-    "project_id": "teste-87b10",
-    "storage_bucket": "teste-87b10.appspot.com"
+    "project_number": "210368349131",
+    "firebase_url": "https://prefeitura-barreiras.firebaseio.com",
+    "project_id": "prefeitura-barreiras",
+    "storage_bucket": "prefeitura-barreiras.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:163822581986:android:e6c398e077eb53b64ec6bb",
+        "mobilesdk_app_id": "1:210368349131:android:f22b997c97e575dc71ec4e",
         "android_client_info": {
           "package_name": "com.example.aqui_cliente"
         }
       },
       "oauth_client": [
         {
-          "client_id": "163822581986-t6g6gcdb8i5vbkrqbipvjs2agm39vdbl.apps.googleusercontent.com",
+          "client_id": "210368349131-f118ccupmkma4888353m88qtrrvdtofe.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDicIjibXyHkJOTNpnP4w0_NPEh9bQHzdg"
+          "current_key": "AIzaSyCdPTUgmLXP-tzSXqE80GyH0Bnn-yIbtlA"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "163822581986-t6g6gcdb8i5vbkrqbipvjs2agm39vdbl.apps.googleusercontent.com",
+              "client_id": "210368349131-f118ccupmkma4888353m88qtrrvdtofe.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "210368349131-rt4ordrcspejobqfq15rmm0b2eqt7404.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.aquiCliente"
+              }
             }
           ]
         }
