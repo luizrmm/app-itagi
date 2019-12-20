@@ -2,6 +2,7 @@ import 'package:aqui_cliente/notifiers/home_notifier.dart';
 import 'package:aqui_cliente/notifiers/login_notifier.dart';
 import 'package:aqui_cliente/screens/Cadastro/cadastro.dart';
 import 'package:aqui_cliente/screens/Fale_conosco/widgets/label.dart';
+import 'package:aqui_cliente/screens/Termo/termo.dart';
 import 'package:aqui_cliente/screens/widgets/button.dart';
 import 'package:aqui_cliente/screens/widgets/input.dart';
 import 'package:flutter/material.dart';
@@ -118,12 +119,13 @@ class _LoginScreenState extends State<LoginScreen> {
                           child: RichText(
                             text: TextSpan(
                               text: 'Não tem conta? ',
-                              style: DefaultTextStyle.of(context).style,
+                              style: TextStyle(color: Colors.white),
                               children: <TextSpan>[
                                 TextSpan(
                                     text: 'Cadastre-se',
-                                    style:
-                                        TextStyle(fontWeight: FontWeight.bold)),
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                    )),
                               ],
                             ),
                           ),
@@ -134,6 +136,16 @@ class _LoginScreenState extends State<LoginScreen> {
                                     builder: (context) => Cadastro()));
                           },
                         ),
+                      ),
+                      FlatButton(
+                        child: Text(
+                          'Termo e Política de Privacidade de Uso',
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        onPressed: () {
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (context) => Termo()));
+                        },
                       )
                     ],
                   ),
