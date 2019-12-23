@@ -11,7 +11,6 @@ class PesquisaSatisfacao extends StatefulWidget {
 }
 
 class _PesquisaSatisfacaoState extends State<PesquisaSatisfacao> {
-  List<dynamic> list = new List();
   @override
   void initState() {
     super.initState();
@@ -38,6 +37,7 @@ class _PesquisaSatisfacaoState extends State<PesquisaSatisfacao> {
                 child: Text('Nenhum dado encontrado'),
               );
             } else {
+              List<dynamic> list = new List(result.options.length);
               return SingleChildScrollView(
                 child: Container(
                   padding: EdgeInsets.only(
@@ -68,27 +68,27 @@ class _PesquisaSatisfacaoState extends State<PesquisaSatisfacao> {
                                     ],
                                     onSelected: (String selected) {
                                       if (selected == "Insatisfeito") {
-                                        var value = {
+                                        var teste = {
                                           "pesquisa_id":
                                               result.options[index].id,
                                           "voto": 1
                                         };
-                                        list.add(value);
+                                        list[index] = teste;
                                       } else if (selected ==
                                           "Pouco Satisfeito") {
-                                        var value = {
+                                        var teste = {
                                           "pesquisa_id":
                                               result.options[index].id,
                                           "voto": 2
                                         };
-                                        list.add(value);
+                                        list[index] = teste;
                                       } else {
-                                        var value = {
+                                        var teste = {
                                           "pesquisa_id":
                                               result.options[index].id,
                                           "voto": 3
                                         };
-                                        list.add(value);
+                                        list[index] = teste;
                                       }
                                     })
                               ],
@@ -105,20 +105,28 @@ class _PesquisaSatisfacaoState extends State<PesquisaSatisfacao> {
                           isbusy:
                               Provider.of<PesquisaNotifier>(context).loading,
                           function: () async {
-                            var form = {"respostas": list};
-                            await Provider.of<PesquisaNotifier>(context)
-                                .votar(form);
-                            if (Provider.of<PesquisaNotifier>(context)
-                                .requestSucces) {
+                            if (list.contains(null)) {
                               Scaffold.of(context).showSnackBar(SnackBar(
-                                content: Text(result.successMessage),
-                                backgroundColor: Colors.green,
-                              ));
-                            } else {
-                              Scaffold.of(context).showSnackBar(SnackBar(
-                                content: Text(result.errorMessage),
+                                content:
+                                    Text('Por favor responda todas as opções'),
                                 backgroundColor: Colors.red,
                               ));
+                            } else {
+                              var form = {"respostas": list};
+                              await Provider.of<PesquisaNotifier>(context)
+                                  .votar(form);
+                              if (Provider.of<PesquisaNotifier>(context)
+                                  .requestSucces) {
+                                Scaffold.of(context).showSnackBar(SnackBar(
+                                  content: Text(result.successMessage),
+                                  backgroundColor: Colors.green,
+                                ));
+                              } else {
+                                Scaffold.of(context).showSnackBar(SnackBar(
+                                  content: Text(result.errorMessage),
+                                  backgroundColor: Colors.red,
+                                ));
+                              }
                             }
                           },
                           text: 'Confirmar',

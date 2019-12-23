@@ -33,7 +33,6 @@ dependencies:
   grouped_buttons: ^1.0.4
   url_launcher: ^5.4.1
   firebase_messaging: ^6.0.9
-  dio: ^3.0.7
   share: ^0.6.3+5
   flutter_launcher_icons: ^0.7.4
 
@@ -42,7 +41,7 @@ dev_dependencies:
     sdk: flutter
 
 flutter_icons:
-  android: true 
+  android: true
   ios: true
   image_path: "icons/icon.png"
 
