@@ -26,13 +26,19 @@ class Prefeito extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: <Widget>[
                           Padding(
-                            padding:
-                                const EdgeInsets.only(top: 20.0, bottom: 30.0),
-                            child: Image.asset(
-                              'assets/prefeito.png',
-                              height: 120,
-                            ),
-                          ),
+                              padding: const EdgeInsets.only(
+                                  top: 20.0,
+                                  bottom: 30.0,
+                                  left: 20.0,
+                                  right: 20.0),
+                              child: result.prefeito.imagem.isEmpty
+                                  ? Image.asset(
+                                      'assets/prefeito.png',
+                                      height: 120,
+                                    )
+                                  : Image.network(
+                                      result.prefeito.imagem,
+                                    )),
                           result.loading
                               ? Center(child: Loading())
                               : Padding(

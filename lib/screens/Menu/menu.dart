@@ -8,9 +8,11 @@ import 'package:aqui_cliente/screens/Pesquisa_satisfacao/pesquisa.dart';
 import 'package:aqui_cliente/screens/Prefeito/prefeito.dart';
 import 'package:aqui_cliente/screens/Prefeitura/prefeirura.dart';
 import 'package:aqui_cliente/screens/Telefones_uteis/telefones_uteis.dart';
+import 'package:aqui_cliente/screens/widgets/loading.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'widgets/menu_item.dart';
 
 class MenuScreen extends StatefulWidget {
@@ -25,28 +27,41 @@ class _MenuScreenState extends State<MenuScreen> {
       barrierDismissible: false, // user must tap button!
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Rewind and remember'),
+          contentPadding: EdgeInsets.all(2.0),
           content: CarouselSlider(
-            height: 400.0,
-            autoPlay: true,
-            items: [1, 2, 3, 4, 5].map((i) {
-              return Builder(
-                builder: (BuildContext context) {
-                  return Container(
-                      width: MediaQuery.of(context).size.width,
-                      margin: EdgeInsets.symmetric(horizontal: 5.0),
-                      decoration: BoxDecoration(color: Colors.amber),
-                      child: Text(
-                        'text $i',
-                        style: TextStyle(fontSize: 16.0),
-                      ));
-                },
-              );
-            }).toList(),
-          ),
+              viewportFraction: 1.0,
+              height: MediaQuery.of(context).size.height * 0.5,
+              autoPlay: true,
+              items: Provider.of<PopUpNotifier>(context).imagens == null
+                  ? <Widget>[Center(child: Loading())]
+                  : Provider.of<PopUpNotifier>(context).imagens.map((value) {
+                      return Builder(
+                        builder: (BuildContext context) {
+                          return GestureDetector(
+                            onTap: value.url == null
+                                ? () {}
+                                : () async {
+                                    var url = value.url;
+                                    if (await canLaunch(url)) {
+                                      await launch(url);
+                                    } else {
+                                      throw 'Could not launch $url';
+                                    }
+                                  },
+                            child: Container(
+                              padding: EdgeInsets.symmetric(horizontal: 20.0),
+                              child: Image.network(value.popUp),
+                            ),
+                          );
+                        },
+                      );
+                    }).toList()),
           actions: <Widget>[
             FlatButton(
-              child: Text('Regret'),
+              child: Text(
+                'Fechar',
+                style: TextStyle(color: Colors.red),
+              ),
               onPressed: () {
                 Provider.of<PopUpNotifier>(context).hidePopUp();
                 Navigator.of(context).pop();

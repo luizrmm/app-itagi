@@ -1,6 +1,7 @@
 import 'package:aqui_cliente/notifiers/home_notifier.dart';
 import 'package:aqui_cliente/notifiers/login_notifier.dart';
 import 'package:aqui_cliente/screens/Cadastro/cadastro.dart';
+import 'package:aqui_cliente/screens/Esqueceu_senha/esqueceuSenha.dart';
 import 'package:aqui_cliente/screens/Fale_conosco/widgets/label.dart';
 import 'package:aqui_cliente/screens/Termo/termo.dart';
 import 'package:aqui_cliente/screens/widgets/button.dart';
@@ -113,8 +114,21 @@ class _LoginScreenState extends State<LoginScreen> {
                                   }));
                         },
                       ),
+                      InkWell(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => EsqueceuSenha()));
+                        },
+                        child: Text(
+                          'Esqueceu sua senha?',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      ),
                       Padding(
-                        padding: EdgeInsets.only(top: 60.0),
+                        padding: EdgeInsets.only(top: 0.0),
                         child: FlatButton(
                           child: RichText(
                             text: TextSpan(

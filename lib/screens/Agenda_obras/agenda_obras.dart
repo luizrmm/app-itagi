@@ -36,6 +36,7 @@ class AgendaObras extends StatelessWidget {
                             MaterialPageRoute(
                                 builder: (context) => NoticiaDetail(
                                       noticia: value.noticia,
+                                      imagens: value.carousel,
                                       title: 'Detalhes',
                                     )));
                       },

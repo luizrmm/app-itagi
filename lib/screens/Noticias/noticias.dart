@@ -36,6 +36,7 @@ class NoticiasScreen extends StatelessWidget {
                       itemCount: qtd,
                       itemBuilder: (BuildContext context, int index) {
                         NoticiaModel value = result.noticias[index];
+
                         return GestureDetector(
                           onTap: () {
                             Navigator.push(
@@ -44,6 +45,8 @@ class NoticiasScreen extends StatelessWidget {
                                     builder: (context) => NoticiaDetail(
                                           noticia:
                                               result.noticias[index].noticia,
+                                          imagens:
+                                              result.noticias[index].carousel,
                                           title: 'Detalhes',
                                         )));
                           },
