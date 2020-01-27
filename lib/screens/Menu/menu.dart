@@ -76,11 +76,11 @@ class _MenuScreenState extends State<MenuScreen> {
   @override
   void initState() {
     super.initState();
-      // Future.microtask(() {
-      //   if (Provider.of<PopUpNotifier>(context).show) {
-      //     _neverSatisfied();
-      //   }
-      // });
+    Future.microtask(() {
+      if (Provider.of<PopUpNotifier>(context).show) {
+        _neverSatisfied();
+      }
+    });
   }
 
   @override

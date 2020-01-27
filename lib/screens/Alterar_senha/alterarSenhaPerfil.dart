@@ -1,18 +1,20 @@
 import 'package:aqui_cliente/notifiers/esqueceu_notifier.dart';
-import 'package:aqui_cliente/screens/Home/home_screen.dart';
+import 'package:aqui_cliente/notifiers/perfil_notifier.dart';
 import 'package:aqui_cliente/screens/Login/login_screen.dart';
+import 'package:aqui_cliente/screens/Menu/menu.dart';
 import 'package:aqui_cliente/screens/Perfil/widgets/button.dart';
 import 'package:aqui_cliente/screens/widgets/loading.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class AlterarSenha extends StatefulWidget {
+class AlterarSenhaPerfil extends StatefulWidget {
   @override
-  _AlterarSenhaState createState() => _AlterarSenhaState();
+  _AlterarSenhaPerfilState createState() => _AlterarSenhaPerfilState();
 }
 
-class _AlterarSenhaState extends State<AlterarSenha> {
+class _AlterarSenhaPerfilState extends State<AlterarSenhaPerfil> {
   final _novaSenha = TextEditingController();
+  final _senhaAtual = TextEditingController();
   final _confirmarSenha = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   @override
@@ -46,6 +48,38 @@ class _AlterarSenhaState extends State<AlterarSenha> {
                         'assets/novaSenha.png',
                         height: 160,
                       ),
+                      Padding(
+                          padding:
+                              const EdgeInsets.only(top: 8.0, bottom: 18.0),
+                          child: Material(
+                            color: Colors.white,
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(6.0)),
+                            elevation: 7.0,
+                            shadowColor: Colors.black,
+                            child: TextFormField(
+                              autocorrect: false,
+                              textCapitalization: TextCapitalization.none,
+                              keyboardType: TextInputType.emailAddress,
+                              controller: _senhaAtual,
+                              style: TextStyle(fontSize: 16),
+                              decoration: InputDecoration(
+                                  hintText: 'Insira sua senha atual',
+                                  contentPadding: EdgeInsets.symmetric(
+                                      horizontal: 12.0, vertical: 10.0),
+                                  fillColor: Colors.white,
+                                  filled: true,
+                                  border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(6.0),
+                                      borderSide: BorderSide.none)),
+                              validator: (value) {
+                                if (value.isEmpty) {
+                                  return 'Campo obrigatório';
+                                }
+                                return null;
+                              },
+                            ),
+                          )),
                       Padding(
                           padding:
                               const EdgeInsets.only(top: 8.0, bottom: 18.0),
@@ -110,8 +144,8 @@ class _AlterarSenhaState extends State<AlterarSenha> {
                               },
                             ),
                           )),
-                      Consumer<EsqueceuSenhaNotifier>(
-                        builder: (context, model, child) {
+                      Consumer2<EsqueceuSenhaNotifier, PerfilNotifier>(
+                        builder: (context, model, model2, child) {
                           return model.loading
                               ? Center(child: Loading())
                               : Button(
@@ -120,17 +154,16 @@ class _AlterarSenhaState extends State<AlterarSenha> {
                                   function: () async {
                                     if (_formKey.currentState.validate()) {
                                       form = {
-                                        "usuario_app_id": model.retorno.id,
-                                        "senha": _novaSenha.text,
-                                        "confirmar_senha": _confirmarSenha.text
+                                        "usuario_app_id": model2.userPerfil.id,
+                                        "senha": _senhaAtual.text,
+                                        "nova_senha": _novaSenha.text,
+                                        "confirmar_nova_senha":
+                                            _confirmarSenha.text
                                       };
-                                      await model.trocarSenhaEsqueceu(form);
+                                      print(form);
+                                      await model.alterarSenhaPerfil(form);
                                       if (model.requestSucces) {
-                                        Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    HomeScreen()));
+                                        Navigator.pop(context);
                                       } else {
                                         Scaffold.of(context)
                                             .showSnackBar(SnackBar(

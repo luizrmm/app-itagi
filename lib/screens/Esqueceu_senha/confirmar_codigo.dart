@@ -2,6 +2,7 @@ import 'package:aqui_cliente/notifiers/esqueceu_notifier.dart';
 import 'package:aqui_cliente/screens/Esqueceu_senha/alterar_senha.dart';
 import 'package:aqui_cliente/screens/Perfil/widgets/button.dart';
 import 'package:aqui_cliente/screens/widgets/input.dart';
+import 'package:aqui_cliente/screens/widgets/loading.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -74,17 +75,36 @@ class _ConfirmarCodigoState extends State<ConfirmarCodigo> {
                         ),
                         Consumer<EsqueceuSenhaNotifier>(
                           builder: (context, model, child) {
-                            return Button(
-                              text: 'ENVIAR',
-                              color: Theme.of(context).primaryColor,
-                              function: () async {
-                                if (_formKey.currentState.validate()) {
-                                 Navigator.push(context, MaterialPageRoute(
-                                   builder: (context) => AlterarSenha()
-                                 ));
-                                }
-                              },
-                            );
+                            return model.loading
+                                ? Center(
+                                    child: Loading(),
+                                  )
+                                : Button(
+                                    text: 'ENVIAR',
+                                    color: Theme.of(context).primaryColor,
+                                    function: () async {
+                                      if (_formKey.currentState.validate()) {
+                                        form = {
+                                          "usuario_app_id": model.retorno.id,
+                                          "codigo": _codigo.text
+                                        };
+                                        await model.enviarCodigo(form);
+                                        if (model.requestSucces) {
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      AlterarSenha()));
+                                        } else {
+                                          Scaffold.of(context)
+                                              .showSnackBar(SnackBar(
+                                            content: Text(model.errorMessage),
+                                            backgroundColor: Colors.red,
+                                          ));
+                                        }
+                                      }
+                                    },
+                                  );
                           },
                         )
                       ],

@@ -1,6 +1,7 @@
 import 'package:aqui_cliente/models/user_model.dart';
 import 'package:aqui_cliente/notifiers/cadastro_notifier.dart';
 import 'package:aqui_cliente/notifiers/perfil_notifier.dart';
+import 'package:aqui_cliente/screens/Alterar_senha/alterarSenhaPerfil.dart';
 import 'package:aqui_cliente/screens/Home/home_screen.dart';
 import 'package:aqui_cliente/screens/Perfil/widgets/label.dart';
 import 'package:aqui_cliente/screens/widgets/loading.dart';
@@ -431,19 +432,29 @@ class _PerfilState extends State<Perfil> {
                                     ),
                                   )
                                 : Padding(
-                                    padding: EdgeInsets.only(top: 40.0),
+                                    padding: EdgeInsets.only(
+                                        top: 40.0, bottom: 12.0),
                                     child: Button(
                                       color: Colors.green,
                                       text: 'Editar perfil',
-                                      function: () {
-                                        result.enableEdit(true);
-                                      },
+                                      function: () {},
                                     ),
                                   ),
+                            Button(
+                              color: Theme.of(context).primaryColor,
+                              text: 'Alterar senha',
+                              function: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            AlterarSenhaPerfil()));
+                              },
+                            ),
                             result.isEditable
                                 ? Padding(
                                     padding: EdgeInsets.only(
-                                        top: 18.0, bottom: 20.0),
+                                        top: 12.0, bottom: 20.0),
                                     child: Button(
                                       color: Colors.red,
                                       text: 'Cancelar',
@@ -454,7 +465,7 @@ class _PerfilState extends State<Perfil> {
                                   )
                                 : Padding(
                                     padding: EdgeInsets.only(
-                                        top: 18.0, bottom: 20.0),
+                                        top: 12.0, bottom: 20.0),
                                     child: Button(
                                       color: Colors.red,
                                       text: 'Sair',

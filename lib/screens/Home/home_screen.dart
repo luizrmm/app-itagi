@@ -31,7 +31,6 @@ class _HomeScreenState extends State<HomeScreen>
   void setupNotification() async {
     _firebaseMessaging.getToken().then((token) {
       var json = {"key": token};
-      print(token);
       Provider.of<HomeNotifier>(context).saveFCM(json);
     });
 

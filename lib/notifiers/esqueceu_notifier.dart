@@ -40,6 +40,55 @@ class EsqueceuSenhaNotifier with ChangeNotifier {
     }
   }
 
+  Future enviarCodigo(Map<String, dynamic> json) async {
+    setLoading(true);
+
+    Map<String, dynamic> data;
+    http.Response response =
+        await http.put('$baseUrl/esqueceu_senha/confirmar_codigo', body: json);
+    data = jsonDecode(response.body);
+    if (response.statusCode == 200) {
+      _requestSucces = true;
+      setLoading(false);
+    } else {
+      _requestSucces = false;
+      _errorMessage = data["mensagem"];
+      setLoading(false);
+    }
+  }
+
+  Future trocarSenhaEsqueceu(Map<String, dynamic> json) async {
+    setLoading(true);
+    Map<String, dynamic> data;
+    http.Response response =
+        await http.put('$baseUrl/esqueceu_senha/trocar_senha', body: json);
+    data = jsonDecode(response.body);
+    if (response.statusCode == 200) {
+      _requestSucces = true;
+      setLoading(false);
+    } else {
+      _requestSucces = false;
+      _errorMessage = data["mensagem"];
+      setLoading(false);
+    }
+  }
+
+  Future alterarSenhaPerfil(Map<String, dynamic> json) async {
+    setLoading(true);
+    Map<String, dynamic> data;
+    http.Response response =
+        await http.put('$baseUrl/usuario/alterar_senha', body: json);
+    data = jsonDecode(response.body);
+    if (response.statusCode == 200) {
+      _requestSucces = true;
+      setLoading(false);
+    } else {
+      _requestSucces = false;
+      _errorMessage = data["mensagem"];
+      setLoading(false);
+    }
+  }
+
   void setLoading(bool value) {
     _loading = value;
     notifyListeners();
