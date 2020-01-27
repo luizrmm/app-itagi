@@ -1,4 +1,5 @@
 import 'package:aqui_cliente/notifiers/esqueceu_notifier.dart';
+import 'package:aqui_cliente/screens/Esqueceu_senha/alterar_senha.dart';
 import 'package:aqui_cliente/screens/Perfil/widgets/button.dart';
 import 'package:aqui_cliente/screens/widgets/input.dart';
 import 'package:flutter/material.dart';
@@ -40,13 +41,14 @@ class _ConfirmarCodigoState extends State<ConfirmarCodigo> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                         Image.asset(
-                          'assets/password.png',
+                          'assets/senha.png',
                           height: 160,
                         ),
                         Padding(
                           padding: const EdgeInsets.symmetric(vertical: 10.0),
                           child: Text(
-                            'Email',
+                            'Por favor insira o código que enviamos no seu email\n O código expira em 2 horas',
+                            textAlign: TextAlign.center,
                             style: TextStyle(
                               fontSize: 18.0,
                             ),
@@ -77,16 +79,9 @@ class _ConfirmarCodigoState extends State<ConfirmarCodigo> {
                               color: Theme.of(context).primaryColor,
                               function: () async {
                                 if (_formKey.currentState.validate()) {
-                                  form = {'email': _codigo.text};
-                                  await model.recuperarSenha(form);
-                                  if (model.requestSucces) {
-                                    print(model.retorno.mensagem);
-                                  } else {
-                                    Scaffold.of(context).showSnackBar(SnackBar(
-                                      content: Text(model.errorMessage),
-                                      backgroundColor: Colors.red,
-                                    ));
-                                  }
+                                 Navigator.push(context, MaterialPageRoute(
+                                   builder: (context) => AlterarSenha()
+                                 ));
                                 }
                               },
                             );

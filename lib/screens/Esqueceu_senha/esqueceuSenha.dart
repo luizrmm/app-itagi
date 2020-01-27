@@ -1,7 +1,6 @@
 import 'package:aqui_cliente/notifiers/esqueceu_notifier.dart';
 import 'package:aqui_cliente/screens/Esqueceu_senha/confirmar_codigo.dart';
 import 'package:aqui_cliente/screens/Perfil/widgets/button.dart';
-import 'package:aqui_cliente/screens/widgets/input.dart';
 import 'package:aqui_cliente/screens/widgets/loading.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
