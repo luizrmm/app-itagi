@@ -27,35 +27,38 @@ class _MenuScreenState extends State<MenuScreen> {
       barrierDismissible: false, // user must tap button!
       builder: (BuildContext context) {
         return AlertDialog(
-          contentPadding: EdgeInsets.all(2.0),
-          content: CarouselSlider(
-              viewportFraction: 1.0,
-              height: MediaQuery.of(context).size.height * 0.5,
-              autoPlay: true,
-              items: Provider.of<PopUpNotifier>(context).imagens == null
-                  ? <Widget>[Center(child: Loading())]
-                  : Provider.of<PopUpNotifier>(context).imagens.map((value) {
-                      return Builder(
-                        builder: (BuildContext context) {
-                          return GestureDetector(
-                            onTap: value.url == null
-                                ? () {}
-                                : () async {
-                                    var url = value.url;
-                                    if (await canLaunch(url)) {
-                                      await launch(url);
-                                    } else {
-                                      throw 'Could not launch $url';
-                                    }
-                                  },
-                            child: Container(
-                              padding: EdgeInsets.symmetric(horizontal: 20.0),
-                              child: Image.network(value.popUp),
-                            ),
-                          );
-                        },
-                      );
-                    }).toList()),
+          content: Container(
+            height: MediaQuery.of(context).size.height * 0.5,
+            width: MediaQuery.of(context).size.width * 0.9,
+            child: CarouselSlider(
+                viewportFraction: 1.0,
+                height: MediaQuery.of(context).size.height * 0.5,
+                autoPlay: true,
+                items: Provider.of<PopUpNotifier>(context).imagens == null
+                    ? <Widget>[Center(child: Loading())]
+                    : Provider.of<PopUpNotifier>(context).imagens.map((value) {
+                        return Builder(
+                          builder: (BuildContext context) {
+                            return GestureDetector(
+                              onTap: value.url == null
+                                  ? () {}
+                                  : () async {
+                                      var url = value.url;
+                                      if (await canLaunch(url)) {
+                                        await launch(url);
+                                      } else {
+                                        throw 'Could not launch $url';
+                                      }
+                                    },
+                              child: Container(
+                                padding: EdgeInsets.symmetric(horizontal: 20.0),
+                                child: Image.network(value.popUp),
+                              ),
+                            );
+                          },
+                        );
+                      }).toList()),
+          ),
           actions: <Widget>[
             FlatButton(
               child: Text(
