@@ -1,13 +1,13 @@
-import 'package:aqui_cliente/notifiers/home_notifier.dart';
-import 'package:aqui_cliente/notifiers/login_notifier.dart';
 import 'package:aqui_cliente/screens/Cadastro/cadastro.dart';
 import 'package:aqui_cliente/screens/Esqueceu_senha/esqueceuSenha.dart';
 import 'package:aqui_cliente/screens/Fale_conosco/widgets/label.dart';
 import 'package:aqui_cliente/screens/Termo/termo.dart';
-import 'package:aqui_cliente/screens/widgets/button.dart';
 import 'package:aqui_cliente/screens/widgets/input.dart';
+import 'package:aqui_cliente/state/user_store.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:states_rebuilder/states_rebuilder.dart';
+
+import '../Home/home_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -38,10 +38,11 @@ class _LoginScreenState extends State<LoginScreen> {
             child: SafeArea(
               child: Container(
                 decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                        colors: [Colors.white, Colors.blueGrey],
-                        begin: Alignment.topCenter,
-                        end: Alignment.bottomCenter)),
+                  gradient: LinearGradient(
+                      colors: [Colors.white, Colors.blueGrey],
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter),
+                ),
                 padding: EdgeInsets.all(20.0),
                 child: Form(
                   key: _formKey,
@@ -87,32 +88,50 @@ class _LoginScreenState extends State<LoginScreen> {
                           return null;
                         },
                       ),
-                      Consumer<LoginNotifier>(
-                        builder: (context, result, widget) {
-                          return Padding(
-                              padding: EdgeInsets.only(top: 18.0, bottom: 20.0),
-                              child: DefaultButton(
-                                  isbusy: result.loading,
-                                  text: 'Entrar',
-                                  function: () async {
-                                    senhaFocusNode.unfocus();
-                                    emailFocusNode.unfocus();
-                                    if (_formKey.currentState.validate()) {
-                                      await result.logar(
-                                          _email.text, _password.text);
-                                      if (result.requestSucces) {
-                                        Provider.of<HomeNotifier>(context)
-                                            .getToken();
-                                      } else {
-                                        Scaffold.of(context)
-                                            .showSnackBar(SnackBar(
-                                          content: Text(result.errorMessage),
-                                          backgroundColor: Colors.red,
-                                        ));
-                                      }
-                                    }
-                                  }));
-                        },
+                      Padding(
+                        padding: EdgeInsets.only(top: 18.0, bottom: 20.0),
+                        child: StateBuilder<UserStore>(
+                          models: [Injector.getAsReactive<UserStore>()],
+                          builder: (BuildContext context, reactiveModel) {
+                            return MaterialButton(
+                              color: Theme.of(context).primaryColor,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(6.0),
+                              ),
+                              onPressed: () {
+                                reactiveModel.setState(
+                                  (reactiveModel) => reactiveModel.authenticate(
+                                      _email.text, _password.text),
+                                  onData: (context, data) {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => HomeScreen(),
+                                      ),
+                                    );
+                                  },
+                                  onError: (context, error) {
+                                    Scaffold.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text(
+                                            error.response.data['mensagem']),
+                                        backgroundColor: Colors.red,
+                                      ),
+                                    );
+                                  },
+                                );
+                              },
+                              child: reactiveModel.isWaiting
+                                  ? CircularProgressIndicator(
+                                      valueColor: AlwaysStoppedAnimation<Color>(
+                                          Colors.white))
+                                  : Text(
+                                      'Entrar',
+                                      style: TextStyle(color: Colors.white),
+                                    ),
+                            );
+                          },
+                        ),
                       ),
                       InkWell(
                         onTap: () {

@@ -1,7 +1,5 @@
 import 'package:aqui_cliente/notifiers/esqueceu_notifier.dart';
 import 'package:aqui_cliente/notifiers/perfil_notifier.dart';
-import 'package:aqui_cliente/screens/Login/login_screen.dart';
-import 'package:aqui_cliente/screens/Menu/menu.dart';
 import 'package:aqui_cliente/screens/Perfil/widgets/button.dart';
 import 'package:aqui_cliente/screens/widgets/loading.dart';
 import 'package:flutter/material.dart';

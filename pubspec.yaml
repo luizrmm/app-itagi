@@ -36,6 +36,8 @@ dependencies:
   share: ^0.6.3+5
   flutter_launcher_icons: ^0.7.4
   carousel_slider: ^1.4.1
+  states_rebuilder: ^1.13.0
+  dio: ^3.0.8
 
 dev_dependencies:
   flutter_test:
