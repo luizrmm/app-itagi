@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 class Input extends StatelessWidget {
   final bool isObscure;
   final Function(String) validatorFunc;
+  final Function(String) saveFunc;
+  final Function(String) submitedFunc;
   final TextEditingController controller;
   final TextInputType type;
   final FocusNode focusNode;
@@ -16,35 +18,35 @@ class Input extends StatelessWidget {
       this.type,
       this.focusNode,
       this.action,
-      this.nextFocus});
+      this.nextFocus,
+      this.saveFunc,
+      this.submitedFunc});
   @override
   Widget build(BuildContext context) {
     return Material(
-      color: Colors.white,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6.0)),
-      elevation: 7.0,
-      shadowColor: Colors.black,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(6.0),
+      ),
+      elevation: 6.0,
       child: TextFormField(
-        onFieldSubmitted: nextFocus != null
-            ? (String value) {
-                FocusScope.of(context).requestFocus(nextFocus);
-              }
-            : null,
+        onFieldSubmitted: submitedFunc,
         textInputAction: action,
         focusNode: focusNode,
         keyboardType: type,
         controller: controller,
-        obscureText: isObscure,
+        obscureText: isObscure ?? false,
         style: TextStyle(fontSize: 16),
         decoration: InputDecoration(
-            contentPadding:
-                EdgeInsets.symmetric(horizontal: 12.0, vertical: 10.0),
-            fillColor: Colors.white,
-            filled: true,
-            border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(6.0),
-                borderSide: BorderSide.none)),
+          contentPadding:
+              EdgeInsets.symmetric(horizontal: 12.0, vertical: 10.0),
+          fillColor: Colors.white,
+          filled: true,
+          border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(6.0),
+              borderSide: BorderSide.none),
+        ),
         validator: validatorFunc,
+        onSaved: saveFunc,
       ),
     );
   }

@@ -1,5 +1,6 @@
 import 'package:aqui_cliente/models/user_model.dart';
 import 'package:aqui_cliente/repository/user_repository.dart';
+import 'package:aqui_cliente/view-models/cadastro_viewmodel.dart';
 import 'package:aqui_cliente/view-models/login_viewmodel.dart';
 import 'package:flutter/material.dart';
 
@@ -39,6 +40,18 @@ class UserNotifier with ChangeNotifier {
       _requestSucces = false;
       notifyListeners();
       setLoading(false);
+    }
+  }
+
+  Future<void> account(CadastroViewModel model) async {
+    setLoading(true);
+    try {
+      _successMessage = await _userRepository.account(model);
+      _requestSucces = true;
+      setLoading(false);
+    } catch (e) {
+      _requestSucces = false;
+      _errorMessage = e.response.data['mensagem'];
     }
   }
 

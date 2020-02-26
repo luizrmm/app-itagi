@@ -4,6 +4,7 @@ import 'package:aqui_cliente/screens/Esqueceu_senha/esqueceuSenha.dart';
 import 'package:aqui_cliente/screens/Fale_conosco/widgets/label.dart';
 import 'package:aqui_cliente/screens/Termo/termo.dart';
 import 'package:aqui_cliente/screens/widgets/button.dart';
+import 'package:aqui_cliente/screens/widgets/input.dart';
 import 'package:aqui_cliente/view-models/login_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -53,61 +54,36 @@ class _LoginScreenState extends State<LoginScreen> {
                 Label(
                   value: 'Usuário',
                 ),
-                Material(
-                  elevation: 6.0,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(6.0),
-                  ),
-                  child: TextFormField(
-                    decoration: InputDecoration(
-                        contentPadding: EdgeInsets.symmetric(horizontal: 12.0),
-                        enabledBorder: InputBorder.none,
-                        focusedBorder: InputBorder.none,
-                        focusedErrorBorder: InputBorder.none,
-                        errorBorder: InputBorder.none),
-                    textInputAction: TextInputAction.next,
-                    keyboardType: TextInputType.emailAddress,
-                    onFieldSubmitted: (String value) {
-                      FocusScope.of(context).requestFocus(senhaFocusNode);
-                    },
-                    validator: (value) {
-                      if (value.isEmpty) {
-                        return 'Informe seu email';
-                      }
-                      return null;
-                    },
-                    onSaved: (String value) {
-                      model.email = value;
-                    },
-                  ),
+                Input(
+                  action: TextInputAction.next,
+                  type: TextInputType.emailAddress,
+                  submitedFunc: (value) {
+                    FocusScope.of(context).requestFocus(senhaFocusNode);
+                  },
+                  validatorFunc: (value) {
+                    if (value.isEmpty) {
+                      return 'Informe seu email';
+                    }
+                    return null;
+                  },
+                  saveFunc: (value) {
+                    model.email = value;
+                  },
                 ),
                 Label(
                   value: 'Senha',
                 ),
-                Material(
-                  elevation: 6.0,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(6.0),
-                  ),
-                  child: TextFormField(
-                    decoration: InputDecoration(
-                        contentPadding: EdgeInsets.symmetric(horizontal: 12.0),
-                        enabledBorder: InputBorder.none,
-                        focusedBorder: InputBorder.none,
-                        focusedErrorBorder: InputBorder.none,
-                        errorBorder: InputBorder.none),
-                    focusNode: senhaFocusNode,
-                    obscureText: true,
-                    validator: (value) {
-                      if (value.isEmpty) {
-                        return 'Informe sua senha';
-                      }
-                      return null;
-                    },
-                    onSaved: (String value) {
-                      model.password = value;
-                    },
-                  ),
+                Input(
+                  isObscure: true,
+                  validatorFunc: (value) {
+                    if (value.isEmpty) {
+                      return 'Informe sua senha';
+                    }
+                    return null;
+                  },
+                  saveFunc: (value) {
+                    model.password = value;
+                  },
                 ),
                 Padding(
                     padding: EdgeInsets.only(top: 18.0, bottom: 20.0),
