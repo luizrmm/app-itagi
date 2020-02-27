@@ -97,7 +97,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               _formKey.currentState.save();
                               await user.authenticate(model);
                               if (user.requestSucces) {
-                                print(user.user.email);
+                                _formKey.currentState.reset();
                               } else {
                                 Scaffold.of(context).showSnackBar(
                                   SnackBar(

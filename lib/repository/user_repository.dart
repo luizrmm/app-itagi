@@ -35,16 +35,19 @@ class UserRepository {
           "cidade_id": model.cidadeId
         },
       );
-      return response.data;
+      print(response.data['mensagem']);
+      return response.data['mensagem'];
     } on DioError catch (e) {
       throw e;
     }
   }
 
-  Future<CidadeModel> getCidades(String sigla) async {
+  Future getCidades(String sigla) async {
+    List list = new List();
     try {
       Response response = await dio.get('/cidades/buscar_cidades/$sigla');
-      return CidadeModel.fromJson(response.data['mensagem']);
+      list = response.data['mensagem'] as List;
+      return list.map((value) => CidadeModel.fromJson(value)).toList();
     } on DioError catch (e) {
       throw e;
     }
