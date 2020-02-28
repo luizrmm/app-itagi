@@ -1,6 +1,7 @@
 import 'package:aqui_cliente/models/cidade_model.dart';
 import 'package:aqui_cliente/models/user_model.dart';
 import 'package:aqui_cliente/repository/user_repository.dart';
+import 'package:aqui_cliente/utils/utils.dart';
 import 'package:aqui_cliente/view-models/cadastro_viewmodel.dart';
 import 'package:aqui_cliente/view-models/login_viewmodel.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +11,9 @@ class UserNotifier with ChangeNotifier {
   UserNotifier(this._userRepository) {
     getCidades('BA');
   }
+
+  Utils utils = new Utils();
+
   String _email = "";
   String get email => _email;
 
@@ -27,6 +31,9 @@ class UserNotifier with ChangeNotifier {
 
   String _successMessage = "";
   String get successMessage => _successMessage;
+
+  String _token;
+  String get token => _token;
 
   bool _requestSucces = false;
   bool get requestSucces => _requestSucces;
@@ -77,6 +84,11 @@ class UserNotifier with ChangeNotifier {
     } catch (e) {
       setLoadingCity(false);
     }
+  }
+
+  void getToken() async {
+    _token = await utils.getToken();
+    notifyListeners();
   }
 
   void changeValue(String newValue) {

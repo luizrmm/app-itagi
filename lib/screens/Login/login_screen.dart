@@ -74,6 +74,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   value: 'Senha',
                 ),
                 Input(
+                  focusNode: senhaFocusNode,
                   isObscure: true,
                   validatorFunc: (value) {
                     if (value.isEmpty) {
@@ -98,6 +99,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               await user.authenticate(model);
                               if (user.requestSucces) {
                                 _formKey.currentState.reset();
+                                user.getToken();
                               } else {
                                 Scaffold.of(context).showSnackBar(
                                   SnackBar(

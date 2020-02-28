@@ -12,7 +12,7 @@ class UserRepository {
     try {
       Response response = await dio.put('/usuario/login',
           data: {"email": model.email, "senha": model.password});
-      await utils.setToken(response.data["Token"]);
+      await utils.setToken(response.data["mensagem"]['token']);
       return UserModel.fromJson(response.data["mensagem"]);
     } on DioError catch (erro) {
       throw erro;
@@ -35,7 +35,6 @@ class UserRepository {
           "cidade_id": model.cidadeId
         },
       );
-      print(response.data['mensagem']);
       return response.data['mensagem'];
     } on DioError catch (e) {
       throw e;

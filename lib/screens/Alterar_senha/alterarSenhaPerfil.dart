@@ -158,7 +158,7 @@ class _AlterarSenhaPerfilState extends State<AlterarSenhaPerfil> {
                                         "confirmar_nova_senha":
                                             _confirmarSenha.text
                                       };
-                                      print(form);
+
                                       await model.alterarSenhaPerfil(form);
                                       if (model.requestSucces) {
                                         Navigator.pop(context);

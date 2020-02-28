@@ -5,7 +5,6 @@ import 'package:aqui_cliente/notifiers/enquetes/enquetes_usuario.dart';
 import 'package:aqui_cliente/notifiers/enquetes/novas.dart';
 import 'package:aqui_cliente/notifiers/esqueceu_notifier.dart';
 import 'package:aqui_cliente/notifiers/faleConosco_notifier.dart';
-import 'package:aqui_cliente/notifiers/home_notifier.dart';
 import 'package:aqui_cliente/notifiers/noticia_notifier.dart';
 import 'package:aqui_cliente/notifiers/perfil_notifier.dart';
 import 'package:aqui_cliente/notifiers/pesquisa_notifier.dart';
@@ -28,9 +27,6 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(
-          create: (context) => HomeNotifier(),
-        ),
         ChangeNotifierProvider(
           create: (context) => PrefeituraNotifier(),
         ),
