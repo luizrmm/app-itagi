@@ -34,7 +34,7 @@ class _LoginScreenState extends State<LoginScreen> {
               minHeight: MediaQuery.of(context).size.height * 0.9),
           decoration: BoxDecoration(
             gradient: LinearGradient(
-                colors: [Colors.white, Colors.blueGrey],
+                colors: [Colors.white, Colors.grey[700]],
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter),
           ),
@@ -47,7 +47,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 Padding(
                   padding: const EdgeInsets.only(top: 20.0, bottom: 30.0),
                   child: Image.asset(
-                    'assets/logo_barreiras.png',
+                    'assets/logo.png',
                     height: 120,
                   ),
                 ),

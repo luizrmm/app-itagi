@@ -92,7 +92,7 @@ class _MenuScreenState extends State<MenuScreen> {
       child: Container(
         decoration: BoxDecoration(
             gradient: LinearGradient(
-                colors: [Colors.white, Colors.blueGrey],
+                colors: [Colors.white, Colors.grey[700]],
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter)),
         child: ListView(
@@ -100,7 +100,7 @@ class _MenuScreenState extends State<MenuScreen> {
             Padding(
               padding: const EdgeInsets.only(top: 40.0, bottom: 60.0),
               child: Image.asset(
-                'assets/logo_barreiras.png',
+                'assets/logo.png',
                 height: 140,
               ),
             ),

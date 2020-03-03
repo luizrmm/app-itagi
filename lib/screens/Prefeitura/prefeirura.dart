@@ -29,7 +29,7 @@ class Prefeitura extends StatelessWidget {
                             padding:
                                 const EdgeInsets.only(top: 20.0, bottom: 30.0),
                             child: Image.asset(
-                              'assets/logo_barreiras.png',
+                              'assets/logo.png',
                               height: 120,
                             ),
                           ),
