@@ -66,7 +66,7 @@ class _MenuScreenState extends State<MenuScreen> {
                 style: TextStyle(color: Colors.red),
               ),
               onPressed: () {
-                Provider.of<PopUpNotifier>(context).hidePopUp();
+                Provider.of<PopUpNotifier>(context, listen: false).hidePopUp();
                 Navigator.of(context).pop();
               },
             ),
@@ -80,7 +80,7 @@ class _MenuScreenState extends State<MenuScreen> {
   void initState() {
     super.initState();
     Future.microtask(() {
-      if (Provider.of<PopUpNotifier>(context).show) {
+      if (Provider.of<PopUpNotifier>(context, listen: false).show) {
         _neverSatisfied();
       }
     });

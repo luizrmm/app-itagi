@@ -22,11 +22,14 @@ class _EnqueteListState extends State<EnqueteList>
     _tabController = TabController(vsync: this, length: 3);
 
     Future.microtask(() =>
-        Provider.of<UsuarioEnqueteNotifier>(context).getEnquetesUsuario());
-    Future.microtask(
-        () => Provider.of<NovasEnqueteNotifier>(context).getNovasEnquetes());
-    Future.microtask(() => Provider.of<EnqueteEncerradasNotifier>(context)
-        .getEnquetesEncerradas());
+        Provider.of<UsuarioEnqueteNotifier>(context, listen: false)
+            .getEnquetesUsuario());
+    Future.microtask(() =>
+        Provider.of<NovasEnqueteNotifier>(context, listen: false)
+            .getNovasEnquetes());
+    Future.microtask(() =>
+        Provider.of<EnqueteEncerradasNotifier>(context, listen: false)
+            .getEnquetesEncerradas());
   }
 
   @override

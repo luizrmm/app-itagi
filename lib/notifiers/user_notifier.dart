@@ -4,6 +4,7 @@ import 'package:aqui_cliente/repository/user_repository.dart';
 import 'package:aqui_cliente/utils/utils.dart';
 import 'package:aqui_cliente/view-models/cadastro_viewmodel.dart';
 import 'package:aqui_cliente/view-models/login_viewmodel.dart';
+import 'package:aqui_cliente/view-models/perfil_viewmodel.dart';
 import 'package:flutter/material.dart';
 
 class UserNotifier with ChangeNotifier {
@@ -76,6 +77,30 @@ class UserNotifier with ChangeNotifier {
     }
   }
 
+  Future getUser() async {
+    setLoading(true);
+    try {
+      _user = await _userRepository.getUser();
+      setLoading(false);
+    } catch (e) {
+      _errorMessage = e.response.data['mensagem'];
+      setLoading(false);
+    }
+  }
+
+  Future editPerfil(PerfilViewModel model) async {
+    setLoading(true);
+    try {
+      _successMessage = await _userRepository.editPerfil(model);
+      _requestSucces = true;
+      setLoading(false);
+    } catch (e) {
+      _errorMessage = e.response.data['mensagem'];
+      _requestSucces = false;
+      setLoading(false);
+    }
+  }
+
   Future getCidades(String sigla) async {
     setLoadingCity(true);
     try {
@@ -88,6 +113,11 @@ class UserNotifier with ChangeNotifier {
 
   void getToken() async {
     _token = await utils.getToken();
+    notifyListeners();
+  }
+
+  void clearToken() async {
+    _token = await utils.clearToken();
     notifyListeners();
   }
 

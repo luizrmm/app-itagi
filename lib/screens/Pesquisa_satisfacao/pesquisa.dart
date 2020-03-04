@@ -14,7 +14,8 @@ class _PesquisaSatisfacaoState extends State<PesquisaSatisfacao> {
   @override
   void initState() {
     super.initState();
-    Future.microtask(() => Provider.of<PesquisaNotifier>(context).getOptions());
+    Future.microtask(() =>
+        Provider.of<PesquisaNotifier>(context, listen: false).getOptions());
   }
 
   @override

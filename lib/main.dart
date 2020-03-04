@@ -1,4 +1,3 @@
-import 'package:aqui_cliente/notifiers/cadastro_notifier.dart';
 import 'package:aqui_cliente/notifiers/contatos_notifier.dart';
 import 'package:aqui_cliente/notifiers/enquetes/encerradas.dart';
 import 'package:aqui_cliente/notifiers/enquetes/enquetes_usuario.dart';
@@ -14,6 +13,8 @@ import 'package:aqui_cliente/notifiers/prefeito_notifier.dart';
 import 'package:aqui_cliente/notifiers/prefeitura_notifier.dart';
 import 'package:aqui_cliente/notifiers/relatar_notifier.dart';
 import 'package:aqui_cliente/notifiers/user_notifier.dart';
+import 'package:aqui_cliente/repository/prefeito_repository.dart';
+import 'package:aqui_cliente/repository/prefeitura_repository.dart';
 import 'package:aqui_cliente/repository/user_repository.dart';
 import 'package:aqui_cliente/screens/Home/home_screen.dart';
 import 'package:flutter/material.dart';
@@ -28,10 +29,7 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
-          create: (context) => PrefeituraNotifier(),
-        ),
-        ChangeNotifierProvider(
-          create: (context) => PrefeitoNotifier(),
+          create: (context) => PrefeituraNotifier(PrefeituraRepository()),
         ),
         ChangeNotifierProvider(
           create: (context) => PontosInteresseNotifier(),
@@ -40,10 +38,10 @@ class MyApp extends StatelessWidget {
           create: (context) => ContatosNotifier(),
         ),
         ChangeNotifierProvider(
-          create: (context) => CadastroNotifier(),
+          create: (context) => UserNotifier(UserRepository()),
         ),
         ChangeNotifierProvider(
-          create: (context) => UserNotifier(UserRepository()),
+          create: (context) => PrefeitoNotifier(PrefeitoRepository()),
         ),
         ChangeNotifierProvider(
           create: (context) => PerfilNotifier(),
