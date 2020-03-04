@@ -4,6 +4,7 @@ import 'package:aqui_cliente/utils/apis.dart';
 import 'package:aqui_cliente/utils/utils.dart';
 import 'package:aqui_cliente/view-models/cadastro_viewmodel.dart';
 import 'package:aqui_cliente/view-models/login_viewmodel.dart';
+import 'package:aqui_cliente/view-models/perfil_viewmodel.dart';
 import 'package:dio/dio.dart';
 
 class UserRepository {
@@ -47,6 +48,44 @@ class UserRepository {
       Response response = await dio.get('/cidades/buscar_cidades/$sigla');
       list = response.data['mensagem'] as List;
       return list.map((value) => CidadeModel.fromJson(value)).toList();
+    } on DioError catch (e) {
+      throw e;
+    }
+  }
+
+  Future<UserModel> getUser() async {
+    String token = await utils.getToken();
+    try {
+      Response response = await dio.get(
+        '/usuario/perfil',
+        options: Options(headers: {'Token': token}),
+      );
+      return UserModel.fromJson(response.data['mensagem']);
+    } on DioError catch (e) {
+      throw e;
+    }
+  }
+
+  Future editPerfil(PerfilViewModel model) async {
+    String token = await utils.getToken();
+    try {
+      Response response = await dio.put(
+        '/usuario/editar_perfil',
+        options: Options(
+          headers: {'Token': token},
+        ),
+        data: {
+          "nome": model.nome,
+          "email": model.email,
+          "telefone": model.telefone,
+          "endereco": model.endereco,
+          "numero": model.numero,
+          "bairro": model.bairro,
+          "complemento": model.complemento,
+          "cidade_id": model.cidadeId
+        },
+      );
+      return response.data['mensagem'];
     } on DioError catch (e) {
       throw e;
     }

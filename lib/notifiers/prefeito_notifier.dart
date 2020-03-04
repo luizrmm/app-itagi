@@ -1,15 +1,13 @@
 import 'package:aqui_cliente/models/prefeito_model.dart';
-import 'package:aqui_cliente/utils/api_utils.dart';
+import 'package:aqui_cliente/repository/prefeito_repository.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
 
 class PrefeitoNotifier with ChangeNotifier {
-  PrefeitoNotifier() {
+  final PrefeitoRepository _prefeitoRepository;
+  PrefeitoNotifier(this._prefeitoRepository) {
     getPrefeitoData();
   }
 
-  String baseUrl = ApiUtils().baseUrl;
   bool _loading = false;
   bool get loading => _loading;
 
@@ -17,20 +15,16 @@ class PrefeitoNotifier with ChangeNotifier {
   PrefeitoModel get prefeito => _prefeito;
 
   String _errorMessage = "";
-
   String get errorMessage => _errorMessage;
 
   Future getPrefeitoData() async {
     setLoading(true);
-    Map<String, dynamic> data;
-    http.Response response =
-        await http.get("$baseUrl/sobre/buscar_informacoes/2");
-    data = jsonDecode(response.body);
-    if (response.statusCode == 200) {
-      _prefeito = PrefeitoModel.fromJson(data["mensagem"]);
+    try {
+      _prefeito = await _prefeitoRepository.getPrefeitoData();
+      print(_prefeito.imagem);
       setLoading(false);
-    } else {
-      _errorMessage = data["mensagem"];
+    } catch (e) {
+      _errorMessage = e.response.data['mensagem'];
       setLoading(false);
     }
   }

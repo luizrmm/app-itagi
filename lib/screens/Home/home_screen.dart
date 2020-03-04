@@ -25,7 +25,8 @@ class _HomeScreenState extends State<HomeScreen>
   @override
   void initState() {
     super.initState();
-    Future.microtask(() => Provider.of<UserNotifier>(context).getToken());
+    Future.microtask(
+        () => Provider.of<UserNotifier>(context, listen: false).getToken());
     setupNotification();
     _tabController = TabController(vsync: this, length: 3);
     _tabController.animateTo(_currentIndex);
