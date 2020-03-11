@@ -99,7 +99,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               await user.authenticate(model);
                               if (user.requestSucces) {
                                 _formKey.currentState.reset();
-                                user.getToken();
+                                user.getUserToken();
                               } else {
                                 Scaffold.of(context).showSnackBar(
                                   SnackBar(

@@ -1,41 +1,34 @@
-import 'dart:convert';
-
 import 'package:aqui_cliente/models/pontosInteresse_model.dart';
-import 'package:aqui_cliente/utils/api_utils.dart';
+import 'package:aqui_cliente/repository/contatos_repository.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 
 class ContatosNotifier with ChangeNotifier {
-  String baseUrl = ApiUtils().baseUrl;
+  final ContatosRepository _contatosRepository;
+  ContatosNotifier(this._contatosRepository) {
+    getContatos();
+  }
 
   bool _loading = false;
   bool get loading => _loading;
 
-  String _errorMessage = "";
+  bool _success = false;
+  bool get success => _success;
 
+  String _errorMessage = "";
   String get errorMessage => _errorMessage;
 
   List<PontosInteresseModel> _pontos;
   List<PontosInteresseModel> get pontos => _pontos;
 
-  ContatosNotifier() {
-    getContatos();
-  }
-
   Future getContatos() async {
     setLoading(true);
-    Map<String, dynamic> data;
-    List<dynamic> list;
-    http.Response response =
-        await http.get('$baseUrl/telefones/buscar_telefones/2');
-    data = jsonDecode(response.body);
-    if (response.statusCode == 200) {
-      list = data["mensagem"] as List;
-      _pontos =
-          list.map((value) => PontosInteresseModel.fromJson(value)).toList();
+    try {
+      _pontos = await _contatosRepository.getContatos();
+      _success = true;
       setLoading(false);
-    } else {
-      _errorMessage = data["mensagem"];
+    } catch (e) {
+      _success = false;
+      _errorMessage = e.response.data['mensagem'];
       setLoading(false);
     }
   }

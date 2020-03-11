@@ -13,8 +13,6 @@ class UserNotifier with ChangeNotifier {
     getCidades('BA');
   }
 
-  Utils utils = new Utils();
-
   String _email = "";
   String get email => _email;
 
@@ -111,13 +109,13 @@ class UserNotifier with ChangeNotifier {
     }
   }
 
-  void getToken() async {
-    _token = await utils.getToken();
+  void getUserToken() async {
+    _token = await getToken();
     notifyListeners();
   }
 
-  void clearToken() async {
-    _token = await utils.clearToken();
+  void clearUserToken() async {
+    _token = await clearToken();
     notifyListeners();
   }
 

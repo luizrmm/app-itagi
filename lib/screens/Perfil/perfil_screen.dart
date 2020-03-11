@@ -4,7 +4,6 @@ import 'package:aqui_cliente/screens/Home/home_screen.dart';
 import 'package:aqui_cliente/screens/Perfil/widgets/label.dart';
 import 'package:aqui_cliente/screens/widgets/loading.dart';
 import 'package:aqui_cliente/utils/constants.dart';
-import 'package:aqui_cliente/utils/utils.dart';
 import 'package:aqui_cliente/view-models/perfil_viewmodel.dart';
 import 'package:brasil_fields/formatter/telefone_input_formatter.dart';
 import 'package:flutter/material.dart';
@@ -20,7 +19,7 @@ class Perfil extends StatefulWidget {
 
 class _PerfilState extends State<Perfil> {
   PerfilViewModel model = new PerfilViewModel();
-  Utils preferences = new Utils();
+
   bool isEditable = false;
   final _formKey = GlobalKey<FormState>();
   FocusNode senhaFocusNode = FocusNode();
@@ -461,7 +460,7 @@ class _PerfilState extends State<Perfil> {
                                         color: Colors.red,
                                         text: 'Sair',
                                         function: () async {
-                                          userModel.clearToken();
+                                          userModel.clearUserToken();
                                           Navigator.pushReplacement(
                                             context,
                                             MaterialPageRoute(

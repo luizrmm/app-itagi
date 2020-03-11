@@ -18,7 +18,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen>
     with SingleTickerProviderStateMixin {
   int _currentIndex = 1;
-  Utils utils = new Utils();
+
   String token;
 
   TabController _tabController;
@@ -26,7 +26,7 @@ class _HomeScreenState extends State<HomeScreen>
   void initState() {
     super.initState();
     Future.microtask(
-        () => Provider.of<UserNotifier>(context, listen: false).getToken());
+        () => Provider.of<UserNotifier>(context, listen: false).getUserToken());
     setupNotification();
     _tabController = TabController(vsync: this, length: 3);
     _tabController.animateTo(_currentIndex);
@@ -35,7 +35,7 @@ class _HomeScreenState extends State<HomeScreen>
   void setupNotification() async {
     _firebaseMessaging.getToken().then((token) {
       var json = {"key": token};
-      utils.saveFCM(json);
+      saveFCM(json);
     });
 
     _firebaseMessaging.configure(
