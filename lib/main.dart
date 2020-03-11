@@ -14,6 +14,7 @@ import 'package:aqui_cliente/notifiers/prefeitura_notifier.dart';
 import 'package:aqui_cliente/notifiers/relatar_notifier.dart';
 import 'package:aqui_cliente/notifiers/user_notifier.dart';
 import 'package:aqui_cliente/repository/contatos_repository.dart';
+import 'package:aqui_cliente/repository/popUp_repository.dart';
 import 'package:aqui_cliente/repository/prefeito_repository.dart';
 import 'package:aqui_cliente/repository/prefeitura_repository.dart';
 import 'package:aqui_cliente/repository/user_repository.dart';
@@ -69,7 +70,7 @@ class MyApp extends StatelessWidget {
           create: (context) => PesquisaNotifier(),
         ),
         ChangeNotifierProvider(
-          create: (context) => PopUpNotifier(),
+          create: (context) => PopUpNotifier(PopUpRepository()),
         ),
         ChangeNotifierProvider(
           create: (context) => EsqueceuSenhaNotifier(),

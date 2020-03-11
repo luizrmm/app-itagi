@@ -11,8 +11,10 @@ class PontosInteresseNotifier with ChangeNotifier {
   bool _loading = false;
   bool get loading => _loading;
 
-  String _errorMessage = "";
+  bool _success;
+  bool get succes => _success;
 
+  String _errorMessage = "";
   String get errorMessage => _errorMessage;
 
   List<PontosInteresseModel> _pontos;
