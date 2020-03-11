@@ -1,47 +1,37 @@
 import 'package:aqui_cliente/models/popup_model.dart';
-import 'package:aqui_cliente/utils/api_utils.dart';
+import 'package:aqui_cliente/repository/popUp_repository.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
 
 class PopUpNotifier with ChangeNotifier {
+  final PopUpRepository _popUpRepository;
+  PopUpNotifier(this._popUpRepository) {
+    getData();
+  }
+
   bool _show = true;
   bool get show => _show;
 
-  String baseUrl = ApiUtils().baseUrl;
   bool _loading = false;
   bool get loading => _loading;
 
   String _errorMessage = "";
   String get errorMessage => _errorMessage;
 
-  String _successMessage = "";
-  String get successMessage => _successMessage;
-
-  bool _requestSucces = false;
-  bool get requestSucces => _requestSucces;
+  bool _success;
+  bool get success => _success;
 
   List<PopModel> _imagens;
   List<PopModel> get imagens => _imagens;
 
-  PopUpNotifier() {
-    getData();
-  }
-
   Future getData() async {
     setLoading(true);
-    Map<String, dynamic> data;
-    List<dynamic> list;
-    http.Response response = await http.get('$baseUrl/pop_up/buscar_pop_up');
-    data = jsonDecode(response.body);
-    if (response.statusCode == 200) {
-      _requestSucces = true;
-      list = data["mensagem"] as List;
-      _imagens = list.map((value) => PopModel.fromJson(value)).toList();
+    try {
+      _imagens = await _popUpRepository.getPopUp();
+      _success = true;
       setLoading(false);
-    } else {
-      _requestSucces = false;
-      _errorMessage = data["mensagem"];
+    } catch (e) {
+      _success = false;
+      _errorMessage = e.response.data['mensagem'];
       setLoading(false);
     }
   }
