@@ -3,6 +3,7 @@ import 'package:aqui_cliente/utils/apis.dart';
 import 'package:dio/dio.dart';
 
 class PontosInteresseRespository {
+  Dio dio = CustomDio().instance;
   Future getPontosInteresse() async {
     List list = new List();
     try {
