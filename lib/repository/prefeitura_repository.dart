@@ -6,7 +6,7 @@ class PrefeituraRepository {
   Dio dio = CustomDio().instance;
   Future<PrefeituraModel> getPrefeitoData() async {
     try {
-      Response response = await dio.get("/sobre/buscar_informacoes/2");
+      Response response = await dio.get("/sobre/buscar_informacoes/1");
       return PrefeituraModel.fromJson(response.data['mensagem']);
     } on DioError catch (e) {
       throw e;

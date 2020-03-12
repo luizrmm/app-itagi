@@ -1,12 +1,13 @@
 import 'package:aqui_cliente/models/pontosInteresse_model.dart';
-import 'package:aqui_cliente/utils/api_utils.dart';
+import 'package:aqui_cliente/repository/pontosInteresse_repository.dart';
 import 'package:flutter/material.dart';
-import 'dart:convert';
-import 'package:http/http.dart' as http;
 import 'package:url_launcher/url_launcher.dart';
 
 class PontosInteresseNotifier with ChangeNotifier {
-  String baseUrl = ApiUtils().baseUrl;
+  final PontosInteresseRespository _pontosInteresseRespository;
+  PontosInteresseNotifier(this._pontosInteresseRespository) {
+    getPontosInteresse();
+  }
 
   bool _loading = false;
   bool get loading => _loading;
@@ -17,27 +18,18 @@ class PontosInteresseNotifier with ChangeNotifier {
   String _errorMessage = "";
   String get errorMessage => _errorMessage;
 
-  List<PontosInteresseModel> _pontos;
+  List<PontosInteresseModel> _pontos = new List();
   List<PontosInteresseModel> get pontos => _pontos;
-
-  PontosInteresseNotifier() {
-    getPontosInteresse();
-  }
 
   Future getPontosInteresse() async {
     setLoading(true);
-    Map<String, dynamic> data;
-    List<dynamic> list;
-    http.Response response =
-        await http.get('$baseUrl/telefones/buscar_telefones/1');
-    data = jsonDecode(response.body);
-    if (response.statusCode == 200) {
-      list = data["mensagem"] as List;
-      _pontos =
-          list.map((value) => PontosInteresseModel.fromJson(value)).toList();
+    try {
+      _pontos = await _pontosInteresseRespository.getPontosInteresse();
+      _success = true;
       setLoading(false);
-    } else {
-      _errorMessage = data["mensagem"];
+    } catch (e) {
+      _errorMessage = e.response.data['mensagem'];
+      _success = false;
       setLoading(false);
     }
   }

@@ -17,7 +17,7 @@ class ContatosNotifier with ChangeNotifier {
   String _errorMessage = "";
   String get errorMessage => _errorMessage;
 
-  List<PontosInteresseModel> _pontos;
+  List<PontosInteresseModel> _pontos = new List();
   List<PontosInteresseModel> get pontos => _pontos;
 
   Future getContatos() async {
