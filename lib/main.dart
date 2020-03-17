@@ -4,7 +4,6 @@ import 'package:aqui_cliente/notifiers/enquetes/enquetes_usuario.dart';
 import 'package:aqui_cliente/notifiers/enquetes/novas.dart';
 import 'package:aqui_cliente/notifiers/esqueceu_notifier.dart';
 import 'package:aqui_cliente/notifiers/faleConosco_notifier.dart';
-import 'package:aqui_cliente/notifiers/noticia_notifier.dart';
 import 'package:aqui_cliente/notifiers/perfil_notifier.dart';
 import 'package:aqui_cliente/notifiers/pesquisa_notifier.dart';
 import 'package:aqui_cliente/notifiers/pontosInteresse_notifier.dart';
@@ -32,20 +31,27 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
-          create: (context) => PrefeituraNotifier(PrefeituraRepository()),
-        ),
-        ChangeNotifierProvider(
-          create: (context) =>
-              PontosInteresseNotifier(PontosInteresseRespository()),
-        ),
-        ChangeNotifierProvider(
-          create: (context) => ContatosNotifier(ContatosRepository()),
-        ),
-        ChangeNotifierProvider(
           create: (context) => UserNotifier(UserRepository()),
         ),
-        ChangeNotifierProvider(
-          create: (context) => PrefeitoNotifier(PrefeitoRepository()),
+        ChangeNotifierProvider.value(
+          value: PrefeitoNotifier(
+            PrefeitoRepository(),
+          ),
+        ),
+        ChangeNotifierProvider.value(
+          value: PrefeituraNotifier(
+            PrefeituraRepository(),
+          ),
+        ),
+        ChangeNotifierProvider.value(
+          value: ContatosNotifier(
+            ContatosRepository(),
+          ),
+        ),
+        ChangeNotifierProvider.value(
+          value: PontosInteresseNotifier(
+            PontosInteresseRespository(),
+          ),
         ),
         ChangeNotifierProvider(
           create: (context) => PerfilNotifier(),
@@ -64,9 +70,6 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (context) => UsuarioEnqueteNotifier(),
-        ),
-        ChangeNotifierProvider(
-          create: (context) => NoticiaNotifier(),
         ),
         ChangeNotifierProvider(
           create: (context) => PesquisaNotifier(),

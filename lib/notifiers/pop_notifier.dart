@@ -20,7 +20,7 @@ class PopUpNotifier with ChangeNotifier {
   bool _success;
   bool get success => _success;
 
-  List<PopModel> _imagens;
+  List<PopModel> _imagens = new List();
   List<PopModel> get imagens => _imagens;
 
   Future getData() async {

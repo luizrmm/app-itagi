@@ -34,7 +34,7 @@ class _MenuScreenState extends State<MenuScreen> {
                 viewportFraction: 1.0,
                 height: MediaQuery.of(context).size.height * 0.5,
                 autoPlay: true,
-                items: Provider.of<PopUpNotifier>(context).imagens == null
+                items: Provider.of<PopUpNotifier>(context).imagens.isEmpty
                     ? <Widget>[Center(child: Loading())]
                     : Provider.of<PopUpNotifier>(context).imagens.map((value) {
                         return Builder(

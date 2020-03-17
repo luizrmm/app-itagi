@@ -17,7 +17,7 @@ class ObrasNotifier with ChangeNotifier {
   bool _success = false;
   bool get success => _success;
 
-  List<NoticiaModel> _obras;
+  List<NoticiaModel> _obras = new List();
   List<NoticiaModel> get obras => _obras;
 
   Future getObras() async {
@@ -34,8 +34,15 @@ class ObrasNotifier with ChangeNotifier {
   }
 
   Future curtir(Map<String, dynamic> json) async {
-    _setLoading(true);
-    try {} catch (e) {}
+    try {
+      await _obrasRepository.curtir(json);
+      getObras();
+      notifyListeners();
+    } catch (e) {
+      _success = false;
+      _errorMessage = e.response.data['mensagem'];
+      notifyListeners();
+    }
   }
 
   void _setLoading(bool value) {

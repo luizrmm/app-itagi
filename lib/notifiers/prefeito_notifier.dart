@@ -21,7 +21,6 @@ class PrefeitoNotifier with ChangeNotifier {
     setLoading(true);
     try {
       _prefeito = await _prefeitoRepository.getPrefeitoData();
-      print(_prefeito.imagem);
       setLoading(false);
     } catch (e) {
       _errorMessage = e.response.data['mensagem'];

@@ -4,7 +4,6 @@ import 'package:dio/dio.dart';
 
 class CustomDio {
   Dio _dio;
-  // Utils utils = new Utils();
 
   CustomDio() {
     _dio = Dio();
